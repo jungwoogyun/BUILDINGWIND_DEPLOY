@@ -6,12 +6,12 @@ console.log("drawChart_ByRealTimeMenu() Not called.. intervalId : ",intervalId);
 
 
    //실시간 풍향
-   let realtimeVECIdx =["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
-   let realtimeVECVal =["299","281","226","233","219","247","225","240","231","253"];
-
-   //실시간 풍속
-   let realtimeWSDIdx = ["0600","0700","0800","0900","1000","1100","1200","1300","1400","1500"];
-   let realtimeWSDVal = [0.9,1.4,2.4,1.9,3.3,2.3,3.7,3.8,2.4,4.2];
+//   let realtimeVECIdx =["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
+//   let realtimeVECVal =["299","281","226","233","219","247","225","240","231","253"];
+//
+//   //실시간 풍속
+//   let realtimeWSDIdx = ["0600","0700","0800","0900","1000","1100","1200","1300","1400","1500"];
+//   let realtimeWSDVal = [0.9,1.4,2.4,1.9,3.3,2.3,3.7,3.8,2.4,4.2];
 
 
 const drawChart_ByRealTimeMenu = ()=>{
