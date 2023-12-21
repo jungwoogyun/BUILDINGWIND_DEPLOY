@@ -502,6 +502,8 @@ body::-webkit-scrollbar{
     
     display:flex;
     justify-content: center;
+    background-color : white;
+    z-index:10;
   
 }
 .section06>.left
@@ -589,4 +591,5 @@ th,td{
 .section02>div>img{
     width : 769px
     height : 488px;
+    z-index:5 !important;
 }

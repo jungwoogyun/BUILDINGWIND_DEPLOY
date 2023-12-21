@@ -641,9 +641,11 @@ th,td{
         align-items : center !important;
         flex-direction : column  !important;
         height : 800px !important;
+
 }
 
 .section02>div>img{
     width  : 200px !important;
     height : 300px !important;;
+    z-index:5 !important;
 }
