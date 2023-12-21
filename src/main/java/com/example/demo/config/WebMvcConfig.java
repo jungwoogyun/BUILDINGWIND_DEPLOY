@@ -28,6 +28,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 		registry.addResourceHandler("/video/**").addResourceLocations("classpath:/static/video/").setCachePeriod(60 * 60 * 24 * 365);
 
+		registry.addResourceHandler("/gif/**").addResourceLocations("classpath:/static/gif/").setCachePeriod(60 * 60 * 24 * 365);
+
 	}
 
 

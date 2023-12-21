@@ -68,15 +68,13 @@
                                 <span>빌딩풍 위험도 분석 및 예방·대응 시스템</span>
                             </div>
                             <div>
-                                <form action="">
-                                    <select class="form-select" style="width:150px;">
-                                        <option value="" selected="selected">LCT</option>
-                                        <option value="" selected="selected">마린시티</option>
-                                        <option value="" selected="selected">센텀파크</option>
-                                    </select>
-                                </form>
-
+                                <select class="form-select" style="width:150px;" name="centerxy" id="centerSelect" onchange="chageLangSelect()">
+                                    <option value="35.16073,129.1688" selected="selected">LCT</option>
+                                    <option value="35.15541,129.1460">마린시티</option>
+                                    <option value="35.17899,129.1227">센텀파크</option>
+                                </select>
                             </div>
+
                         </div>
                         <div class="right">
                             <div>
@@ -334,7 +332,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <iframe  src="https://tv.naver.com/v/15691656?mute=true" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen mute></iframe>    
+                    <iframe  src="https://tv.naver.com/v/15691656?mute=true" title="" frameborder="0" allow="accelerometer;clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
  
             </div>
@@ -348,7 +346,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <iframe id="naverTvIframe" src="https://www.youtube.com/embed/d3fh7ADBKT4?si=Kxuxd_3T08by-p9L&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                
+                    <iframe  src="https://www.youtube.com/embed/d3fh7ADBKT4?si=Kxuxd_3T08by-p9L&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 
                 <style>
@@ -404,8 +402,10 @@
                                             type="checkbox"
                                             name=""
                                             id="lct-location01"
-                                            class="form-check-input"
-                                            style="width:20px;"/>&nbsp;
+                                            class="form-check-input dangerchk lct lct-n"
+                                            style="width:20px;"
+                                            checked
+                                        />&nbsp;
                                         <label for="lct-location01" class="form-check-label">북풍 (N)</label>
                                     </div>
                                     <div
@@ -414,7 +414,7 @@
                                             type="checkbox"
                                             name=""
                                             id="lct-location02"
-                                            class="form-check-input"
+                                            class="form-check-input dangerchk lct lct-ne"
                                             style="width:20px;"/>&nbsp;
                                         <label for="lct-location02" class="form-check-label">북동풍 (NE)</label>
                                     </div>
@@ -424,7 +424,7 @@
                                             type="checkbox"
                                             name=""
                                             id="lct-location03"
-                                            class="form-check-input"
+                                            class="form-check-input dangerchk lct lct-e"
                                             style="width:20px;"/>&nbsp;
                                         <label for="lct-location03" class="form-check-label">동풍 (E)</label>
                                     </div>
@@ -434,7 +434,7 @@
                                             type="checkbox"
                                             name=""
                                             id="lct-location04"
-                                            class="form-check-input"
+                                            class="form-check-input dangerchk lct lct-s"
                                             style="width:20px;"/>&nbsp;
                                         <label for="lct-location04" class="form-check-label">남풍 (S)</label>
                                     </div>
@@ -444,7 +444,7 @@
                                             type="checkbox"
                                             name=""
                                             id="lct-location05"
-                                            class="form-check-input"
+                                            class="form-check-input dangerchk lct lct-sw"
                                             style="width:20px;"/>&nbsp;
                                         <label for="lct-location05" class="form-check-label">남서풍 (SW)</label>
                                     </div>
@@ -454,7 +454,7 @@
                                             type="checkbox"
                                             name=""
                                             id="lct-location06"
-                                            class="form-check-input"
+                                            class="form-check-input dangerchk lct lct-w"
                                             style="width:20px;"/>&nbsp;
                                         <label for="lct-location06" class="form-check-label">서풍 (W)</label>
                                     </div>
@@ -464,7 +464,7 @@
                                             type="checkbox"
                                             name=""
                                             id="lct-location07"
-                                            class="form-check-input"
+                                            class="form-check-input dangerchk lct lct-nw"
                                             style="width:20px;"/>&nbsp;
                                         <label for="lct-location07" class="form-check-label">북서풍 (NW)</label>
                                     </div>
@@ -690,9 +690,11 @@
                         </div>
 
                     </div>
-                    <script>
+
+
+                        <script>
                         const opacityControlEl = document.querySelector('.opacityController');
-                        opacityControlEl.addEventListener('change', function () {
+                            opacityControlEl.addEventListener('change', function () {
                             console.log(opacityControlEl.value);
 
                             const offcanvasEl = document.querySelector('.offcanvas');
@@ -712,23 +714,23 @@
 
     <!-- ------------------------ BUildingWind Danger Page Fixed
     -------------------------------------------- -->
-    <div
-        class="buildingDangerFixedBlock"
-        style="position:fixed;width:20vw;height:70vh;left:70vw;top:20vh;background-color:white;z-index:700;transition:0.5s;">
+    <div  class="buildingDangerFixedBlock"  style="position:fixed;width:17vw;;left:70vw;top:18vh;background-color:white;z-index:700;transition:0.5s;">
 
-        <div
-            style="padding : 15px; border-radius: 10px;display:flex;justify-content: space-between;align-items: center;flex-direction: column;">
-            <div
-                style="border : 1px solid lightgray;width:100%;height:21.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
-                <img src="images/fixed_img01.png"/>
+        <div style="padding : 15px; border-radius: 10px;display:flex;justify-content: space-between;align-items: center;flex-direction: column;">
+
+            <div style="border : 1px solid lightgray;width:100%;height:15.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
+                <img src="images/fixed_img01.png"  style="width:100%; height:100%;"/>
             </div>
-            <div
-                style="border : 1px solid lightgray;width:100%;height:21.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
-                <img src="images/fixed_img02.gif" style="width:100%; height:100%;"/>
+
+            <div class="buildingwindGif" style="border : 1px solid lightgray;width:100%;height:15.8vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
+                <img class="section02" src="gif/lct/n/1/n.gif" style="width:100%; height:100%;object-fit: cover;" />
             </div>
-            <div
-                style="border : 1px solid lightgray;width:100%;height:21.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
+
+            <div style="border : 1px solid lightgray;width:100%;height:15.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
                 <img src="images/fixed_img03.png" style="width:100%; height:100%;"/>
+            </div>
+            <div style="border : 1px solid lightgray;width:100%;height:15.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
+                <img src="gif/buildingWind.gif" style="width:100%; height:100%;"/>
             </div>
         </div>
 
@@ -862,14 +864,42 @@
         //실시간 풍속
         realtimeWSDIdx = [];
         realtimeWSDVal = [];
+
+        //-----------------------
+        // 지도
+        //-----------------------
+         var map;
     </script>
     
     <script src="js/mobile.js"></script>
     <script src="js/menu06.js"></script>
     <script src="js/drawChart.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/rangeDataSet.js"></script>
+
+    <script>
 
 
+        function chageLangSelect(){
+            var langSelect = document.getElementById("centerSelect");
+
+            // select element에서 선택된 option의 value가 저장된다.
+            var selectValue = langSelect.options[langSelect.selectedIndex].value;
+
+            // select element에서 선택된 option의 text가 저장된다.
+            var selectText = langSelect.options[langSelect.selectedIndex].text;
+
+            console.log(selectText + " : " + selectValue);
+
+
+             const latlag = selectValue.split(',');
+
+             console.log(map);
+             map.setCenter(latlag[0],latlag[1]);
+        }
+
+
+    </script>
 
 
 

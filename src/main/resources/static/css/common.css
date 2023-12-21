@@ -586,7 +586,7 @@ th,td{
 
 
 
-.section02{
+section.section02{
     width : 100vw  ;
     display:flex  !important;
     justify-content : center  !important  ;
@@ -594,12 +594,38 @@ th,td{
     height : 600px  !important;
 
 }
-.section02>div{
+section.section02>div{
     width : 48.063rem  ;
     height :30.5 rem  ;
 }
-.section02>div>img{
+section.section02>div>img{
     width : 769px;
     height : 488px;;
     z-index:5  ;
+}
+
+
+.buildingDangerFixedBlock .buildingwindGif::after{
+    content:'N';
+    display:block;
+    position:absolute;
+    top:10px;
+    left:10px;
+
+    width:55px;
+    height:35px;
+    display:flex;
+    justify-content: center;
+    align-items : center;
+
+
+    background-color:white;
+    z-index:777;
+
+    border-radius: 2px;
+
+    font-size:1rem;
+    color:black;
+    z-index:777;
+
 }
