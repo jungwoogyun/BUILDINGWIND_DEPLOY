@@ -217,14 +217,17 @@ nav_menu_img_items.forEach(item => {
                 //-------------------------
                 //테이블 값 지우기
                 //-------------------------
-                const tblEl = document.querySelector('.realtimeTbl tbody');
-                while(tblEl.lastChild!=null){
-                    tblEl.lastChild.remove();
-                }
+                const tblEl = document.querySelectorAll('.realtimeTbl tbody td');
+                tblEl.forEach(item =>{item.remove();})
+                realtimeVECVal =[];
 
+                //실시간 풍속
+                realtimeWSDIdx = [];
+                realtimeWSDVal = [];
             }
 
             intervalid =  drawChart_ByRealTimeMenu();
+            console.log("drawChart_ByRealTimeMenu() call! intervalid : " + intervalid);
             //---------------------------
             // 이전꺼 지우기
             //---------------------------

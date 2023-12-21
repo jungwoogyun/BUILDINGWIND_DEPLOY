@@ -1,17 +1,16 @@
 
-let intervalId  = null;     //Interval Null유무
-
-console.log("drawChart_ByRealTimeMenu() Not called.. intervalId : ",intervalId);
+intervalId  = null;     //Interval Null유무
 
 
 
-   //실시간 풍향
-//   let realtimeVECIdx =["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
-//   let realtimeVECVal =["299","281","226","233","219","247","225","240","231","253"];
-//
-//   //실시간 풍속
-//   let realtimeWSDIdx = ["0600","0700","0800","0900","1000","1100","1200","1300","1400","1500"];
-//   let realtimeWSDVal = [0.9,1.4,2.4,1.9,3.3,2.3,3.7,3.8,2.4,4.2];
+            //실시간 풍향
+            realtimeVECIdx =["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
+            realtimeVECVal =[];
+
+            //실시간 풍속
+            realtimeWSDIdx = [];
+            realtimeWSDVal = [];
+
 
 
 const drawChart_ByRealTimeMenu = ()=>{
@@ -33,111 +32,128 @@ if(true){
 
     console.log(formattedDate);
 
-
-    
- 
-
-
     idx=0;
     let basetime=null;
 
+           //풍속 가져오기
+            axios.get('/windPower')
+            .then(res=>{
 
-           
-            //2초마다 올리기
-            intervalId = setInterval(function(){
+                console.log(res);
+                const data = res.data;
 
-               
-                    //----------------
-                    //    left Chart
-                    //----------------
-                    var newDataPoint = {
-                        label:realtimeWSDIdx[idx],
-                        value:realtimeWSDVal[idx]
-                    };
+                data.forEach(item=>{
+                    console.log('item ',item);
+                    basetime = item.baseTime;
+                    realtimeWSDIdx.push(item.baseTime);
+                    realtimeWSDVal.push(item.obsrValue);
+                });
 
-                    
+                //풍향가져오기
+                axios.get('/windDirection')
+                .then(res=>{
+                        console.log(res);
+                        const data = res.data;
 
-                    leftConfig.data.labels.push(newDataPoint.label);
-                    leftChart.data.datasets[0].data.push(newDataPoint.value);
-                    
-                    leftChart.update();
+                        data.forEach(item=>{
+                            console.log('item ',item);
+                            basetime = item.baseTime;
+                            realtimeVECVal.push(item.obsrValue);
 
-                    //----------------
-                    //    right Chart
-                    //----------------
-                    //풍향 기호부터 구하기
-                    directionIdx =  parseInt( ( parseInt(realtimeVECVal[idx]) + 22.5 * 0.5)/22.5); //풍향문자 구하기
-                    console.log("realtimeVECVal[idx] : " + realtimeVECVal[idx]);
-                    console.log("directionIdx : " + directionIdx);
-                    console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
+                        });
 
-
-                     const leftTableTrDirEls =    document.querySelectorAll("#freq .dir");
-                     leftTableTrDirEls.forEach(dir=>{
-                        if(dir.innerHTML == realtimeVECIdx[directionIdx])
-                        {
-                            const dataEl =  dir.nextElementSibling;
-                            dataEl.innerHTML = realtimeWSDVal[idx];
-                        }
-                        else
-                        {
-                            const dataEl =  dir.nextElementSibling;
-                            dataEl.innerHTML = 0;
-                        }
-
-                     });
-
-                    //----------------
-                    //RIGHT CHART
-                    //----------------
-                        const ChartBlockRightEl =  document.querySelector('.chartBlock .right');
-                        ChartBlockRightEl.removeChild(ChartBlockRightEl.children[0]);
-                        const newrightChartEl = document.createElement('div');
-                        newrightChartEl.setAttribute('id','container');
-                        ChartBlockRightEl.appendChild(newrightChartEl);
-                        rightChart();
-
-
-                    //----------------
-                    //REALTIME 테이블에 추가
-                    //----------------
-                    const tblEl = document.querySelector('.realtimeTbl tbody');
-                    const trEl = document.createElement('tr');
-                    const td1 = document.createElement('td'); td1.innerHTML=idx + 1;
-                    const td2 = document.createElement('td'); td2.innerHTML=realtimeWSDIdx[idx];
-                    const td3 = document.createElement('td'); td3.innerHTML= realtimeVECVal[idx]+"/"+realtimeVECIdx[directionIdx]
-                    const td4 = document.createElement('td'); td4.innerHTML= realtimeWSDVal[idx];
-
-                    trEl.appendChild(td1);trEl.appendChild(td2);
-                    trEl.appendChild(td3);trEl.appendChild(td4);
-                    tblEl.appendChild(trEl);
-
-                    //스크롤바를 아래로 내리기
-                    const sectionLeftEl = document.querySelector('.section06>.right>.tbl_block');
-                    sectionLeftEl.scrollTop = container.scrollHeight;
-
-                    //----------------
-                    // IDX 증가
-                    //----------------
-                    idx++;
-                    if(idx>=realtimeVECVal.length){
-                        clearInterval(intervalId);
                         idx=0;
-                    }
-
-            },2000);
-        
-        
-         console.log("drawChart_ByRealTimeMenu() called.. intervalId : ",intervalId);
-            return intervalId;
-        }  
+                        var intervalId = setInterval(function(){
 
 
-        realtimeVECVal =[];
-        //실시간 풍속
-        realtimeWSDIdx = [];
-        realtimeWSDVal = [];
-        intervalId = null;
-        
+                                //----------------
+                                //    left Chart
+                                //----------------
+                                var newDataPoint = {
+                                    label:realtimeWSDIdx[idx],
+                                    value:realtimeWSDVal[idx]
+                                };
+                                leftConfig.data.labels.push(newDataPoint.label);
+                                leftChart.data.datasets[0].data.push(newDataPoint.value);
+                                leftChart.update();
+
+                                //----------------
+                                //    right Chart
+                                //----------------
+                                //풍향 기호부터 구하기
+                                directionIdx =  parseInt( ( parseInt(realtimeVECVal[idx]) + 22.5 * 0.5)/22.5); //풍향문자 구하기
+                                console.log("realtimeVECVal[idx] : " + realtimeVECVal[idx]);
+                                console.log("directionIdx : " + directionIdx);
+                                console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
+
+                                 const leftTableTrDirEls =    document.querySelectorAll("#freq .dir");
+                                 leftTableTrDirEls.forEach(dir=>{
+                                    if(dir.innerHTML == realtimeVECIdx[directionIdx])
+                                    {
+                                        const dataEl =  dir.nextElementSibling;
+                                        dataEl.innerHTML = realtimeWSDVal[idx];
+                                    }
+                                    else
+                                    {
+                                        const dataEl =  dir.nextElementSibling;
+                                        dataEl.innerHTML = 0;
+                                    }
+
+                                 });
+
+                                //----------------
+                                //RIGHT CHART
+                                //----------------
+                                    const ChartBlockRightEl =  document.querySelector('.chartBlock .right');
+                                    ChartBlockRightEl.removeChild(ChartBlockRightEl.children[0]);
+                                    const newrightChartEl = document.createElement('div');
+                                    newrightChartEl.setAttribute('id','container');
+                                    ChartBlockRightEl.appendChild(newrightChartEl);
+                                    rightChart();
+
+
+                                //----------------
+                                //REALTIME 테이블에 추가
+                                //----------------
+                                const tblEl = document.querySelector('.realtimeTbl tbody');
+                                const trEl = document.createElement('tr');
+                                const td1 = document.createElement('td'); td1.innerHTML=idx;
+                                const td2 = document.createElement('td'); td2.innerHTML=realtimeWSDIdx[idx];
+                                const td3 = document.createElement('td'); td3.innerHTML= realtimeVECVal[idx]+"/"+realtimeVECIdx[directionIdx]
+                                const td4 = document.createElement('td'); td4.innerHTML= realtimeWSDVal[idx];
+
+                                trEl.appendChild(td1);trEl.appendChild(td2);
+                                trEl.appendChild(td3);trEl.appendChild(td4);
+                                tblEl.appendChild(trEl);
+
+                                //스크롤바를 아래로 내리기
+                                //const sectionLeftEl = document.querySelector('section.left');
+                                //sectionLeftEl.scrollTop = container.scrollHeight;
+
+                                //----------------
+                                // IDX 증가
+                                //----------------
+                                idx++;
+
+
+                                if(idx>=realtimeVECVal.length){
+                                    clearInterval(intervalId);
+                                }
+
+                        },2000);
+
+                 })
+                 .catch(err=>{});
+
+            })
+            .catch(err=>{});
+
+
+            console.log("drawChart_ByRealTimeMenu() called.. intervalId : ",intervalId);
+
+        }  //if true
+
+    return intervalId;
+
 }//drawChart();
 
