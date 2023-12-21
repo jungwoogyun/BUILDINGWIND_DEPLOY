@@ -642,14 +642,19 @@ th,td{
     width : 24.063rem  ;
     height :15.5 rem  ;
     top : 15vw;
-    vorder : 1px solid red;
+    display:flex  !important;
+    justify-content : center  !important  ;
+    align-items : center !important ;
+    flex-direction : row !important;
+    height : 600px  !important;
+
 }
 
 .section02>div>img{
     position:relative;
     width  : 100vw;
     height :100vw;
-    left : 0vw;top:0;right:0;bottom:0;
+    left : 2vw;top:0;right:0;bottom:0;
     margin : auto;
 
 }
