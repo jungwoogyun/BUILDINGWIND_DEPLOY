@@ -628,24 +628,28 @@ th,td{
 
 
 .section02{
-    width : 100vw  !important;
-    display:flex !important;
-    justify-content : center  !important;
-    align-items : center !important;
-    flex-direction : column  !important;
-    height : 800px !important;
+    width : 100vw  ;
+    display:flex  !important;
+    justify-content : center  !important  ;
+    align-items : center !important ;
+    flex-direction : column !important;
+    height : 600px  !important;
+
+
+
 }
 .section02>div{
-    width : 100vw;
-        justify-content : center  !important;
-        align-items : center !important;
-        flex-direction : column  !important;
-        height : 800px !important;
-
+    width : 24.063rem  ;
+    height :15.5 rem  ;
+    top : 15vw;
+    vorder : 1px solid red;
 }
 
 .section02>div>img{
-    width  : 200px !important;
-    height : 300px !important;;
-    z-index:5 !important;
+    position:relative;
+    width  : 100vw;
+    height :100vw;
+    left : 5vw;top:0;right:0;bottom:0;
+    margin : auto;
+
 }
