@@ -19,11 +19,8 @@ offcanvas_btn_el.addEventListener('click', function () {
 // Nav li Click Event
 // --------------------------
 
-let menuActiveArr = []; //활성 팝업객체 저장
-let isPopupOpend = []; //활성 팝업여부 표시
-let intervalid=null;
-let menu02clickInit=true;   //SETINTERㄴVAL 삭제를 위해코드를 추가했건만... 처음 menu06로 진입할때
-                            //leftchart 가 안떠서 그거 해결한다고 추가함..
+
+
 const nav_menu_img_items = document.querySelectorAll('nav li>a');
 nav_menu_img_items.forEach(item => {
 
@@ -127,7 +124,8 @@ nav_menu_img_items.forEach(item => {
         //실시간 풍속 정보를 클릭했을때
         //-------------------------------------
         } else if (submenuUrl.includes("06")) {
-            //
+
+            // 모든 section 을 display:none;
             console.log("menu06!!!");
             const sectionEls = document.querySelectorAll('main section');
             sectionEls.forEach(sec => {
@@ -226,13 +224,12 @@ nav_menu_img_items.forEach(item => {
                 realtimeWSDVal = [];
             }
 
-            intervalid =  drawChart_ByRealTimeMenu();
-            console.log("drawChart_ByRealTimeMenu() call! intervalid : " + intervalid);
+            intervalId =  drawChart_ByRealTimeMenu();
+            console.log("common's drawChart_ByRealTimeMenu() called! intervalId : " + intervalId);
             //---------------------------
             // 이전꺼 지우기
             //---------------------------
 
-            
             //OFFCANVAS BTN 비활성화
             const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
             if (offcanvas_btn_el.classList.contains('ToRight')) {
