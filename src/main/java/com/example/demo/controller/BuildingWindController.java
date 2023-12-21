@@ -30,7 +30,9 @@ public class BuildingWindController {
     private LocationRepository locationRepository;
 
 
-
+    //-----------------------------------------------
+    //DB 꺼내와서 도표 그리는 용도로 사용
+    //-----------------------------------------------
     @GetMapping("/windPower")
     public @ResponseBody List<RealTimeWindPower> getWindPower(){
         return realTimeWindPowerRepostitory.findAll();
@@ -43,40 +45,3 @@ public class BuildingWindController {
     }
 }
 
-
-@Data
-class WeatherResponse {
-    private Response response;
-}
-@Data
-class Response  {
-    private Header header;
-    private Body body;
-}
-@Data
-class Header{
-    private String resultCode;
-    private String resultMsg;
-}
-@Data
-class Body {
-    private String dataType;
-    private Items items;
-    private int pageNo;
-    private int numOfRows;
-    private int totalCount;
-}
-@Data
-class Items {
-    private List<WeatherItem> item;
-
-}
-@Data
-class WeatherItem {
-    private String baseDate;
-    private String baseTime;
-    private String category;
-    private int nx;
-    private int ny;
-    private String obsrValue;
-}

@@ -32,7 +32,42 @@ nav_menu_img_items.forEach(item => {
         const submenuUrl = item.getAttribute('data-submenu');
         const submenuIdx = item.getAttribute('data-idx');
         if (submenuUrl.includes("02")) {
-           
+
+
+
+           const SectionEls = document.querySelectorAll('main section')
+                       SectionEls.forEach(sec => {
+                           sec.style.display = 'none';
+                           if (sec.classList.contains('section02')) {
+                               sec.style.display = 'block';
+                           }
+            })
+
+
+                      //OFFCANVAS BTN 비활성화
+                        const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
+                        if (offcanvas_btn_el.classList.contains('ToRight')) {
+                            //OFFCANVAS Move To RIGHT
+                            offcanvas_btn_el
+                                .classList
+                                .remove("ToRight");
+
+                        }
+                        //OFFCANVAS 숨기기
+                        const myOffcanvas = document.querySelector('.offcanvas')
+                        myOffcanvas
+                            .classList
+                            .remove('show');
+                        const bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
+                        bsOffcanvas.hide();
+                        //
+                        const buildingDangerFixedBlockEl = document.querySelector(
+                            '.buildingDangerFixedBlock'
+                        );
+                        buildingDangerFixedBlockEl.style.display = 'none';
+
+
+
         }
         //01MENU 클릭시
         else if (submenuUrl.includes("01")) {
