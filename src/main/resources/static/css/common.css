@@ -592,6 +592,10 @@ body::-webkit-scrollbar{
     justify-content: center;
     align-items: center;
 }
+.section06>.left .weather-body>.weather-body-section>.weather-footer .weather-item
+{
+width:120px;height:50px;
+}
 .section06>.left .weather-body>.weather-body-section>.weather-footer button{
     border : 1px solid lightgray;
     margin : 10px;
@@ -603,7 +607,7 @@ body::-webkit-scrollbar{
 
 .section06>.right
 {
- position:fixed !important;
+    position:fixed !important;
     display:flex !important;
     top:0vh !important;
     left:40vw !important;
@@ -623,6 +627,8 @@ body::-webkit-scrollbar{
 }
 
 .section06>.right>.chartBlock{
+    display:flex;align-items:center;
+    left:-50vw;top:35vh;height:40vh;
 
 
 }

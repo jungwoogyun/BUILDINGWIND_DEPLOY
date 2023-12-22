@@ -202,7 +202,7 @@
                                 <!-- -->
                                 <div class="left" >
                                     <div>
-                                        <div>
+                                        <div class="mobile-fit">
                                             <div class="weather-top">
                                                 <span>해운대구 우동</span>
                                             </div>
@@ -232,24 +232,24 @@
                                                 </div>
                                             </div>
                                             <div class="weather-footer">
-                                                <button class="weather-item btn" style="width:120px;height:50px;">미세먼지<br>좋음</button>
-                                                <button class="weather-item btn" style="width:120px;height:50px;">초미세먼지<br>좋음</button>
-                                                <button class="weather-item btn" style="width:120px;height:50px;">자외선<br>좋음</button>
-                                                <button class="weather-item btn" style="width:120px;height:50px;">일몰<br>17:13</button>
+                                                <button class="weather-item btn" >미세먼지<br>좋음</button>
+                                                <button class="weather-item btn" >초미세먼지<br>좋음</button>
+                                                <button class="weather-item btn" >자외선<br>좋음</button>
+                                                <button class="weather-item btn" >일몰<br>17:13</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                    <div class="right" style="">
-                        <div  class="tbl_block" style="">
+                    <div class="right" >
+                        <div  class="tbl_block" >
                             <table class="table realtimeTbl"  >
                                 <thead>
-                                <tr style="background-color :#2A76C7; color : white;font-weight:600">
-                                    <th >연번</th>
-                                    <th >시간</th>
-                                    <th >평균풍향(Deg)</th>
-                                    <th >평균풍속(m/s)</th>
-                                </tr>
+                                    <tr style="background-color :#2A76C7; color : white;font-weight:600">
+                                        <th >연번</th>
+                                        <th >시간</th>
+                                        <th >평균풍향(Deg)</th>
+                                        <th >평균풍속(m/s)</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
 
@@ -257,13 +257,9 @@
 
                             </table>
 
-                            <script>
-                                const tblBlockEl1 =  document.querySlector('.right');
-                                tblBlockEl1.scrollTop = tblBlockEl1.scrollHeight;
 
-                            </script>
                         </div>
-                        <div class="chartBlock" style="display:flex;align-items:center;left:-50vw;top:35vh;height:40vh;">
+                        <div class="chartBlock">
                             <div class="left"  >
                                 <canvas id="leftChart"></canvas>
                             </div>
