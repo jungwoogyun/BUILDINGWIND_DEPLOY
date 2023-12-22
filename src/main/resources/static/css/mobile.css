@@ -16,7 +16,6 @@
     font-size: 2.2rem;
     
   };
- 
 
   
 body{
@@ -192,6 +191,7 @@ body::-webkit-scrollbar{
     align-items: center;
     height:800px;
     display:none;
+
 }
 
 
@@ -485,120 +485,183 @@ body::-webkit-scrollbar{
 
 
 /* 06 실시간 풍속정보 */
-.section06{
- display: block;
- position: relative;  
 
+/*-------------*/
+/* updating---------------------------- */
+.section06{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width : 100%;
+
+    z-index:7;
 }
 .section06>.left
 {
-   display:block;
-   position: relative;
-   width : 100%;
-   height : 150px;
-   left:0;right:0;top:0;bottom:0;
-   margin:0 auto;
-   top:5px !important;
-   /* border : 1px solid red; */
-   border-bottom : 1px solid lightgray;
-   
+
+    width : 90vw;
+    height : 20vh;
+
+    margin-top:10vh;
+
+
+    position:fixed !important;
+    top:14vw !important;
+    border : 1px solid lightgray;
+    padding : 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px lightgray;
+
 }
-.section06>.left img{
+.section06>.left .weather-top{
+    height:30px;
+    line-height:30px;
+    font-size:1rem;
+    font-weight: 800;
+    margin-bottom : 10px;
+
+}
+.section06>.left .weather-nav{
+    height:50px;
+
+}
+.section06>.left .weather-nav button{
+
+
+        border-radius:5px;
+        width:40px !important;
+        height:25px !important;
+        font-size:0.4rem;
+
+}
+.section06>.left .weather-body{
+
+}
+.section06>.left .weather-body>.weather-body-top{
+
+}
+.section06>.left .weather-body>.weather-body-section{
+
+}
+.section06>.left .weather-body>.weather-body-section>.weather-info{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align:center;
+}
+.section06>.left .weather-body>.weather-body-section>.weather-info img{
+    width : 17vw;
+    height : 19vh;
+    margin : 20px auto;
+    position:relative;
+    margin : -5vh auto;
+    object-fit : contain;
+}
+.section06>.left .weather-body>.weather-body-section>.weather-info span{
+    position:absolute;
+    top:4vw;
+    left:11vw;
+    font-size:1.5rem;
+    font-weight:800;
+}
+.section06>.left .weather-body>.weather-body-section>.weather-info .weather-info-body{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border : 1px solid lightgray;
+    border-radius: 5px;
     width : 100%;
-    height : 100%;
+
 }
-.section06>.right
+.section06>.left .weather-body>.weather-body-section>.weather-info .weather-info-body span{
+    font-size : 0.6rem !important;
+    position:relative !important;
+    width : 60% !important;
+    top:0;
+    left:0;
+    margin : 10px;
+
+
+}
+.section06>.left .weather-body>.weather-body-section>.weather-footer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.section06>.left .weather-body>.weather-body-section>.weather-footer button{
+    border : 1px solid lightgray;
+    margin : 10px;
+    font-size : 0.6rem;
+}
+
+.section06>.left .weather-body>.weather-body-section>.weather-footer button::first-child
 {
-    width : 100%;
-    display:block;
-    position: relative;  
-    left:0;right:0;top:10px;bottom:0;
-    margin:0 auto;
+    margin-left:0px;
+}
+.section06>.left .weather-body>.weather-body-section>.weather-footer button::last-child
+{
+    margin-right:0px;
+}
+
+
+.section06 .right
+{
+
+    width : 70vw; !important;
+    margin : 0 auto !important;
+    position:absolute;
+    top : 65vh !important;
+    font-size : 0.5rem;
+    left : 45vw;
+    display:flex;
+    justify-content : center;
+    align-items : center;
+    flex-direction:colum;
+    overflow:auto !important;
+    border : 2px solid red;
+
+
 }
 
 
 .section06>.right>.tbl_block{
-
-    display:block;
-    position: relative;  
-    /* border : 1px solid red; */
-    height : 150px;
-    font-size:0.5rem;
-    margin-bottom: 5px;
-    border-bottom : 1px solid lightgray;
+    width : 100vw; !important;
+    height:250px !important;
+    overflow:auto !important;
 }
 
+.section06>.right::-webkit-scrollbar{
+
+}
 
 .section06>.right>.chartBlock{
-    display:block;
-   position: relative;  
-   /* border : 1px solid red; */
-   display:flex;justify-content: center;
-   align-items: center;
-   flex-direction: column;
+
+
+
 }
 
 .section06>.right>.chartBlock>.left{
-   display:block;
-   position: relative;  
-   top:0;bottom:0;left:0;right:0;
-   
-   border-bottom : 1px solid lightgray;
-   width : 100% !important;
-   height : 160px !important;
 
-    
+}
+.section06>.right>.chartBlock>.left>#leftChart{
+
 }
 .section06>.right>.chartBlock>.left{
-    /* width:200px;
-    height : 100%;
-    display: flex; */
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    display:block;
-}
-.section06>.right>.chartBlock>.left canvas{
-
-    display:block !important;
-    position:relative !important;
-    margin : 0 auto;
-
-    
-}
-canvas#leftChart{
-  
 
 }
-
 .section06>.right>.chartBlock>.right{
-  
-    left:0;right:0;top:0px;bottom:0;
-    margin:0 auto;
-    position:relative;
-    top: 35px;
-    width : 200px;
-    height : 200px;
 
-    /* border : 1px solid blue; */
-    z-index:-1;
-     
-}
-.section06>.right>.chartBlock>.right  .container{
-    position: relative;
-    width : 200px;
-    height : 200px;
-
-    /* border : 1px solid blue; */
 }
 
-th,td{
-    width:50px;
+tr,th,td{
+    width:5vw;
+    height : 2vw ;
     text-align:center;
 }
+/* ---------------------------- */
 
-
-
+/*-------------*/
 .section02{
     width : 100vw  ;
     display:flex  !important;
@@ -614,18 +677,19 @@ th,td{
     width : 24.063rem  ;
     height :15.5 rem  ;
     top : 15vw;
-    display:flex  !important;
-    justify-content : center  !important  ;
-    align-items : center !important ;
-    flex-direction : row !important;
-    height : 600px  !important;
+    display:flex  ;
+    justify-content : center  ;
+    align-items : center ;
+    flex-direction : row
+    height : 600px  ;
+    object-fit : cover;
 
 }
 
-.section02>div>img{
+.section02 img{
     position:relative;
-    width  : 100vw;
-    height :100vw;
+    width : 369px ;
+    height : 88px ;
     left : 2vw;top:0;right:0;bottom:0;
     margin : auto;
 

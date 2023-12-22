@@ -143,6 +143,7 @@ nav_menu_img_items.forEach(item => {
                         .remove();
                     const mapEl = document.createElement('div');
                     mapEl.setAttribute('id', 'map');
+                    mapEl.setAttribute('style','position:relative ;z-index:6');
                     sec.appendChild(mapEl);
                     createMap();
                 }

@@ -189,22 +189,60 @@
 
                 <section class="section02">
                     <div>
-                        <img src="images/menu02_01.png" alt="" >
+<!--                        <img src="images/menu02_01.png" alt="">-->
                     </div>
 
                     <div>
-                        <img src="images/menu02_02.png" alt="" >
+<!--                        <img src="images/menu02_02.png" alt="" >-->
                     </div>
                 </section>
 
                 <section class="section06">
-                    <!-- -->
-                    <div class="left" >
-                        <img src="images/fixed_img01.png" />
-                    </div>
-                    <div class="right">
-                        <div  class="tbl_block"  >
-                            <table class="table realtimeTbl" >
+
+                                <!-- -->
+                                <div class="left" >
+                                    <div>
+                                        <div>
+                                            <div class="weather-top">
+                                                <span>해운대구 우동</span>
+                                            </div>
+                                            <div class="weather-nav">
+                                                <button class="btn btn-secondary "  style="border-radius:20px;width:80px;height:45px;">오늘</button>
+                                                <button class="btn btn-secondary "  style="border-radius:20px;width:80px;height:45px;">내일</button>
+                                                <button class="btn btn-secondary "  style="border-radius:20px;width:80px;height:45px;">모레</button>
+                                                <button class="btn btn-secondary "  style="border-radius:20px;width:80px;height:45px;">월간</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="weather-body">
+                                        <div class="weather-body-top">
+
+                                        </div>
+                                        <div class="weather-body-section">
+                                            <div class="weather-info">
+                                                <div class="imgblock" style="object-fix:contain">
+                                                    <img src="images/weather/NB02.png" alt="" />
+                                                </div>
+                                                <span class="temp">10.5℃</span>
+                                                <div class="weather-info-body">
+                                                    <span>체감 10.5℃</span>
+                                                    <span>강수 0.5mm</span>
+                                                    <span>습도 99%</span>
+                                                    <span>북동풍 2.8m/s</span>
+                                                </div>
+                                            </div>
+                                            <div class="weather-footer">
+                                                <button class="weather-item btn" style="width:120px;height:50px;">미세먼지<br>좋음</button>
+                                                <button class="weather-item btn" style="width:120px;height:50px;">초미세먼지<br>좋음</button>
+                                                <button class="weather-item btn" style="width:120px;height:50px;">자외선<br>좋음</button>
+                                                <button class="weather-item btn" style="width:120px;height:50px;">일몰<br>17:13</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    <div class="right" style="">
+                        <div  class="tbl_block" style="">
+                            <table class="table realtimeTbl"  >
                                 <thead>
                                 <tr style="background-color :#2A76C7; color : white;font-weight:600">
                                     <th >연번</th>
@@ -216,21 +254,27 @@
                                 <tbody>
 
                                 </tbody>
-                                
+
                             </table>
+
+                            <script>
+                                const tblBlockEl1 =  document.querySlector('.right');
+                                tblBlockEl1.scrollTop = tblBlockEl1.scrollHeight;
+
+                            </script>
                         </div>
-                        <div class="chartBlock" >
-                            <div class="left" >
-                                <canvas id="leftChart" ></canvas>
+                        <div class="chartBlock" style="display:flex;align-items:center;left:-50vw;top:35vh;height:40vh;">
+                            <div class="left"  >
+                                <canvas id="leftChart"></canvas>
                             </div>
-            
-                            <div class="right" style="">
+
+                            <div class="right">
                                 <div id="container" ></div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
 
-                </section>
+        </section>
 
 
                 <section class="section03 ">
@@ -719,7 +763,9 @@
         <div style="padding : 15px; border-radius: 10px;display:flex;justify-content: space-between;align-items: center;flex-direction: column;">
 
             <div style="border : 1px solid lightgray;width:100%;height:15.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
-                <img src="images/fixed_img01.png"  style="width:100%; height:100%;"/>
+
+
+
             </div>
 
             <div class="buildingwindGif" style="border : 1px solid lightgray;width:100%;height:15.8vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
