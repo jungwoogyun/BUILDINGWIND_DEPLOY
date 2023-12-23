@@ -2,7 +2,7 @@
     box-sizing:border-box;
     position:relative;
     width : 100%;
-    margin : 0;
+    margin : 0 auto;
 
 }
 
@@ -20,7 +20,7 @@
   
 body{
     font-family: 'Montserrat', sans-serif;
-    width : 450px;
+    width : 100vw;
     margin : 0 auto;
     display: flex;
     justify-content: center;
@@ -102,22 +102,21 @@ body::-webkit-scrollbar{
 }
 .wrapper>header>nav{
     display:relative;
-    width:350px;
+    width:350px !important;
+    left:0px !important;
     height : 80px;
     padding : 0px;
-    margin : 0 auto;
+    margin : 0 auto !important;
     overflow:hidden;
     background-color: #2A76C7;
     display:flex;
     justify-content: left;
     align-items: center;
 
-
-
 }
 .wrapper>header>nav>div{
     width:350px;
-    padding-left:15px;
+    padding-left:5px !important;
 
 }
 
@@ -132,8 +131,8 @@ body::-webkit-scrollbar{
     align-items: left;
     flex-direction: row;
     /* border : 1px solid green; */
-    width :350px;
-    margin : 0 auto;
+    width :100vw !important;
+    margin : 0 auto !important;;
     
 
 }
@@ -163,12 +162,14 @@ body::-webkit-scrollbar{
 
 
 .hrtg{
-    display:block;
-    width : 350px;
-    height : 35px;
-    line-height:35px;
-    background-color: lightgray;
-    text-align: center;
+    display:block !important;
+    width : 350px !important;
+    height : 35px !important;
+    line-height:35px !important;
+    background-color: lightgray !important;
+    text-align: center !important;
+    top:30px !important;
+    z-index:12 !important;
 
 }
 
@@ -199,7 +200,8 @@ body::-webkit-scrollbar{
     align-items: center;
     background-color : white;
     display:none;
-    top:-80px !important;
+    top:-90px !important;
+
 }
 
 
@@ -365,10 +367,10 @@ body::-webkit-scrollbar{
 /* MAP */
 .wrapper>main>section>#map{
  
-    position:fixed;
-    width:350px;
-    height :300px;
-
+    position:relative !important;
+    width:350px !important;
+    height :300px !important;
+    left:0px !important;
 }
 
 

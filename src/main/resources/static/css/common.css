@@ -19,8 +19,7 @@
  
 
 
-  
-  
+
 body{
     font-family: 'Montserrat', sans-serif;
 
@@ -96,7 +95,8 @@ body::-webkit-scrollbar{
     opacity: 0.5;
 }
 .wrapper>header>nav{
-    width:100vw;
+    width:100vw !important;
+    left:0px !important;
     height : 80px;
     margin : 0px;
     padding : 0px;
@@ -105,14 +105,14 @@ body::-webkit-scrollbar{
 
 }
 .wrapper>header>nav>div{
-    padding-left:50px;
+    padding-left:50px !important;
 }
 
 .wrapper>header>nav ul {
     
-    margin : 0px;
-    padding : 10px;
-    left : -10px;
+    margin : 0px !important;
+    padding : 10px !important;
+    left : -10px !important;
 
    
 }
@@ -155,7 +155,7 @@ body::-webkit-scrollbar{
 
 .hrtg
 {
-    display:none;
+    display:none !important;
 }
 .wrapper>main{
   
@@ -343,10 +343,10 @@ body::-webkit-scrollbar{
 /* MAP */
 .wrapper>main>section>#map{
 
-    position:fixed;
-    width:100vw;
-    left:calc(-50vw + 50%);
-    height:100vh
+    position:fixed !important;
+    width:100vw !important;
+    left:calc(-50vw + 50%) !important;
+    height:100vh !important;
 }
 
 .wrapper>main>section>#map .leaflet-control-container{
