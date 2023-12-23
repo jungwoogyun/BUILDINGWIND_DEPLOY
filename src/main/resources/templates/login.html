@@ -245,26 +245,25 @@
                      </div>
                      <div class="body">    
                         
-                         <form name="joinform" action="/login" method="post" onsubmit="return false">
+                         <form name="joinform" action="/login" method="post" >
  
                              <div class="m-2 mb-3 insert-el-group">
-                               <input name="username" class="username">
-                               <div class="placeholder">INSERT USERNAME</div>
+                               <input name="username" class="username" value="admin" placeholder="INSERT USERNAME">
+<!--                               <div class="placeholder">INSERT USERNAME</div>-->
                              </div>
                              <div class="m-2 insert-el-group">
-                                 <input name="password" type="password"  class="password" >
-                                 <div class="placeholder">INSERT PASSWORD</div>
+                                 <input name="password" type="password"  class="password"  value="1234" placeholder="INSERT PASSWORD">
+<!--                                 <div class="placeholder">INSERT PASSWORD</div>-->
                              </div>
                              <div class="mt-2 ms-2 me-2 form-check" >   
                                  <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me"  />
                                  <label class="form-check-label" for="rememberMe" style="font-size:0.8rem;">로그인 상태를 유지</label>
                              </div>
-                             <div x>
-                                 <button class="btn  w-100" style="background-color: #2A76C7;color:white;" onclick="isValid()">로그인</button>
+                             <div class="m-2 mb-3 insert-el-group">
+                                 <input type="submit" class="btn  w-100" style="background-color: #2A76C7;color:white;" />
                              </div>
  
-                             <div class="m-2 join_req" >
-                             </div>
+
  
                          </form>
                      </div>
@@ -401,6 +400,10 @@
         });
 
 
+        const isValid = ()=>{
+
+            document.joinform.submit();
+        }
 
 
     </script>

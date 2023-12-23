@@ -21,14 +21,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		/* '/img/**'로 호출하는 자원은 '/static/img/' 폴더 아래에서 찾는다. */
 		registry.addResourceHandler("images/**").addResourceLocations("classpath:/static/images/").setCachePeriod(60 * 60 * 24 * 365);
 
-		registry.addResourceHandler("/modules/**").addResourceLocations("classpath:/static/modules/").setCachePeriod(60 * 60 * 24 * 365);
+		registry.addResourceHandler("modules/**").addResourceLocations("classpath:/static/modules/").setCachePeriod(60 * 60 * 24 * 365);
 
 		/* '/font/**'로 호출하는 자원은 '/static/font/' 폴더 아래에서 찾는다. */
-		registry.addResourceHandler("/font/**").addResourceLocations("classpath:/static/font/").setCachePeriod(60 * 60 * 24 * 365);
+		registry.addResourceHandler("font/**").addResourceLocations("classpath:/static/font/").setCachePeriod(60 * 60 * 24 * 365);
 
-		registry.addResourceHandler("/video/**").addResourceLocations("classpath:/static/video/").setCachePeriod(60 * 60 * 24 * 365);
+		registry.addResourceHandler("video/**").addResourceLocations("classpath:/static/video/").setCachePeriod(60 * 60 * 24 * 365);
 
-		registry.addResourceHandler("/gif/**").addResourceLocations("classpath:/static/gif/").setCachePeriod(60 * 60 * 24 * 365);
+		registry.addResourceHandler("gif/**").addResourceLocations("classpath:/static/gif/").setCachePeriod(60 * 60 * 24 * 365);
 
 	}
 

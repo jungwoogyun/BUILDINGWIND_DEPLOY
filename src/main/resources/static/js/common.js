@@ -48,24 +48,24 @@ nav_menu_img_items.forEach(item => {
                 //차트 비활 비홠성화
                 LChartBlock.style.visibility = 'hidden';
                 RChartBlock.style.visibility = 'hidden';
-                      //OFFCANVAS BTN 비활성화
-                        const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
-                        if (offcanvas_btn_el.classList.contains('ToRight')) {
+                //OFFCANVAS BTN 비활성화
+                 const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
+                 if (offcanvas_btn_el.classList.contains('ToRight')) {
                             //OFFCANVAS Move To RIGHT
                             offcanvas_btn_el
                                 .classList
                                 .remove("ToRight");
 
-                        }
-                        //OFFCANVAS 숨기기
-                        const myOffcanvas = document.querySelector('.offcanvas')
-                        myOffcanvas
+                }
+                //OFFCANVAS 숨기기
+                const myOffcanvas = document.querySelector('.offcanvas')
+                    myOffcanvas
                             .classList
                             .remove('show');
                         const bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
                         bsOffcanvas.hide();
-                        //
-                        buildingDangerFixedBlock.style.zIndex="1";
+                    //
+                    buildingDangerFixedBlock.style.zIndex="1";
 
 
                         menu02ImageZIdxEls.forEach(item => {
@@ -104,6 +104,9 @@ nav_menu_img_items.forEach(item => {
             const bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
             bsOffcanvas.hide();
             //
+
+
+
             const buildingDangerFixedBlockEl = document.querySelector(
                 '.buildingDangerFixedBlock'
             );
@@ -117,9 +120,7 @@ nav_menu_img_items.forEach(item => {
         else if (submenuUrl.includes("05")) {
 
             //OFFCANVAS 버튼 오른쪽이동
-
             const windowWidth = window.innerWidth;
-
             if (windowWidth > 500) {
                 const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
                 if (!offcanvas_btn_el.classList.contains('ToRight')) {

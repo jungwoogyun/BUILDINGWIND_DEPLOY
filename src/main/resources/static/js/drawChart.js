@@ -111,7 +111,7 @@ const drawChart_ByRealTimeMenu = ()=>{
                                     tblEl.appendChild(trEl);
 
                                     //스크롤바를 아래로 내리기
-                                    const sectionLeftEl = document.querySelector('.section06 .left');
+                                    const sectionLeftEl = document.querySelector('.section06>.right>.tbl_block');
                                     sectionLeftEl.scrollTop = container.scrollHeight;
 
                                     //----------------

@@ -10,6 +10,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(){
+        log.info("GET /...");
         return "index";
     }
     @GetMapping("/login")
@@ -17,17 +18,6 @@ public class HomeController {
 
     }
 
-    @GetMapping("/menu01")
-    public void menu01(){}
-    @GetMapping("/menu02")
-    public void menu02(){}
-    @GetMapping("/menu03")
-    public void menu03(){}
-    @GetMapping("/menu04")
-    public void menu04(){}
-    @GetMapping("/menu05")
-    public void menu05(){}
-    @GetMapping("/menu06")
-    public void menu06(){}
+
 
 }
