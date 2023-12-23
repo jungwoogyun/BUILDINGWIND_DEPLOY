@@ -171,10 +171,41 @@ nav_menu_img_items.forEach(item => {
             menu02ImageZIdxEls.forEach(item => {
                              item.style.display='none';
             })
+            //-------------------------
+            //menu05에서 실시간 풍속정보 요청하기
+            //-------------------------
+            console.log('실시간 풍속정보 요청하기');
+            axios.get('/windNow')
+                .then(resp=>{
+                    console.log('windNow',resp);
+                    var data = resp.data;
+                    data.forEach(item=>{
+                        if(item.category==='T1H'){
+                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.T1H').innerHTML=item.obsrValue;
+                            document.querySelector('.buildingDangerFixedBlock .weather-info .temp').innerHTML=item.obsrValue;
+                        }
+                        else if(item.category==='RN1'){document.querySelector('.buildingDangerFixedBlock .weather-info-body span.RN1').innerHTML=item.obsrValue;}
+                        else if(item.category==='REH'){document.querySelector('.buildingDangerFixedBlock .weather-info-body span.REH').innerHTML=item.obsrValue;}
+                        else if(item.category==='VEC'){
+                            directionIdx =  parseInt( (parseInt(item.obsrValue) + 22.5 * 0.5)/22.5); //풍향문자 구하기
+                            console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
+                            document.querySelector('.section06 .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
+                        }
+                        else if(item.category==='WSD')document.querySelector('.buildingDangerFixedBlock .weather-info-body span.WSD').innerHTML=item.obsrValue;
+                    })
+
+                    ;
+                })
+                .catch(err=>{
+                    console.log("windNodErr",err);
+             });
+
+
         //-------------------------------------
         //실시간 풍속 정보를 클릭했을때
         //-------------------------------------
-        } else if (submenuUrl.includes("06")) {
+        }
+        else if (submenuUrl.includes("06")) {
 
             // 모든 section 을 display:none;
             console.log("menu06!!!");
@@ -185,12 +216,44 @@ nav_menu_img_items.forEach(item => {
                     sec.style.display = "block";
                 }             
             })
-            //---------------------------
-            //차트도 활성화
-                LChartBlock.style.visibility = 'visible';
-                RChartBlock.style.visibility = 'visible';
+            //-------------------------
+            //실시간 풍속정보 요청하기
+            //-------------------------
+            console.log('실시간 풍속정보 요청하기');
+            axios.get('/windNow')
+                .then(resp=>{
+                    console.log('windNow',resp);
+                    var data = resp.data;
+                    data.forEach(item=>{
+                        if(item.category==='T1H'){
+                            document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=item.obsrValue;
+                            document.querySelector('.section06 .weather-info .temp').innerHTML=item.obsrValue;
+                        }
+                        else if(item.category==='RN1'){document.querySelector('.section06 .weather-info-body span.RN1').innerHTML=item.obsrValue;}
+                        else if(item.category==='REH'){document.querySelector('.section06 .weather-info-body span.REH').innerHTML=item.obsrValue;}
+                        else if(item.category==='VEC'){
+                            directionIdx =  parseInt( (parseInt(item.obsrValue) + 22.5 * 0.5)/22.5); //풍향문자 구하기
+                            console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
+                            document.querySelector('.section06 .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
+                        }
+                        else if(item.category==='WSD')document.querySelector('.section06 .weather-info-body span.WSD').innerHTML=item.obsrValue;{}
+                    })
+
+                    ;
+                })
+                .catch(err=>{
+                    console.log("windNodErr",err);
+             });
+
+
+
 
             //---------------------------
+            //차트도 활성화
+            LChartBlock.style.visibility = 'visible';
+            RChartBlock.style.visibility = 'visible';
+
+           //빌딩풍 위험지도 FIx된거 지우기----------------
            buildingDangerFixedBlock.style.zIndex="1";
            buildingDangerFixedBlock.style.display = 'none';
 
@@ -204,10 +267,9 @@ nav_menu_img_items.forEach(item => {
                 clearInterval(intervalId); //interval 제거
                 console.log("interval removed...interval : ",intervalId);
 
-                //-------------------------
-                //left chart지우기(안지워짐..)
-                //-------------------------
-
+             //-------------------------
+             //left chart지우기(안지워짐..)
+             //-------------------------
                 const leftChartParentEl = document.querySelector('.chartBlock>.left');
                 const oldChart = document.querySelector('.chartBlock>.left>#leftChart');
                 oldChart.remove();
@@ -215,9 +277,9 @@ nav_menu_img_items.forEach(item => {
                  newLeftChart.setAttribute('id','leftChart');
                  newLeftChart.setAttribute('class','WWIWIIWIWW');
                  leftChartParentEl.appendChild(newLeftChart);
-                
-                
+
                  const ctx = newLeftChart.getContext('2d');
+
                  //기존 로그데이터 초기화
                  leftConfig = {
                     type: 'line',
@@ -278,7 +340,7 @@ nav_menu_img_items.forEach(item => {
                 tblEl.forEach(item =>{item.remove();})
                 realtimeVECVal =[];
 
-                //실시간 풍속
+                //실시간 풍속 초기화
                 realtimeWSDIdx = [];
                 realtimeWSDVal = [];
             }
@@ -306,10 +368,12 @@ nav_menu_img_items.forEach(item => {
             const bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
             bsOffcanvas.hide();
 
-
+            //
             menu02ImageZIdxEls.forEach(item => {
                             item.style.display='none';
             })
+
+
         }
 
 

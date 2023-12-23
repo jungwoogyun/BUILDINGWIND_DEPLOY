@@ -2,9 +2,11 @@ package com.example.demo.controller;
 
 
 import com.example.demo.domain.entity.RealTimeWindDirection;
+import com.example.demo.domain.entity.RealTimeWindNow;
 import com.example.demo.domain.entity.RealTimeWindPower;
 import com.example.demo.domain.repository.LocationRepository;
 import com.example.demo.domain.repository.RealTimeWindDirectionRepostitory;
+import com.example.demo.domain.repository.RealTimeWindNowRepostitory;
 import com.example.demo.domain.repository.RealTimeWindPowerRepostitory;
 import lombok.Data;
 import org.json.simple.parser.ParseException;
@@ -24,7 +26,8 @@ public class BuildingWindController {
     @Autowired
     private RealTimeWindDirectionRepostitory realTimeWindDirectionRepostitory;
 
-
+    @Autowired
+    private RealTimeWindNowRepostitory realTimeWindNowRepostitory;
 
     @Autowired
     private LocationRepository locationRepository;
@@ -42,6 +45,11 @@ public class BuildingWindController {
     public @ResponseBody List<RealTimeWindDirection> getWindDirection(){
 
         return realTimeWindDirectionRepostitory.findAll();
+    }
+
+    @GetMapping("/windNow")
+    public @ResponseBody List<RealTimeWindNow> getWindNow(){
+        return realTimeWindNowRepostitory.findAll();
     }
 }
 

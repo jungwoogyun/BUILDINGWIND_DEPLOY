@@ -600,6 +600,7 @@ display:none !important;
     position:relative !important;
     margin : 0 auto !important;
     object-fit : contain !important;
+    margin-bottom :0px !important;
 }
 
 .section06>.left .weather-body>.weather-body-section>.weather-info span{
@@ -621,7 +622,8 @@ display:none !important;
     margin : 0 auto;
     height : 40px !important;
     margin : 0 auto;
-
+    padding-left:0px !important;
+    padding-right:0px !important;
 
 }
 .section06>.left .weather-body>.weather-body-section>.weather-info .weather-info-body span{
@@ -700,9 +702,9 @@ display:none !important;
 .realtimeTbl th,
 .realtimeTbl  td
 {
-    width: 7px !important;
-    height : 7px !important;
-    line-height : 7px !important;
+    width: 12px !important;
+    height : 12px !important;
+    line-height : 12px !important;
     text-align:center !important;
     font-size:0.6rem !important;
 }

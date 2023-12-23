@@ -534,7 +534,7 @@ body::-webkit-scrollbar{
 
     border : 1px solid lightgray;
     border-radius: 5px;
-    width : 300px !important;
+    width : 290px !important;
     margin : 0 auto;
     height : 40px !important;
     margin : 0 auto;
@@ -559,7 +559,7 @@ body::-webkit-scrollbar{
 }
 .buildingDangerFixedBlock>div>.buildingDangerFixedBlock-weather  .weather-body>.weather-body-section>.weather-footer button{
 
-    margin : 5px;
+    margin : 8px;
     font-size : 0.5rem;
     width : 60px;
     height : 35px;
@@ -730,7 +730,7 @@ body::-webkit-scrollbar{
 .section06>.left .weather-nav{
 
     height:60px;
-    border-bottom : 1px solid lightgray;
+    /*border-bottom : 1px solid lightgray;*/
 }
 .section06>.left .weather-nav button{
     border-radius:20px !important;
@@ -753,6 +753,7 @@ body::-webkit-scrollbar{
     align-items: center;
     flex-direction: column;
     text-align:center;
+
 }
 .section06>.left .weather-body>.weather-body-section>.weather-info img{
 
@@ -762,11 +763,11 @@ body::-webkit-scrollbar{
     position:relative !important;
     margin : 0 auto !important;
     object-fit : contain !important;
-
+    margin-bottom :50px !important;
 
 }
 /*10.5도씨*/
-.section06>.left .weather-body>.weather-body-section>.weather-info span{
+.section06>.left .weather-body>.weather-body-section>.weather-info .temp{
     position:absolute;
     top:2vw  !important;;
     left:4vw;
@@ -774,21 +775,33 @@ body::-webkit-scrollbar{
     font-weight:800;
 }
 
+.section06>.left .weather-body>.weather-body-section>.weather-info span{
+    position:absolute;
+    top:2vw  !important;;
+    left:8vw;
+    font-size:2.5rem  !important;
+    font-weight:800;
+}
+
+
+
 .section06>.left .weather-body>.weather-body-section>.weather-info .weather-info-body{
     display:flex;
     justify-content: center;
     align-items: center;
 
-
+    border : 1px solid lightgray;
     border-radius: 5px;
     width : 400px !important;
     height : 60px !important;
     margin : 0 auto;
+    padding-left:2px !important;
+    padding-right:2px !important;
 
 
 }
 .section06>.left .weather-body>.weather-body-section>.weather-info .weather-info-body span{
-    font-size : 1rem !important;
+    font-size : 0.8rem !important;
     position:relative !important;
     left:0px !important;
     top:0px !important;
