@@ -1,3 +1,5 @@
+
+
 // --------------------------
 // OPENCANVAS
 // --------------------------
@@ -19,18 +21,22 @@ offcanvas_btn_el.addEventListener('click', function () {
 // Nav li Click Event
 // --------------------------
 const nav_menu_img_items = document.querySelectorAll('nav li>a');
+LChartBlock = document.querySelector('.section06 .left');
+RChartBlock = document.querySelector('.section06 .right');
+buildingDangerFixedBlock = document.querySelector('.buildingDangerFixedBlock');
+menu02ImageZIdxEls = document.querySelectorAll('section.section02 div img');
+
 nav_menu_img_items.forEach(item => {
 
     item.addEventListener('click', function () {
         const isOpened = item.getAttribute('data-toggle');
 
 
-        //
+
         const submenuUrl = item.getAttribute('data-submenu');
         const submenuIdx = item.getAttribute('data-idx');
+
         if (submenuUrl.includes("02")) {
-
-
 
            const SectionEls = document.querySelectorAll('main section')
                        SectionEls.forEach(sec => {
@@ -39,8 +45,9 @@ nav_menu_img_items.forEach(item => {
                                sec.style.display = 'block';
                            }
             })
-
-
+                //차트 비활 비홠성화
+                LChartBlock.style.visibility = 'hidden';
+                RChartBlock.style.visibility = 'hidden';
                       //OFFCANVAS BTN 비활성화
                         const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
                         if (offcanvas_btn_el.classList.contains('ToRight')) {
@@ -58,14 +65,15 @@ nav_menu_img_items.forEach(item => {
                         const bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
                         bsOffcanvas.hide();
                         //
-                        const buildingDangerFixedBlockEl = document.querySelector(
-                            '.buildingDangerFixedBlock'
-                        );
-                        buildingDangerFixedBlockEl.style.display = 'none';
+                        buildingDangerFixedBlock.style.zIndex="1";
 
 
-
+                        menu02ImageZIdxEls.forEach(item => {
+                            item.style.display='flex';
+                        });
         }
+
+
         //01MENU 클릭시
         else if (submenuUrl.includes("01")) {
             const SectionEls = document.querySelectorAll('main section')
@@ -75,7 +83,9 @@ nav_menu_img_items.forEach(item => {
                     sec.style.display = 'block';
                 }
             })
-
+            //차트 비활 비홠성화
+                LChartBlock.style.visibility = 'hidden';
+                RChartBlock.style.visibility = 'hidden';
 
             //OFFCANVAS BTN 비활성화
             const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
@@ -97,9 +107,14 @@ nav_menu_img_items.forEach(item => {
             const buildingDangerFixedBlockEl = document.querySelector(
                 '.buildingDangerFixedBlock'
             );
-            buildingDangerFixedBlockEl.style.display = 'none';
 
-        } else if (submenuUrl.includes("05")) {
+            menu02ImageZIdxEls.forEach(item => {
+                item.style.display='none';
+            })
+
+        }
+        //빌딩풍 위험지도 띄우기
+        else if (submenuUrl.includes("05")) {
 
             //OFFCANVAS 버튼 오른쪽이동
 
@@ -114,6 +129,11 @@ nav_menu_img_items.forEach(item => {
                         .add("ToRight");
                 }
 
+                //차트 비활 비홠성화
+                LChartBlock.style.visibility = 'hidden';
+                RChartBlock.style.visibility = 'hidden';
+                //
+
                 //OFFCANVAS SHOW
                 const myOffcanvas = document.querySelector('.offcanvas')
                 let bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
@@ -124,12 +144,9 @@ nav_menu_img_items.forEach(item => {
                     const buildingWindEl = document.querySelector('.dangerzone');
                     buildingWindEl.style.display = 'block';
 
-                    const buildingDangerFixedBlockEl = document.querySelector(
-                        '.buildingDangerFixedBlock'
-                    );
-                    buildingDangerFixedBlockEl.style.display = 'block';
-
                 }
+
+
             }
 
             // 빌딩풍위험지도 다시 띄우기
@@ -143,14 +160,16 @@ nav_menu_img_items.forEach(item => {
                         .remove();
                     const mapEl = document.createElement('div');
                     mapEl.setAttribute('id', 'map');
-                    mapEl.setAttribute('style','position:relative ;z-index:6');
+                    mapEl.setAttribute('style','position:relative ;z-index:10');
                     sec.appendChild(mapEl);
                     createMap();
                 }
-
             })
-
-
+            //
+            buildingDangerFixedBlock.style.zIndex="11";
+            menu02ImageZIdxEls.forEach(item => {
+                             item.style.display='none';
+            })
         //-------------------------------------
         //실시간 풍속 정보를 클릭했을때
         //-------------------------------------
@@ -165,6 +184,14 @@ nav_menu_img_items.forEach(item => {
                     sec.style.display = "block";
                 }             
             })
+            //---------------------------
+            //차트도 활성화
+                LChartBlock.style.visibility = 'visible';
+                RChartBlock.style.visibility = 'visible';
+
+            //---------------------------
+           buildingDangerFixedBlock.style.zIndex="1";
+           buildingDangerFixedBlock.style.display = 'none';
 
             //---------------------------
             // 그래프 표시하기
@@ -175,10 +202,10 @@ nav_menu_img_items.forEach(item => {
                 menu02clickInit=false;
                 clearInterval(intervalId); //interval 제거
                 console.log("interval removed...interval : ",intervalId);
+
                 //-------------------------
                 //left chart지우기(안지워짐..)
                 //-------------------------
-                
 
                 const leftChartParentEl = document.querySelector('.chartBlock>.left');
                 const oldChart = document.querySelector('.chartBlock>.left>#leftChart');
@@ -277,13 +304,14 @@ nav_menu_img_items.forEach(item => {
                 .remove('show');
             const bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
             bsOffcanvas.hide();
-            //
-            const buildingDangerFixedBlockEl = document.querySelector(
-                '.buildingDangerFixedBlock'
-            );
-            buildingDangerFixedBlockEl.style.display = 'none';
 
+
+            menu02ImageZIdxEls.forEach(item => {
+                            item.style.display='none';
+            })
         }
+
+
 
     })
 
@@ -502,6 +530,7 @@ dangerZoneLctEls.forEach(el=>{
         const fixedblockSection02ImgEl = document.querySelector('.buildingDangerFixedBlock .section02');
         const n = document.querySelector('.buildingDangerFixedBlock .buildingwindGif');
         let afterStyleEl = document.createElement("style");
+        const afterStyle = ``;
         if (el.checked==true)
         {
            if(el.classList.contains('lct-n')){
@@ -509,6 +538,17 @@ dangerZoneLctEls.forEach(el=>{
 
                 afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
                     content: 'N';
+                    position:absolute;
+                    left:0px;
+                    top:0px !important;
+                    display:block;
+                    width : 40px;
+                    height :25px;
+                    z-index:11;
+                    color : white;
+                    text-align:center;
+                    border : 1px solid white;
+                    margin : 10px;
                 }`;
                 n.appendChild(afterStyleEl);
 
@@ -516,30 +556,55 @@ dangerZoneLctEls.forEach(el=>{
             else if(el.classList.contains('lct-ne')){
                 fixedblockSection02ImgEl.src='gif/lct/ne/1/ne.gif';
 
-                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
-                    content: 'NE';
-                }`;
+                  afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                    content: 'NE';
+                                    position:absolute;
+                                    left:0px;
+                                    top:0px !important;
+                                    display:block;
+                                    width : 40px;
+                                    height :25px;
+                                    z-index:11;
+                                    color : white;
+                                    text-align:center;
+                                    border : 1px solid white;
+                                    margin : 10px;
+                                }`;
                 n.appendChild(afterStyleEl);
             }
             else if(el.classList.contains('lct-e')){
                  fixedblockSection02ImgEl.src='gif/lct/e/1/e.gif';
 
-                 afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
-                     content: 'E';
-                 }`;
+                   afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                     content: 'E';
+                                     position:absolute;
+                                     left:0px;
+                                     top:0px !important;
+                                     display:block;
+                                     width : 40px;
+                                     height :25px;
+                                     z-index:11;
+                                     color : white;
+                                     text-align:center;
+                                     border : 1px solid white;
+                                     margin : 10px;
+                                 }`;
                  n.appendChild(afterStyleEl);
              }
 
 
         }
 
-
-
-
-
-
-
     })
 
-
 })
+
+
+//처음로딩될때 이벤트
+document.addEventListener('DOMContentLoaded', function() {
+
+                LChartBlock.style.visibility = 'hidden';
+                RChartBlock.style.visibility = 'hidden';
+
+
+});
