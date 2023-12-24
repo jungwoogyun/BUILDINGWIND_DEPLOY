@@ -626,13 +626,28 @@ display:none !important;
     padding-right:0px !important;
 
 }
-.section06>.left .weather-body>.weather-body-section>.weather-info .weather-info-body span{
-    font-size : 0.6rem !important;
+.section06>.left .weather-body>.weather-body-section>.weather-info .weather-info-body>span{
+    font-size : 0.5rem !important;
+    position:relative !important;
+    left:0px !important;
+    top:0px !important;
+    display:block  !important;
+    border : 1px solid lightgray !important;
+         border-radius: 2px;
+    padding : 2px !important;
+    margin : 2px !important;
+
+}
+.section06>.left .weather-body>.weather-body-section>.weather-info .weather-info-body>span>span{
+    font-size : 0.5rem !important;
     position:relative !important;
     left:0px !important;
     top:0px !important;
 
+    padding :0px !important;
+    margin : 0px !important;
 }
+
 .section06>.left .weather-body>.weather-body-section>.weather-footer{
     display:flex;
     justify-content: left  !important;;

@@ -116,10 +116,13 @@ nav_menu_img_items.forEach(item => {
             })
 
         }
-        //빌딩풍 위험지도 띄우기
+        //-------------------------
+        //빌딩풍 위험지도 메뉴
+        //-------------------------
         else if (submenuUrl.includes("05")) {
-
+            //-------------------------
             //OFFCANVAS 버튼 오른쪽이동
+            //-------------------------
             const windowWidth = window.innerWidth;
             if (windowWidth > 500) {
                 const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
@@ -150,7 +153,10 @@ nav_menu_img_items.forEach(item => {
 
             }
 
+
+            //-------------------------
             // 빌딩풍위험지도 다시 띄우기
+            //-------------------------
             const sectionEls = document.querySelectorAll('main section');
             sectionEls.forEach(sec => {
                 sec.style.display = 'none';
@@ -163,7 +169,19 @@ nav_menu_img_items.forEach(item => {
                     mapEl.setAttribute('id', 'map');
                     mapEl.setAttribute('style','position:relative ;z-index:10');
                     sec.appendChild(mapEl);
-                    createMap();
+                    //-------------------------
+                    // GreenPolygon 좌표 받아오기
+                    //-------------------------
+                    var ploygonGreenArray;
+                    axios('/polygon/green')
+                          .then(resp=>{
+                             console.log("GREENPOLYGON",resp);
+                             //createMap(resp.data);      //폴리곤 받아 지도 만들기
+                             createMap(null);;
+                            })
+                           .catch(err=>{console.log(err);});
+
+
                 }
             })
             //
@@ -171,27 +189,43 @@ nav_menu_img_items.forEach(item => {
             menu02ImageZIdxEls.forEach(item => {
                              item.style.display='none';
             })
+
+
+
             //-------------------------
             //menu05에서 실시간 풍속정보 요청하기
             //-------------------------
+
             console.log('실시간 풍속정보 요청하기');
-            axios.get('/windNow')
+            RTForcastDate = getForcastDate();
+            RTForcastTime = getForcastTime();
+            console.log("RTNowDate : " + RTForcastDate);
+            console.log("RTNowTime : " + RTForcastTime);
+            axios.get('/windForcast/'+RTForcastDate+"/"+RTForcastTime)
                 .then(resp=>{
-                    console.log('windNow',resp);
+                    console.log('/windForcast',resp);
                     var data = resp.data;
                     data.forEach(item=>{
+                          console.log(item);
                         if(item.category==='T1H'){
-                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.T1H').innerHTML=item.obsrValue;
-                            document.querySelector('.buildingDangerFixedBlock .weather-info .temp').innerHTML=item.obsrValue;
+                            //document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=item.fcstValue;
+                            document.querySelector('.buildingDangerFixedBlock .weather-info .temp').innerHTML=item.fcstValue+"℃";
                         }
-                        else if(item.category==='RN1'){document.querySelector('.buildingDangerFixedBlock .weather-info-body span.RN1').innerHTML=item.obsrValue;}
-                        else if(item.category==='REH'){document.querySelector('.buildingDangerFixedBlock .weather-info-body span.REH').innerHTML=item.obsrValue;}
+                        else if(item.category==='RN1'){
+
+                                document.querySelector('.buildingDangerFixedBlock .weather-info-body span.RN1').innerHTML=item.fcstValue;
+                        }
+                        else if(item.category==='REH'){
+                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.REH').innerHTML=item.fcstValue;
+                        }
                         else if(item.category==='VEC'){
-                            directionIdx =  parseInt( (parseInt(item.obsrValue) + 22.5 * 0.5)/22.5); //풍향문자 구하기
+                            directionIdx =  parseInt( (parseInt(item.fcstValue) + 22.5 * 0.5)/22.5); //풍향문자 구하기
                             console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
-                            document.querySelector('.section06 .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
+                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
                         }
-                        else if(item.category==='WSD')document.querySelector('.buildingDangerFixedBlock .weather-info-body span.WSD').innerHTML=item.obsrValue;
+                        else if(item.category==='WSD'){
+                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.WSD').innerHTML=item.fcstValue;
+                        }
                     })
 
                     ;
@@ -199,6 +233,9 @@ nav_menu_img_items.forEach(item => {
                 .catch(err=>{
                     console.log("windNodErr",err);
              });
+
+
+
 
 
         //-------------------------------------
@@ -216,27 +253,45 @@ nav_menu_img_items.forEach(item => {
                     sec.style.display = "block";
                 }             
             })
+
+
+
             //-------------------------
             //실시간 풍속정보 요청하기
             //-------------------------
             console.log('실시간 풍속정보 요청하기');
-            axios.get('/windNow')
+            RTForcastDate = getForcastDate();
+
+            RTForcastTime = getForcastTime();
+            if(RTForcastTime==="0000")
+                RTForcastDate
+            console.log("RTNowDate : " + RTForcastDate);
+            console.log("RTNowTime : " + RTForcastTime);
+            axios.get('/windForcast/'+RTForcastDate+"/"+RTForcastTime)
                 .then(resp=>{
-                    console.log('windNow',resp);
+                    console.log('/windForcast',resp);
                     var data = resp.data;
                     data.forEach(item=>{
+                          console.log(item);
                         if(item.category==='T1H'){
-                            document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=item.obsrValue;
-                            document.querySelector('.section06 .weather-info .temp').innerHTML=item.obsrValue;
+                            //document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=item.fcstValue;
+                            document.querySelector('.section06 .weather-info .temp').innerHTML=item.fcstValue+"℃";
                         }
-                        else if(item.category==='RN1'){document.querySelector('.section06 .weather-info-body span.RN1').innerHTML=item.obsrValue;}
-                        else if(item.category==='REH'){document.querySelector('.section06 .weather-info-body span.REH').innerHTML=item.obsrValue;}
+                        else if(item.category==='RN1'){
+
+                                document.querySelector('.section06 .weather-info-body span.RN1').innerHTML=item.fcstValue;
+                        }
+                        else if(item.category==='REH'){
+                            document.querySelector('.section06 .weather-info-body span.REH').innerHTML=item.fcstValue;
+                        }
                         else if(item.category==='VEC'){
-                            directionIdx =  parseInt( (parseInt(item.obsrValue) + 22.5 * 0.5)/22.5); //풍향문자 구하기
+                            directionIdx =  parseInt( (parseInt(item.fcstValue) + 22.5 * 0.5)/22.5); //풍향문자 구하기
                             console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
                             document.querySelector('.section06 .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
                         }
-                        else if(item.category==='WSD')document.querySelector('.section06 .weather-info-body span.WSD').innerHTML=item.obsrValue;{}
+                        else if(item.category==='WSD'){
+                            document.querySelector('.section06 .weather-info-body span.WSD').innerHTML=item.fcstValue;
+                        }
                     })
 
                     ;
@@ -338,9 +393,10 @@ nav_menu_img_items.forEach(item => {
                 //-------------------------
                 const tblEl = document.querySelectorAll('.realtimeTbl tbody td');
                 tblEl.forEach(item =>{item.remove();})
-                realtimeVECVal =[];
 
-                //실시간 풍속 초기화
+
+                //실시간 풍속/풍향 초기화
+                realtimeVECVal =[];
                 realtimeWSDIdx = [];
                 realtimeWSDVal = [];
             }
@@ -415,8 +471,10 @@ nav_menu_img_items.forEach(item => {
 
 
 
-
-const createMap = () => {
+//-------------------------
+//지도 생성 함수
+//-------------------------
+const createMap = (polygon) => {
 
     const LCTlatlng = [35.16073, 129.1688];
     const MARINElatlng = [35.15541, 129.1460];
@@ -446,32 +504,43 @@ const createMap = () => {
         position: new naver.maps.LatLng(35.16073, 129.1688),
         map: map
     });
-    //-----------------------------------------
-    // LCT 마커 정보창
-    //-----------------------------------------
-    var contentString = [
-        '<div class="iw_inner">',
-        '   <h3>서울특별시청</h3>',
-        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br>',
-        '       <img src="./img/hi-seoul.jpg" width="55" height="55" alt="서울시청" class="thumb" /><br>',
-        '       02-120 | 공공,사회기관 > 특별,광역시청<br>',
-        '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
-        '   </p>',
-        '</div>'
-    ].join('');
-    var infowindow = new naver.maps.InfoWindow({
-        content: contentString
-    });
-    //-----------------------------------------
-    // LCT 마커 클릭 이벤트
-    //-----------------------------------------
-    naver.maps.Event.addListener(marker, "click", function(e) {
-        if (infowindow.getMap()) {
-            infowindow.close();
-        } else {
-            infowindow.open(map, marker);
-        }
-    });
+
+
+    //TSET
+//    var polygonData = [];
+//
+//    polygon.forEach(item=>{
+////          var marker = new naver.maps.Marker({
+////                position: new naver.maps.LatLng(item.lat, item.lon),
+////                map: map
+////            });
+//            polygonData.push(new naver.maps.LatLng(item.lat,item.lon));
+//        }
+//    )
+//    naver.maps.onJSContentLoaded = function() {
+//        var dotmap = new naver.maps.visualization.DotMap({
+//            map: map,
+//            data: polygonData
+//        });
+//    };
+
+
+var data = [
+    new naver.maps.LatLng(35.16073, 129.1688),
+    new naver.maps.LatLng(35.16083, 129.1688),
+    new naver.maps.LatLng(35.16093, 129.1688),
+];
+    naver.maps.onJSContentLoaded = function() {
+        var dotmap = new naver.maps.visualization.DotMap({
+            map: map,
+            data: data,
+            fillColor : 'orange',
+            strokeColor : 'orange',
+            radius : 10,
+        });
+    };
+
+
 
     //-----------------------------------------
      //도형 그리기
@@ -479,12 +548,13 @@ const createMap = () => {
      var polygonGreen = new naver.maps.Polygon({
          map: map,
          paths: [[]],
-         fillColor: 'green',
-         fillOpacity: 0.6,
-         strokeColor: '',
+
+//         fillColor: '',
+//         fillOpacity: 0.6,
+         strokeColor: 'green',
          strokeOpacity: 0.6,
          strokeWeight: 3,
-         clickable: true,
+         clickable: false,
          zIndex:1,
      });
 
@@ -493,10 +563,6 @@ const createMap = () => {
      for(i=0;i<GREEN.length;i++){
          path.push(GREEN[i]);
      }
-
-
-
-
 
 
     //-----------------------------------------
@@ -519,10 +585,10 @@ const createMap = () => {
     //-----------------------------------------
     // 기본마커
     //-----------------------------------------
-    var marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(35.16073, 129.1688),
-        map: map
-    });
+//    var marker = new naver.maps.Marker({
+//        position: new naver.maps.LatLng(35.16073, 129.1688),
+//        map: map
+//    });
 
     //-----------------------------------------
     // 마커 정보창
@@ -553,39 +619,121 @@ const createMap = () => {
     });
 
     //-----------------------------------------
-    //도형 그리기
+    //도형 그리기 클릭시 그려지기
     //-----------------------------------------
-    var polygon = new naver.maps.Polygon({
-        map: map,
-        paths: [[]],
-        fillColor: '#ff0000',
-        fillOpacity: 0.3,
-        strokeColor: '#ff0000',
-        strokeOpacity: 0.6,
-        strokeWeight: 3,
-        clickable: true
-    });
+//    var polygon = new naver.maps.Polygon({
+//        map: map,
+//        paths: [[]],
+//        fillColor: '#ff0000',
+//        fillOpacity: 0.3,
+//        strokeColor: 'orange',
+//        strokeOpacity: 0.6,
+//        strokeWeight: 3,
+//        clickable: false
+//    });
+//    naver.maps.Event.addListener(map, 'click', function(e) {
+//        var point = e.latlng;
+//        var path = polygon.getPaths().getAt(0);
+//        path.push(point);
+//        // new naver.maps.Marker({
+//        //     map: map,
+//        //     position: point
+//        // });
+//    });
 
+
+
+    //-----------------------------------------
+    //클릭시 좌표 표시
+    //-----------------------------------------
+
+   var markerList = [];
+
+
+    var menuLayer = $('<div style="position:absolute;z-index:10000;width:400px;height:120px;background-color:#fff;border:solid 1px #333;padding:10px;display:none;"></div>');
+
+    var windmenuLayer = $('<div style="position:absolute;z-index:10000;width:100px;height:100px;background-color:#fff;border:solid 1px #333;padding:10px;display:none;font-size:0.7rem;display:flex;justify-content:center;align-items:center;"></div>');
+
+    map.getPanes().floatPane.appendChild(menuLayer[0]);
+    map.getPanes().floatPane.appendChild(windmenuLayer[0]);
     naver.maps.Event.addListener(map, 'click', function(e) {
+        //OPENWEATHER날씨요청
+        console.log(e.coord);
+        axios.get("/OPTEST/"+e.coord._lat+"/"+e.coord._lng)
+        .then(
+            resp => {
 
-        var point = e.latlng;
+                console.log('openweatherAPI : ',resp);
+                console.log(resp.data.wind);
+                //지도에 표시
+                 var coordHtml ='풍향정보 : '+ resp.data.wind.deg + '<br />'+
+                    '돌풍정보 : ' + resp.data.wind.gust + '<br />'+
+                    '풍속정보 : ' + resp.data.wind.speed;
 
-        var path = polygon.getPaths().getAt(0);
-        path.push(point);
+                  windmenuLayer.show().css({
+                        left: e.offset.x,
+                        top: e.offset.y
+                   }).html(coordHtml);
 
-        // new naver.maps.Marker({
-        //     map: map,
-        //     position: point
-        // });
+
+            }
+        )
+        .catch(error=>{console.log(error);})
+
     });
+
+
+    naver.maps.Event.addListener(map, 'keydown', function(e) {
+        var keyboardEvent = e.keyboardEvent,
+            keyCode = keyboardEvent.keyCode || keyboardEvent.which;
+
+        var ESC = 27;
+
+        if (keyCode === ESC) {
+            keyboardEvent.preventDefault();
+
+            for (var i=0, ii=markerList.length; i<ii; i++) {
+                markerList[i].setMap(null);
+            }
+
+            markerList = [];
+
+            menuLayer.hide();
+        }
+    });
+
+    naver.maps.Event.addListener(map, 'mousedown', function(e) {
+        menuLayer.hide();
+    });
+    //우클릭 이벤트
+    naver.maps.Event.addListener(map, 'rightclick', function(e) {
+
+        var coordHtml =
+            'Coord: '+ e.coord + '<br />' +
+            'Point: ' + e.point + '<br />' +
+            'Offset: ' + e.offset;
+
+        menuLayer.show().css({
+            left: e.offset.x,
+            top: e.offset.y
+        }).html(coordHtml);
+
+        console.log('Coord: ' + e.coord.toString());
+    });
+
+
+
 
 }
+
+
 
 
 //-------------------------------------------------
 // 위험지도 바람별로 바꾸기
 //-------------------------------------------------
 const dangerZoneLctEls = document.querySelectorAll('.dangerzone .body .left .dangerchk');
+
 
 dangerZoneLctEls.forEach(el=>{
 
@@ -664,12 +812,74 @@ dangerZoneLctEls.forEach(el=>{
 
 })
 
+const deSelectFunction = ()=>{
 
+
+}
+
+
+//-----------------------------------------
 //처음로딩될때 이벤트
+//-----------------------------------------
 document.addEventListener('DOMContentLoaded', function() {
 
                 LChartBlock.style.visibility = 'hidden';
                 RChartBlock.style.visibility = 'hidden';
 
-
+                const n = document.querySelector('.buildingDangerFixedBlock .buildingwindGif');
+                let afterStyleEl = document.createElement("style");
+                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                    content: 'N';
+                    position:absolute;
+                    left:0px;
+                    top:0px !important;
+                    display:block;
+                    width : 40px;
+                    height :25px;
+                    z-index:11;
+                    color : white;
+                    text-align:center;
+                    border : 1px solid white;
+                    margin : 10px;
+                }`;
+                n.appendChild(afterStyleEl);
 });
+
+//-----------------------------------------
+//현재 날짜 구하기(20230101)
+//-----------------------------------------
+function getForcastDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  let currentDate = `${year}${month}${day}`;
+    //2300시인경우
+  const time = getForcastTime();
+  if(time=='0000'){
+    // 현재 날짜에 1을 더하여 다음 날을 얻기
+    var nD = new Date(today);
+    nD.setDate(today.getDate() + 1);
+
+    const newYear = nD.getFullYear();
+    const newMonth = String(nD.getMonth()+1).padStart(2, '0');
+    const nextDay =  String(nD.getDate()).padStart(2, '0');
+    currentDate =  `${newYear}${newMonth}${nextDay}`;
+  }
+  return currentDate;
+
+}
+//현재 시간 구하기 0500
+function getForcastTime() {
+    const today = new Date();
+    let hours = String(today.getHours()).padStart(2, '0');
+    const minutes = String(today.getMinutes()).padStart(2, '0');
+
+
+    hours = String(today.getHours()+1).padStart(2, '0');
+    if(hours=='24')
+        return`0000`;
+    else
+        return `${hours}00`;
+  }
+  //return  `${hours}${minutes}`;

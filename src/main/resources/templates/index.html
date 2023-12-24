@@ -43,8 +43,6 @@
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 
-        <!--        NAVER-->
-        <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xzhrszj4e9"></script>
 
 
 
@@ -204,6 +202,10 @@
                             <div class="mobile-fit">
                                 <div class="weather-top">
                                     <span>해운대구 우동</span>
+
+                                    <div class="updatedInfo"  style="display:absolute;width:200px;height:30px;left:-10%;top:0px;text-align:right;font-size:0.6rem;color:lightgray;">
+                                        <span class="updateDateTime">매시간 20분,40분 업데이트</span>
+                                    </div>
                                 </div>
                                 <div class="weather-nav">
                                     <button class="btn btn-secondary ">오늘</button>
@@ -221,21 +223,21 @@
                                 <div class="weather-info">
                                     <div class="imgblock" style="object-fix:contain">
                                         <img src="images/weather/NB02.png" alt="" />
-                                        <span class="temp"></span><span>℃</span>
+                                        <span class="temp"></span>
                                     </div>
 
                                     <div class="weather-info-body">
-                                        <span>체감 </span><span class="value T1H"></span><span>℃</span> |
-                                        <span>강수 </span><span class="value RN1"></span><span>mm</span> |
-                                        <span>습도 </span><span class="value REH"></span><span>%</span> |
-                                        <span class="value VEC"></span> <span class="value WSD"></span><span>m/s</span>
+                                        <span>체감 <span class="value T1H">-</span>℃ </span>
+                                        <span><span class="value RN1"></span></span>
+                                        <span>습도 <span class="value REH"></span>%</span>
+                                        <span><span class="value VEC"></span> <span class="value WSD"></span> m/s</span>
                                     </div>
                                 </div>
                                 <div class="weather-footer">
-                                    <button class="weather-item btn" >미세먼지<br>좋음</button>
-                                    <button class="weather-item btn" >초미세먼지<br>좋음</button>
-                                    <button class="weather-item btn" >자외선<br>좋음</button>
-                                    <button class="weather-item btn" >일몰<br>17:13</button>
+                                    <button class="weather-item btn" >미세먼지<br>-</button>
+                                    <button class="weather-item btn" >초미세먼지<br>-</button>
+                                    <button class="weather-item btn" >자외선<br>-</button>
+                                    <button class="weather-item btn" >일몰<br>--:--</button>
                                 </div>
                             </div>
                         </div>
@@ -440,20 +442,19 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                            type="radio"
+                                            name="lct"
                                             id="lct-location01"
                                             class="form-check-input dangerchk lct lct-n"
                                             style="width:20px;"
-                                            checked
                                         />&nbsp;
                                         <label for="lct-location01" class="form-check-label">북풍 (N)</label>
                                     </div>
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                            type="radio"
+                                            name="lct"
                                             id="lct-location02"
                                             class="form-check-input dangerchk lct lct-ne"
                                             style="width:20px;"/>&nbsp;
@@ -462,8 +463,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                            type="radio"
+                                            name="lct"
                                             id="lct-location03"
                                             class="form-check-input dangerchk lct lct-e"
                                             style="width:20px;"/>&nbsp;
@@ -472,8 +473,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="lct"
                                             id="lct-location04"
                                             class="form-check-input dangerchk lct lct-s"
                                             style="width:20px;"/>&nbsp;
@@ -482,8 +483,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="lct"
                                             id="lct-location05"
                                             class="form-check-input dangerchk lct lct-sw"
                                             style="width:20px;"/>&nbsp;
@@ -492,8 +493,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="lct"
                                             id="lct-location06"
                                             class="form-check-input dangerchk lct lct-w"
                                             style="width:20px;"/>&nbsp;
@@ -502,8 +503,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="lct"
                                             id="lct-location07"
                                             class="form-check-input dangerchk lct lct-nw"
                                             style="width:20px;"/>&nbsp;
@@ -524,8 +525,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="marin"
                                             id="marin-location01"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -534,8 +535,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="marin"
                                             id="marin-location02"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -544,8 +545,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="marin"
                                             id="marin-location03"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -554,8 +555,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="marin"
                                             id="marin-location04"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -564,8 +565,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="marin"
                                             id="marin-location05"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -574,8 +575,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="marin"
                                             id="marin-location06"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -584,8 +585,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="marin"
                                             id="marin-location07"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -606,8 +607,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                            type="radio"
+                                            name="centum"
                                             id="centum-location01"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -616,8 +617,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="centum"
                                             id="centum-location02"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -626,8 +627,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="centum"
                                             id="centum-location03"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -636,8 +637,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="centum"
                                             id="centum-location04"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -646,8 +647,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="centum"
                                             id="centum-location05"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -656,8 +657,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="centum"
                                             id="centum-location06"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -666,8 +667,8 @@
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
-                                            type="checkbox"
-                                            name=""
+                                                type="radio"
+                                                name="centum"
                                             id="centum-location07"
                                             class="form-check-input"
                                             style="width:20px;"/>&nbsp;
@@ -778,21 +779,21 @@
                                     <div class="weather-info">
                                         <div class="imgblock">
                                             <img src="images/weather/NB02.png" alt="" />
-                                            <span class="temp">10.5℃</span>
+                                            <span class="temp"></span>
                                         </div>
 
                                         <div class="weather-info-body">
-                                            <span>체감</span><span class="value T1H"></span><span>℃</span>
-                                            <span>강수</span><span class="value RN1"></span><span>mm</span>
-                                            <span>습도</span><span class="value REH"></span><span>%</span>
-                                            <span class="value VEC"></span> <span class="value WSD"></span><span>m/s</span>
+                                            <span>체감 <span class="value T1H">-</span>℃ </span>
+                                            <span><span class="value RN1"></span></span>
+                                            <span>습도 <span class="value REH"></span>%</span>
+                                            <span><span class="value VEC"></span> <span class="value WSD"></span> m/s</span>
                                         </div>
                                     </div>
                                     <div class="weather-footer">
-                                        <button class="weather-item btn" >미세먼지 좋음</button>
-                                        <button class="weather-item btn" >초미세먼지 좋음</button>
-                                        <button class="weather-item btn" >자외선 좋음</button>
-                                        <button class="weather-item btn" >일몰 17:13</button>
+                                        <button class="weather-item btn" >미세먼지 -</button>
+                                        <button class="weather-item btn" >초미세먼지 -</button>
+                                        <button class="weather-item btn" >자외선 -</button>
+                                        <button class="weather-item btn" >일몰 --:--</button>
                                     </div>
                                 </div>
                             </div>
@@ -807,10 +808,10 @@
                 <img class="section02" src="gif/lct/n/1/n.gif"  />
             </div>
 
-            <div style="border : 1px solid lightgray;width:100%;height:15.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
+            <div style="">
                 <img src="images/fixed_img03.png" />
             </div>
-            <div style="border : 1px solid lightgray;width:100%;height:15.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
+            <div style="">
                 <img src="gif/buildingWind.gif" />
             </div>
         </div>
@@ -930,6 +931,11 @@
 
 <!--        AXIOS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js" integrity="sha512-b94Z6431JyXY14iSXwgzeZurHHRNkLt9d6bAHt7BZT38eqV+GyngIi/tVye4jBKPYQ2lBdRs0glww4fmpuLRwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!--        NAVER-->
+        <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xzhrszj4e9"></script>
+
+        <!--네이버 시각화    -->
+        <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=xzhrszj4e9&submodules=visualization"></script>
     <!-- JS -->
 
     <script>

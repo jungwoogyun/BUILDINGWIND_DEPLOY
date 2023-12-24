@@ -101,13 +101,17 @@ const drawChart_ByRealTimeMenu = ()=>{
                                     //----------------
                                     const tblEl = document.querySelector('.realtimeTbl tbody');
                                     const trEl = document.createElement('tr');
-                                    const td1 = document.createElement('td'); td1.innerHTML=idx;
+                                    const td1 = document.createElement('td'); td1.innerHTML=idx+1;
                                     const td2 = document.createElement('td'); td2.innerHTML=realtimeWSDIdx[idx];
                                     const td3 = document.createElement('td'); td3.innerHTML= realtimeVECVal[idx]+"/"+realtimeVECIdx[directionIdx]
                                     const td4 = document.createElement('td'); td4.innerHTML= realtimeWSDVal[idx];
 
-                                    trEl.appendChild(td1);trEl.appendChild(td2);
-                                    trEl.appendChild(td3);trEl.appendChild(td4);
+
+
+                                    trEl.appendChild(td1);
+                                    trEl.appendChild(td2);
+                                    trEl.appendChild(td3);
+                                    trEl.appendChild(td4);
                                     tblEl.appendChild(trEl);
 
                                     //스크롤바를 아래로 내리기
