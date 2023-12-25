@@ -176,8 +176,8 @@ nav_menu_img_items.forEach(item => {
                     axios('/polygon/green')
                           .then(resp=>{
                              console.log("GREENPOLYGON",resp);
-                             //createMap(resp.data);      //폴리곤 받아 지도 만들기
-                             createMap(null);;
+                             createMap(resp.data);      //폴리곤 받아 지도 만들기
+                             //createMap(null);;
                             })
                            .catch(err=>{console.log(err);});
 
@@ -491,7 +491,9 @@ const createMap = (polygon) => {
         zoomControlOptions: {
             style: naver.maps.ZoomControlStyle.SMALL,
             position: naver.maps.Position.RIGHT_TOP
-        }
+        },
+       
+
     };
 
     var map = new naver.maps.Map('map', mapOptions);
@@ -505,41 +507,56 @@ const createMap = (polygon) => {
         map: map
     });
 
+//-----------------------------------------
+//TSET 위도경도에 모든 마커 표시
+//-----------------------------------------
+    var polygonDataGreen = [];
+    var polygonDataBlue = [];
+    var polygonDataRed = [];
 
-    //TSET
-//    var polygonData = [];
-//
-//    polygon.forEach(item=>{
-////          var marker = new naver.maps.Marker({
-////                position: new naver.maps.LatLng(item.lat, item.lon),
-////                map: map
-////            });
-//            polygonData.push(new naver.maps.LatLng(item.lat,item.lon));
-//        }
-//    )
-//    naver.maps.onJSContentLoaded = function() {
-//        var dotmap = new naver.maps.visualization.DotMap({
-//            map: map,
-//            data: polygonData
-//        });
-//    };
+    polygon.forEach(item=>{
 
-
-var data = [
-    new naver.maps.LatLng(35.16073, 129.1688),
-    new naver.maps.LatLng(35.16083, 129.1688),
-    new naver.maps.LatLng(35.16093, 129.1688),
-];
+            if( Number(item.speed)<15)
+                polygonDataGreen.push(new naver.maps.LatLng(item.lat,item.lon));
+            else if(Number(item.speed)<21)
+                polygonDataBlue.push(new naver.maps.LatLng(item.lat,item.lon));
+            else
+                polygonDataRed.push(new naver.maps.LatLng(item.lat,item.lon));
+        }
+    )
+    console.log("PG",polygonDataGreen);
+    console.log("PB",polygonDataBlue);
+    console.log("PR",polygonDataRed);
     naver.maps.onJSContentLoaded = function() {
-        var dotmap = new naver.maps.visualization.DotMap({
-            map: map,
-            data: data,
-            fillColor : 'orange',
-            strokeColor : 'orange',
-            radius : 10,
-        });
-    };
 
+        //-----------------------------------------
+        //점지도로 표현
+        //-----------------------------------------
+        var dotmap = new naver.maps.visualization.DotMap(
+            {
+                map: map,
+                data: polygonDataGreen,
+                radius : 10,
+                fillColor : 'green',
+                strokeColor : 'green',
+            }
+        );
+       var dotmap2 = new naver.maps.visualization.DotMap({
+                    map: map,
+                    data: polygonDataBlue,
+                    radius :10,
+                    fillColor : 'blue',
+                    strokeColor : 'blue',
+       });
+        var dotmap = new naver.maps.visualization.DotMap({
+                   map: map,
+                   data: polygonDataRed,
+                   radius : 10,
+                   fillColor : 'red',
+                   strokeColor : 'red',
+        });
+
+    };
 
 
     //-----------------------------------------
@@ -593,19 +610,29 @@ var data = [
     //-----------------------------------------
     // 마커 정보창
     //-----------------------------------------
-    var contentString = [
-        '<div class="iw_inner">',
-        '   <h3>서울특별시청</h3>',
-        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br>',
-        '       <img src="./img/hi-seoul.jpg" width="55" height="55" alt="서울시청" class="thumb" /><br>',
-        '       02-120 | 공공,사회기관 > 특별,광역시청<br>',
-        '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
-        '   </p>',
-        '</div>'
-    ].join('');
-    var infowindow = new naver.maps.InfoWindow({
-        content: contentString
-    });
+//    var contentString = [
+//        '<div class="iw_inner" style="position:relative;z-index:199999;">',
+//        '   <h3>LCT</h3>',
+//        '   <div>도로명주소 | 지번주소<br>',
+//
+//        '       <img src="/images/icon22.png" style="width:50px;height:50px;margin 0 auto" alt="서울시청" class="thumb" /><br>',
+//        '       02-120 | 공공,사회기관 > 특별,광역시청<br>',
+//        '       <a href="http://" target="_blank">아직/</a>',
+//        '   </div>',
+//        '</div>'
+//    ].join('');
+//    var infowindow = new naver.maps.InfoWindow({
+//            content: contentString,
+//             maxWidth: 140,
+//             backgroundColor: "#eee",
+//                borderColor: "#2db400",
+//                borderWidth: 5,
+//                anchorSize: new naver.maps.Size(30, 30),
+//            anchorSkew: true,
+//            anchorColor: "#eee",
+//
+//            pixelOffset: new naver.maps.Point(20, -20)
+//    });
 
     //-----------------------------------------
     // 마커 클릭 이벤트
@@ -882,4 +909,5 @@ function getForcastTime() {
     else
         return `${hours}00`;
   }
+
   //return  `${hours}${minutes}`;
