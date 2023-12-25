@@ -37,6 +37,7 @@ nav_menu_img_items.forEach(item => {
         const submenuIdx = item.getAttribute('data-idx');
 
         if (submenuUrl.includes("02")) {
+        sectionNo =2;
 
            const SectionEls = document.querySelectorAll('main section')
                        SectionEls.forEach(sec => {
@@ -76,6 +77,7 @@ nav_menu_img_items.forEach(item => {
 
         //01MENU 클릭시
         else if (submenuUrl.includes("01")) {
+        sectionNo =1;
             const SectionEls = document.querySelectorAll('main section')
             SectionEls.forEach(sec => {
                 sec.style.display = 'none';
@@ -133,7 +135,7 @@ nav_menu_img_items.forEach(item => {
                         .add("ToRight");
                 }
 
-                //차트 비활 비홠성화
+                //차트 비활성화
                 LChartBlock.style.visibility = 'hidden';
                 RChartBlock.style.visibility = 'hidden';
                 //
@@ -144,27 +146,20 @@ nav_menu_img_items.forEach(item => {
                 bsOffcanvas.show();
                 //05MENU 클릭시 오픈캔버스에 내용표시
                 if (submenuUrl.includes("05")) {
-
                     const buildingWindEl = document.querySelector('.dangerzone');
                     buildingWindEl.style.display = 'block';
-
                 }
-
-
             }
-
-
             //-------------------------
             // 빌딩풍위험지도 다시 띄우기
             //-------------------------
             const sectionEls = document.querySelectorAll('main section');
             sectionEls.forEach(sec => {
                 sec.style.display = 'none';
-                if (sec.classList.contains('section03')) {
+                if (sec.classList.contains('section03'))
+                {
                     sec.style.display = "block";
-                    document
-                        .querySelector('#map')
-                        .remove();
+                    document.querySelector('#map').remove();
                     const mapEl = document.createElement('div');
                     mapEl.setAttribute('id', 'map');
                     mapEl.setAttribute('style','position:relative ;z-index:10');
@@ -172,14 +167,18 @@ nav_menu_img_items.forEach(item => {
                     //-------------------------
                     // GreenPolygon 좌표 받아오기
                     //-------------------------
-                    var ploygonGreenArray;
-                    axios('/polygon/green')
+                     axios('/polygon/green')
                           .then(resp=>{
                              console.log("GREENPOLYGON",resp);
+                              polygonDataGreen = [];
+                              polygonDataBlue = [];
+                              polygonDataRed = [];
+
                              createMap(resp.data);      //폴리곤 받아 지도 만들기
-                             //createMap(null);;
+
                             })
                            .catch(err=>{console.log(err);});
+
 
 
                 }
@@ -233,6 +232,17 @@ nav_menu_img_items.forEach(item => {
                 .catch(err=>{
                     console.log("windNodErr",err);
              });
+              //------------------------------
+              //체감온도 가져오기
+              //------------------------------
+              axios.get("/OPTEST/35.170421/129.158254")     //LCT만
+                     .then(
+                         resp => {
+                             console.log('openweatherAPI : ',resp);
+                             document.querySelector('.buildingDangerFixedBlock .weather-info-body span.T1H').innerHTML=(resp.data.main.feels_like-273.15).toFixed(); //캘빈단위로 제공
+                         }
+                     )
+                .catch(err=>{});
 
 
 
@@ -253,8 +263,6 @@ nav_menu_img_items.forEach(item => {
                     sec.style.display = "block";
                 }             
             })
-
-
 
             //-------------------------
             //실시간 풍속정보 요청하기
@@ -297,8 +305,23 @@ nav_menu_img_items.forEach(item => {
                     ;
                 })
                 .catch(err=>{
-                    console.log("windNodErr",err);
+                    console.log("windNodErr",err)
              });
+
+              //------------------------------
+              //체감온도 가져오기
+              //------------------------------
+              axios.get("/OPTEST/35.170421/129.158254")
+                     .then(
+                         resp => {
+                             console.log('openweatherAPI : ',resp);
+                             document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=(resp.data.main.feels_like-273.15).toFixed(); //캘빈단위로 제공
+                         }
+                     )
+                .catch(err=>{});
+
+
+
 
 
 
@@ -474,6 +497,7 @@ nav_menu_img_items.forEach(item => {
 //-------------------------
 //지도 생성 함수
 //-------------------------
+
 const createMap = (polygon) => {
 
     const LCTlatlng = [35.16073, 129.1688];
@@ -492,7 +516,7 @@ const createMap = (polygon) => {
             style: naver.maps.ZoomControlStyle.SMALL,
             position: naver.maps.Position.RIGHT_TOP
         },
-       
+
 
     };
 
@@ -508,14 +532,13 @@ const createMap = (polygon) => {
     });
 
 //-----------------------------------------
-//TSET 위도경도에 모든 마커 표시
+//TSET 테스트 범례 표시
 //-----------------------------------------
+
     var polygonDataGreen = [];
     var polygonDataBlue = [];
     var polygonDataRed = [];
-
     polygon.forEach(item=>{
-
             if( Number(item.speed)<15)
                 polygonDataGreen.push(new naver.maps.LatLng(item.lat,item.lon));
             else if(Number(item.speed)<21)
@@ -524,9 +547,12 @@ const createMap = (polygon) => {
                 polygonDataRed.push(new naver.maps.LatLng(item.lat,item.lon));
         }
     )
+
     console.log("PG",polygonDataGreen);
     console.log("PB",polygonDataBlue);
     console.log("PR",polygonDataRed);
+
+
     naver.maps.onJSContentLoaded = function() {
 
         //-----------------------------------------
@@ -536,7 +562,7 @@ const createMap = (polygon) => {
             {
                 map: map,
                 data: polygonDataGreen,
-                radius : 10,
+                radius : 3,
                 fillColor : 'green',
                 strokeColor : 'green',
             }
@@ -544,14 +570,14 @@ const createMap = (polygon) => {
        var dotmap2 = new naver.maps.visualization.DotMap({
                     map: map,
                     data: polygonDataBlue,
-                    radius :10,
+                    radius :3,
                     fillColor : 'blue',
                     strokeColor : 'blue',
        });
-        var dotmap = new naver.maps.visualization.DotMap({
+        var dotmap3 = new naver.maps.visualization.DotMap({
                    map: map,
                    data: polygonDataRed,
-                   radius : 10,
+                   radius : 3,
                    fillColor : 'red',
                    strokeColor : 'red',
         });
@@ -701,8 +727,6 @@ const createMap = (polygon) => {
                         left: e.offset.x,
                         top: e.offset.y
                    }).html(coordHtml);
-
-
             }
         )
         .catch(error=>{console.log(error);})
@@ -844,34 +868,6 @@ const deSelectFunction = ()=>{
 
 }
 
-
-//-----------------------------------------
-//처음로딩될때 이벤트
-//-----------------------------------------
-document.addEventListener('DOMContentLoaded', function() {
-
-                LChartBlock.style.visibility = 'hidden';
-                RChartBlock.style.visibility = 'hidden';
-
-                const n = document.querySelector('.buildingDangerFixedBlock .buildingwindGif');
-                let afterStyleEl = document.createElement("style");
-                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
-                    content: 'N';
-                    position:absolute;
-                    left:0px;
-                    top:0px !important;
-                    display:block;
-                    width : 40px;
-                    height :25px;
-                    z-index:11;
-                    color : white;
-                    text-align:center;
-                    border : 1px solid white;
-                    margin : 10px;
-                }`;
-                n.appendChild(afterStyleEl);
-});
-
 //-----------------------------------------
 //현재 날짜 구하기(20230101)
 //-----------------------------------------
@@ -911,3 +907,34 @@ function getForcastTime() {
   }
 
   //return  `${hours}${minutes}`;
+
+
+//-----------------------------------------
+//처음로딩될때 이벤트
+//-----------------------------------------
+document.addEventListener('DOMContentLoaded', function() {
+
+                LChartBlock.style.visibility = 'hidden';
+                RChartBlock.style.visibility = 'hidden';
+
+                const n = document.querySelector('.buildingDangerFixedBlock .buildingwindGif');
+                let afterStyleEl = document.createElement("style");
+                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                    content: 'N';
+                    position:absolute;
+                    left:0px;
+                    top:0px !important;
+                    display:block;
+                    width : 40px;
+                    height :25px;
+                    z-index:11;
+                    color : white;
+                    text-align:center;
+                    border : 1px solid white;
+                    margin : 10px;
+                }`;
+                n.appendChild(afterStyleEl);
+
+
+});
+
