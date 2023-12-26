@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
 @Configuration
 @EnableWebSecurity
@@ -19,11 +20,16 @@ public class SecurityConfig  {
     @Bean
     public SecurityFilterChain config(HttpSecurity http) throws Exception {
 
+
         //CSRF 비활성화
         http.csrf(
                 (config)->{ config.disable(); }
         );
 
+        //
+        HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
+        requestCache.setMatchingRequestParameterName(null);
+        http.requestCache(request->{request.requestCache(requestCache);});
 
         //요청 URL별 접근 제한
         http.authorizeHttpRequests(
@@ -38,6 +44,7 @@ public class SecurityConfig  {
         http.formLogin(login->{
             login.permitAll();
             login.loginPage("/login");
+            login.defaultSuccessUrl("/");
         });
 //
         //로그아웃

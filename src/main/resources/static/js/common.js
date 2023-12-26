@@ -102,8 +102,8 @@ nav_menu_img_items.forEach(item => {
                 }
             })
             //차트 비활 비홠성화
-                LChartBlock.style.visibility = 'hidden';
-                RChartBlock.style.visibility = 'hidden';
+            LChartBlock.style.visibility = 'hidden';
+            RChartBlock.style.visibility = 'hidden';
 
             //OFFCANVAS BTN 비활성화
             const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
@@ -142,7 +142,8 @@ nav_menu_img_items.forEach(item => {
             //OFFCANVAS 버튼 오른쪽이동
             //-------------------------
             const windowWidth = window.innerWidth;
-            if (windowWidth > 500) {
+            if (windowWidth > 500)
+            {
                 const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
                 if (!offcanvas_btn_el.classList.contains('ToRight')) {
                     //OFFCANVAS BTN Move To RIGHT
@@ -150,12 +151,6 @@ nav_menu_img_items.forEach(item => {
                         .classList
                         .add("ToRight");
                 }
-
-                //차트 비활성화
-                LChartBlock.style.visibility = 'hidden';
-                RChartBlock.style.visibility = 'hidden';
-                //
-
                 //OFFCANVAS SHOW
                 const myOffcanvas = document.querySelector('.offcanvas')
                 let bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
@@ -166,6 +161,11 @@ nav_menu_img_items.forEach(item => {
                     buildingWindEl.style.display = 'block';
                 }
             }
+
+
+                //차트 비활성화
+                LChartBlock.style.visibility = 'hidden';
+                RChartBlock.style.visibility = 'hidden';
                 //-------------------------
                 // 빌딩풍위험지도 다시 띄우기
                 //-------------------------
@@ -196,14 +196,14 @@ nav_menu_img_items.forEach(item => {
     //
     //                            })
     //                           .catch(err=>{console.log(err);});
-                            createMap(polygonGreen01);
+                            createMap(LctPolygon01,[35.16073, 129.1688]);
 
                     }
                 })
 
             console.log(map);
 
-
+            //
             buildingDangerFixedBlock.style.zIndex="11";
             menu02ImageZIdxEls.forEach(item => {
                              item.style.display='none';
@@ -518,54 +518,58 @@ nav_menu_img_items.forEach(item => {
 //지도 생성 함수
 //-------------------------
 
-const createMap = (polygon) => {
+const createMap = (polygon,centerCoord) => {
 
     const LCTlatlng = [35.16073, 129.1688];
     const MARINElatlng = [35.15541, 129.1460];
     const CENTUMPARKlatlan = [35.17899, 129.1227];
 
+
     //-------------------------------------------------
     // MAP OPTION
     //-------------------------------------------------
-    var mapOptions;
-    const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    if(windowWidth<400){
-        mapOptions = {
-            center: new naver.maps.LatLng(35.16073, 129.1688),
-            zoom: 14,
+     var mobileMapOption= {
+                    center: new naver.maps.LatLng(centerCoord[0], centerCoord[1]),
+                    zoom: 14,
+                    mapTypeId: naver.maps.MapTypeId.HYBRID,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                    style: naver.maps.ZoomControlStyle.SMALL,
+                    position: naver.maps.Position.RIGHT_TOP
+                    }
+    }
+
+     var desktopMapOption = {
+            center: new naver.maps.LatLng(centerCoord[0], centerCoord[1]),
+            zoom: 15,
             mapTypeId: naver.maps.MapTypeId.HYBRID,
             zoomControl: true,
             zoomControlOptions: {
-                style: naver.maps.ZoomControlStyle.SMALL,
-                position: naver.maps.Position.RIGHT_TOP
+             style: naver.maps.ZoomControlStyle.SMALL,
+             position: naver.maps.Position.RIGHT_TOP
             }
-        };
+    };
+
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if(windowWidth<400){
+        map = new naver.maps.Map('map', mobileMapOption);
     }else{
-          mapOptions = {
-                center: new naver.maps.LatLng(35.16073, 129.1688),
-                zoom: 15,
-                mapTypeId: naver.maps.MapTypeId.HYBRID,
-                zoomControl: true,
-                zoomControlOptions: {
-                    style: naver.maps.ZoomControlStyle.SMALL,
-                    position: naver.maps.Position.RIGHT_TOP
-                }
-            };
+        map = new naver.maps.Map('map', desktopMapOption);
     }
-    map = new naver.maps.Map('map', mapOptions);
+
 
 
     //-----------------------------------------
     //LCT MARKER
     //-----------------------------------------
     var marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(35.16073, 129.1688),
+        position: new naver.maps.LatLng(centerCoord[0], centerCoord[1]),
         map: map
     });
 
-//-----------------------------------------
-//TSET 테스트 범례 표시
-//-----------------------------------------
+    //-----------------------------------------
+    //TSET 테스트 범례 표시
+    //-----------------------------------------
 
     var polygonDataGreen = [];
     var polygonDataBlue = [];
@@ -593,7 +597,7 @@ const createMap = (polygon) => {
             {
                 map: map,
                 data: polygonDataGreen,
-                radius : 3,
+                radius : 5,
                 fillColor : 'green',
                 strokeColor : 'green',
             }
@@ -601,14 +605,14 @@ const createMap = (polygon) => {
        var dotmap2 = new naver.maps.visualization.DotMap({
                     map: map,
                     data: polygonDataBlue,
-                    radius :3,
+                    radius :5,
                     fillColor : 'blue',
                     strokeColor : 'blue',
        });
         var dotmap3 = new naver.maps.visualization.DotMap({
                    map: map,
                    data: polygonDataRed,
-                   radius : 3,
+                   radius : 5,
                    fillColor : 'red',
                    strokeColor : 'red',
         });
@@ -616,8 +620,7 @@ const createMap = (polygon) => {
     })
 
 
-
-    //-----------------------------------------
+     //-----------------------------------------
      //도형 그리기
      //-----------------------------------------
 //     var polygonGreen = new naver.maps.Polygon({
@@ -695,53 +698,49 @@ const createMap = (polygon) => {
     //-----------------------------------------
     // 마커 클릭 이벤트
     //-----------------------------------------
-    naver.maps.Event.addListener(marker, "click", function(e) {
-        if (infowindow.getMap()) {
-            infowindow.close();
-        } else {
-            infowindow.open(map, marker);
-        }
-    });
+//    naver.maps.Event.addListener(marker, "click", function(e) {
+//        if (infowindow.getMap()) {
+//            infowindow.close();
+//        } else {
+//            infowindow.open(map, marker);
+//        }
+//    });
 
     //-----------------------------------------
     //도형 그리기 클릭시 그려지기
     //-----------------------------------------
-//    var polygon = new naver.maps.Polygon({
-//        map: map,
-//        paths: [[]],
-//        fillColor: '#ff0000',
-//        fillOpacity: 0.3,
-//        strokeColor: 'orange',
-//        strokeOpacity: 0.6,
-//        strokeWeight: 3,
-//        clickable: false
-//    });
-//    naver.maps.Event.addListener(map, 'click', function(e) {
-//        var point = e.latlng;
-//        var path = polygon.getPaths().getAt(0);
-//        path.push(point);
-//        // new naver.maps.Marker({
-//        //     map: map,
-//        //     position: point
-//        // });
-//    });
-
-
+    var polygon = new naver.maps.Polygon({
+        map: map,
+        paths: [[]],
+        fillColor: '#ff0000',
+        fillOpacity: 0.3,
+        strokeColor: 'orange',
+        strokeOpacity: 0.6,
+        strokeWeight: 3,
+        clickable: false
+    });
+    naver.maps.Event.addListener(map, 'click', function(e) {
+        var point = e.latlng;
+        var path = polygon.getPaths().getAt(0);
+        path.push(point);
+        // new naver.maps.Marker({
+        //     map: map,
+        //     position: point
+        // });
+    });
 
     //-----------------------------------------
     //클릭시 좌표 표시
     //-----------------------------------------
-
-   var markerList = [];
-
-
-    var menuLayer = $('<div style="position:absolute;z-index:10000;width:400px;height:120px;background-color:#fff;border:solid 1px #333;padding:10px;display:none;"></div>');
-
-    var windmenuLayer = $('<div style="position:absolute;z-index:10000;width:100px;height:100px;background-color:#fff;border:solid 1px #333;padding:10px;display:none;font-size:0.7rem;display:flex;justify-content:center;align-items:center;"></div>');
-
-    map.getPanes().floatPane.appendChild(menuLayer[0]);
-    map.getPanes().floatPane.appendChild(windmenuLayer[0]);
-
+//   var markerList = [];
+//
+//
+//    var menuLayer = $('<div style="position:absolute;z-index:10000;width:400px;height:120px;background-color:#fff;border:solid 1px #333;padding:10px;display:none;"></div>');
+//
+//    var windmenuLayer = $('<div style="position:absolute;z-index:10000;width:100px;height:100px;background-color:#fff;border:solid 1px #333;padding:10px;display:none;font-size:0.7rem;display:flex;justify-content:center;align-items:center;"></div>');
+//
+//    map.getPanes().floatPane.appendChild(menuLayer[0]);
+//    map.getPanes().floatPane.appendChild(windmenuLayer[0]);
     //왼쪽 클릭 이벤트 처리
     naver.maps.Event.addListener(map, 'click', function(e) {
         //OPENWEATHER날씨요청
@@ -764,32 +763,33 @@ const createMap = (polygon) => {
 //            }
 //        )
 //        .catch(error=>{console.log(error);})
-
     });
 
 
-    naver.maps.Event.addListener(map, 'keydown', function(e) {
-        var keyboardEvent = e.keyboardEvent,
-            keyCode = keyboardEvent.keyCode || keyboardEvent.which;
+//    naver.maps.Event.addListener(map, 'keydown', function(e) {
+//        var keyboardEvent = e.keyboardEvent,
+//            keyCode = keyboardEvent.keyCode || keyboardEvent.which;
+//
+//        var ESC = 27;
+//
+//        if (keyCode === ESC) {
+//            keyboardEvent.preventDefault();
+//
+//            for (var i=0, ii=markerList.length; i<ii; i++) {
+//                markerList[i].setMap(null);
+//            }
+//
+//            markerList = [];
+//
+//            menuLayer.hide();
+//        }
+//    });
+//
+//    naver.maps.Event.addListener(map, 'mousedown', function(e) {
+//        menuLayer.hide();
+//    });
 
-        var ESC = 27;
 
-        if (keyCode === ESC) {
-            keyboardEvent.preventDefault();
-
-            for (var i=0, ii=markerList.length; i<ii; i++) {
-                markerList[i].setMap(null);
-            }
-
-            markerList = [];
-
-            menuLayer.hide();
-        }
-    });
-
-    naver.maps.Event.addListener(map, 'mousedown', function(e) {
-        menuLayer.hide();
-    });
     //우클릭 이벤트
     naver.maps.Event.addListener(map, 'rightclick', function(e) {
 
@@ -1000,6 +1000,85 @@ function getForcastTime() {
 
 
 
+
+
+        //TOP-HEADER SELECTED EVENT(지도중심좌표이동)
+         //center좌표변경시
+         var langSelect = document.querySelector(".centerSelect");
+        langSelect.addEventListener("change", function(e) {
+
+                     // select element에서 선택된 option의 value가 저장된다.
+                       var selectValue = langSelect.options[langSelect.selectedIndex].value;
+
+                       // select element에서 선택된 option의 text가 저장된다.
+                       var selectText = langSelect.options[langSelect.selectedIndex].text;
+
+                       console.log(selectText + " : " + selectValue);
+
+
+                        const latlag = selectValue.split(',');
+
+                        console.log(map);
+                        const arr =  selectValue.split(',');
+                        map.setCenter(new naver.maps.LatLng(arr[0], arr[1]));
+
+                        var marker = new naver.maps.Marker({
+                                position: new naver.maps.LatLng(arr[0], arr[1]),
+                                map: map
+                        });
+
+                        if(selectValue=="35.16073, 129.1688")//LCT
+                        {
+                           console.log("LCT CLICKED...")
+                            createMap(LctPolygon01,arr)
+
+                        }
+                        else if(selectValue=="35.15541, 129.1460") //MARIN
+                        {
+                            console.log("MARIN CLICKED...")
+                            createMap(marinPolygon01,arr)
+
+                        }
+                        else if(selectValue=="35.15541, 129.1460")
+                        {
+                         console.log("CENTUM CLICKED...")
+                            createMap(centumPolygon01,arr)
+                        }
+
+            })
+
+    //center좌표변경시
+    const centeredEls = document.querySelectorAll('.setCentered')
+    centeredEls.forEach(el=>{
+
+        el.addEventListener('click',function(){
+            const arr = el.getAttribute('data-center').split(',');
+             console.log("CLICKED..."  + arr);
+             console.log(map)
+
+
+                        if(el.getAttribute('data-center')=="35.16073, 129.1688")//LCT
+                        {
+                           console.log("LCT CLICKED...")
+                            createMap(LctPolygon01,arr)
+
+                        }
+                        else if(el.getAttribute('data-center')=="35.15541, 129.1460") //MARIN
+                        {
+                            console.log("MARIN CLICKED...")
+                            createMap(marinPolygon01,arr)
+
+                        }
+                        else if(el.getAttribute('data-center')=="35.15541, 129.1460")   //CENTEM
+                        {
+                            console.log("CENTUM CLICKED...")
+                            createMap(centumPolygon01,arr)
+                        }
+
+
+        })
+
+    });
 
 
 

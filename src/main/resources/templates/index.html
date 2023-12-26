@@ -65,6 +65,14 @@
                             <div>
                                 <span>빌딩풍 위험도 분석 및 예방·대응 시스템</span>
                             </div>
+                            <div>
+                                <select class="centerSelect form-select " name="centerXY" style="width:150px;text-align:center;">
+                                    <option value="35.16073, 129.1688">LCT</option>
+                                    <option value="35.15541, 129.1460">마린시티</option>
+                                    <option value="35.17899, 129.1227">센텀파크</option>
+                                </select>
+
+                            </div>
                         </div>
                         <div class="right">
                             <div>
@@ -98,7 +106,7 @@
                                     data-idx="6">
                                     <!-- <img src="images/test2_off.png" alt="" /> -->
 
-                                    <div class="title" style="width:200px;">실시간 <br> 풍속정보</div>
+                                    <div class="title" style="width:200px;">실시간<br>풍속정보</div>
                                 </a>
                             </li>
                             <li class="nav-item  ms-3">
@@ -109,7 +117,7 @@
                                     data-submenu="menu05"
                                     data-idx="5">
                                     <!-- <img src="images/icon22_off.png" alt="" /> -->
-                                    <div class="title">빌딩풍 <br>위험지도</div>
+                                    <div class="title">빌딩풍<br>위험지도</div>
                                 </a>
                             </li>
 
@@ -272,9 +280,9 @@
                     <div class="header">
 
                         <ul class="menu">
-                            <li><a href="javascript:void(0)">LCT</a></li>
-                            <li><a href="javascript:void(0)">마린시티</a></li>
-                            <li><a href="javascript:void(0)">센텀파크</a></li>
+                            <li><a href="javascript:void(0)" class="setCentered lctCenter" data-center="35.16073, 129.1688">LCT</a></li>
+                            <li><a href="javascript:void(0)" class="setCentered marinCenter" data-center="35.15541, 129.1460">마린시티</a></li>
+                            <li><a href="javascript:void(0)" class="setCentered centumCenter" data-center="35.17899, 129.1227">센텀파크</a></li>
                         </ul>
 
                     </div>
@@ -287,6 +295,14 @@
                     </div>
                     <!-- 빌딩풍 위험지도 -->
                     <div id="map"></div>
+
+                    <div class="hrtg">AI학습결과</div>
+
+                    <div class="section03-footer">
+                            <img src="/gif/lct/e/1/e.gif" alt="bb" />
+                            <img src="/images/fixed_img03.png" alt="aa" />
+                    </div>
+
                 </section>
             </main>
 
@@ -824,7 +840,10 @@
             </div>
 
             <div style="">
-                <img src="images/fixed_img03.png" />
+                <video width="100%" height="150px"  controls loop  muted autoplay>
+                    <source src="video/section03_TensorVideo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <div style="">
                 <img src="gif/buildingWind.gif" />
@@ -963,52 +982,39 @@
     <script src="js/menu06.js"></script>
     <script src="js/drawChart.js"></script>
     <script src="js/common.js"></script>
-    <script src="js/polygonGreen01.js"></script>
-
+    <script src="js/dataSet/LctPolygon01.js"></script>
+    <script src="js/dataSet/MarinPolygon01.js"></script>
         <script>
 
 
 
 
-        function chageLangSelect(){
-            var langSelect = document.getElementById("centerSelect");
-
-            // select element에서 선택된 option의 value가 저장된다.
-            var selectValue = langSelect.options[langSelect.selectedIndex].value;
-
-            // select element에서 선택된 option의 text가 저장된다.
-            var selectText = langSelect.options[langSelect.selectedIndex].text;
-
-            console.log(selectText + " : " + selectValue);
 
 
-             const latlag = selectValue.split(',');
-
-             console.log(map);
-             map.setCenter(latlag[0],latlag[1]);
-        }
 
 
-        // 투명도 EVENT
-        const opacityControlEl = document.querySelector('.opacityController');
-                            opacityControlEl.addEventListener('change', function () {
-                            console.log(opacityControlEl.value);
+                   // 투명도 EVENT
+                   const opacityControlEl = document.querySelector('.opacityController');
+                                       opacityControlEl.addEventListener('change', function () {
+                                       console.log(opacityControlEl.value);
 
-                            const offcanvasEl = document.querySelector('.offcanvas');
-                            offcanvasEl.style.opacity = opacityControlEl.value;
-                            const offcanvas_btnEl = document.querySelector('.offcanvas_btn');
-                            offcanvas_btnEl.style.opacity = opacityControlEl.value;
-        })
+                                       const offcanvasEl = document.querySelector('.offcanvas');
+                                       offcanvasEl.style.opacity = opacityControlEl.value;
+                                       const offcanvas_btnEl = document.querySelector('.offcanvas_btn');
+                                       offcanvas_btnEl.style.opacity = opacityControlEl.value;
+                   })
 
-    //Forcast 버튼 클릭시(10분후 , 30분후 3시간후
-    const forcastEls = document.querySelectorAll('.forcast_btn');
-        forcastEls.forEach(el=>{
 
-        el.addEventListener('click',function(){
-            console.log('forcast btn');
 
-        });
-    })
+               //Forcast 버튼 클릭시(10분후 , 30분후 3시간후
+               const forcastEls = document.querySelectorAll('.forcast_btn');
+                   forcastEls.forEach(el=>{
+
+                   el.addEventListener('click',function(){
+                       console.log('forcast btn');
+
+                   });
+               })
 
 
     </script>

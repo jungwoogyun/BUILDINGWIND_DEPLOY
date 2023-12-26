@@ -68,6 +68,7 @@ body::-webkit-scrollbar{
     display:flex;
     justify-content: left;
     align-items: center;
+    width : 250px;
 
    
 }
@@ -109,13 +110,12 @@ body::-webkit-scrollbar{
 }
 
 .wrapper>header>nav ul {
-    
+    width : 1000px !important;
     margin : 0px !important;
     padding : 10px !important;
     left : -10px !important;
-
-   
 }
+
 .wrapper>header>nav ul li{
     
     width : 130px;
@@ -391,6 +391,26 @@ body::-webkit-scrollbar{
     height:100vh !important;
 }
 
+.section03 .hrtg{
+    display:none !important;
+
+}
+.section03-footer{
+    display:none !important;
+
+
+}
+.section03-footer .left{
+    display:none !important;
+}
+.section03-footer .right{
+    display:none !important;
+}
+
+
+
+
+
 .wrapper>main>section>#map .leaflet-control-container{
     width : 50px;
     top:5%;
@@ -459,10 +479,11 @@ body::-webkit-scrollbar{
 .buildingDangerFixedBlock>div{
     width : 300px;
     height : 150px;
-    object-fit: cover;
+    object-fit: contain;
 
     margin-bottom : 5px;
     object-fit: contain;
+
 }
 .buildingDangerFixedBlock div img{
     width : 300px;
@@ -778,8 +799,8 @@ body::-webkit-scrollbar{
 
 
 .section06>.left .weather-nav{
-     left:3%;
-    height:60px;
+     left:5% !important;
+    height:60px  !important;
     /*border-bottom : 1px solid lightgray;*/
 }
 .section06>.left .weather-nav button{
