@@ -26,10 +26,7 @@ public class SecurityConfig  {
                 (config)->{ config.disable(); }
         );
 
-        //
-        HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
-        requestCache.setMatchingRequestParameterName(null);
-        http.requestCache(request->{request.requestCache(requestCache);});
+
 
         //요청 URL별 접근 제한
         http.authorizeHttpRequests(
