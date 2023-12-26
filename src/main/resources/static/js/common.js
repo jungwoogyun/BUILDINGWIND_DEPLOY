@@ -999,3 +999,15 @@ function getForcastTime() {
     });
 
 
+const forcastEls = documenet.querySelectorAll('forcast_btn');
+forcastEls.forEach(el=>{
+
+    el.addEventListener('click',function(){
+        alert('forcast btn');
+
+    });
+
+})
+
+
+
