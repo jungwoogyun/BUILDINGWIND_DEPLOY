@@ -362,6 +362,59 @@ body::-webkit-scrollbar{
 
 }
 
+/*SECTION03 - 빌딩풍 위험지도 */
+.section03{
+}
+.section03>.header
+{
+    display:block !important;
+    position:relative !important;
+    width : 350px !important;
+    left :0px !important;
+    top:0px !important;
+    height : 40px !important;
+    z-index:9999 !important;
+    margin : 2px auto;
+}
+.section03 .header .menu
+{
+    width : 350px !important;
+    height : 40px !important;
+    margin : 0 auto !important;
+    padding : 0px !important;
+    z-index:9999 !important;
+    background-color: #76ADE8;
+    position:relative !important;
+    left:0px;
+    top:0px;
+    display:flex !important;
+    justify-content: space-evenly !important;
+    align-items : center !important;
+    text-align:center !important;
+    flex-direction: row !important;
+
+}
+.section03 .header .menu li
+{
+    display:block !important;
+    text-align:center !important;
+    border : 1px solid lightgray !important;
+    border-radius : 3px !important;
+    margin : 5px !important;
+    padding : 0px;
+    background-color : beige;
+    width : 80px;
+    font-size : 0.9rem;
+}
+.section03 .header .menu li a
+{
+    display:block  !important;
+    text-decoration:none !important;
+    color:black !important;
+    color :black;
+    display:block;
+
+}
 
 
 /* MAP */

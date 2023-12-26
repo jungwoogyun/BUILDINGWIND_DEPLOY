@@ -166,42 +166,43 @@ nav_menu_img_items.forEach(item => {
                     buildingWindEl.style.display = 'block';
                 }
             }
-            //-------------------------
-            // 빌딩풍위험지도 다시 띄우기
-            //-------------------------
-            const sectionEls = document.querySelectorAll('main section');
-            sectionEls.forEach(sec => {
-                sec.style.display = 'none';
+                //-------------------------
+                // 빌딩풍위험지도 다시 띄우기
+                //-------------------------
+                const sectionEls = document.querySelectorAll('main section');
+                sectionEls.forEach(sec => {
+                    sec.style.display = 'none';
 
-                if (sec.classList.contains('section03'))
-                {
+                    if (sec.classList.contains('section03'))
+                    {
 
-                    sec.style.display = "block";
-                    document.querySelector('#map').remove();
-                    const mapEl = document.createElement('div');
-                    mapEl.setAttribute('id', 'map');
-                    mapEl.setAttribute('style','position:relative ;z-index:10');
-                    sec.appendChild(mapEl);
-                    //-------------------------
-                    // GreenPolygon 좌표 받아오기
-                    //-------------------------
-//                     axios('/polygon/green')
-//                          .then(resp=>{
-//                             console.log("GREENPOLYGON",resp);
-//                              polygonDataGreen = [];
-//                              polygonDataBlue = [];
-//                              polygonDataRed = [];
-//
-//                             createMap(resp.data);      //폴리곤 받아 지도 만들기
-//
-//                            })
-//                           .catch(err=>{console.log(err);});
-                        createMap(polygonGreen01);
+                        sec.style.display = "block";
+                        document.querySelector('#map').remove();
+                        const mapEl = document.createElement('div');
+                        mapEl.setAttribute('id', 'map');
+                        mapEl.setAttribute('style','position:relative ;z-index:10');
+                        sec.appendChild(mapEl);
+                        //-------------------------
+                        // GreenPolygon 좌표 받아오기
+                        //-------------------------
+    //                     axios('/polygon/green')
+    //                          .then(resp=>{
+    //                             console.log("GREENPOLYGON",resp);
+    //                              polygonDataGreen = [];
+    //                              polygonDataBlue = [];
+    //                              polygonDataRed = [];
+    //
+    //                             createMap(resp.data);      //폴리곤 받아 지도 만들기
+    //
+    //                            })
+    //                           .catch(err=>{console.log(err);});
+                            createMap(polygonGreen01);
 
-                }
-            })
+                    }
+                })
 
-            //
+            console.log(map);
+
 
             buildingDangerFixedBlock.style.zIndex="11";
             menu02ImageZIdxEls.forEach(item => {
@@ -524,21 +525,33 @@ const createMap = (polygon) => {
     const CENTUMPARKlatlan = [35.17899, 129.1227];
 
     //-------------------------------------------------
-    // NAVERMAP START
+    // MAP OPTION
     //-------------------------------------------------
-    var mapOptions = {
-        center: new naver.maps.LatLng(35.16073, 129.1688),
-        zoom: 15,
-        mapTypeId: naver.maps.MapTypeId.HYBRID,
-        zoomControl: true,
-        zoomControlOptions: {
-            style: naver.maps.ZoomControlStyle.SMALL,
-            position: naver.maps.Position.RIGHT_TOP
-        },
-
-
-    };
-
+    var mapOptions;
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if(windowWidth<400){
+        mapOptions = {
+            center: new naver.maps.LatLng(35.16073, 129.1688),
+            zoom: 14,
+            mapTypeId: naver.maps.MapTypeId.HYBRID,
+            zoomControl: true,
+            zoomControlOptions: {
+                style: naver.maps.ZoomControlStyle.SMALL,
+                position: naver.maps.Position.RIGHT_TOP
+            }
+        };
+    }else{
+          mapOptions = {
+                center: new naver.maps.LatLng(35.16073, 129.1688),
+                zoom: 15,
+                mapTypeId: naver.maps.MapTypeId.HYBRID,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: naver.maps.ZoomControlStyle.SMALL,
+                    position: naver.maps.Position.RIGHT_TOP
+                }
+            };
+    }
     map = new naver.maps.Map('map', mapOptions);
 
 
@@ -728,27 +741,29 @@ const createMap = (polygon) => {
 
     map.getPanes().floatPane.appendChild(menuLayer[0]);
     map.getPanes().floatPane.appendChild(windmenuLayer[0]);
+
+    //왼쪽 클릭 이벤트 처리
     naver.maps.Event.addListener(map, 'click', function(e) {
         //OPENWEATHER날씨요청
         console.log(e.coord);
-        axios.get("/OPTEST/"+e.coord._lat+"/"+e.coord._lng)
-        .then(
-            resp => {
-
-                console.log('openweatherAPI : ',resp);
-                console.log(resp.data.wind);
-                //지도에 표시
-                 var coordHtml ='풍향정보 : '+ resp.data.wind.deg + '<br />'+
-                    '돌풍정보 : ' + resp.data.wind.gust + '<br />'+
-                    '풍속정보 : ' + resp.data.wind.speed;
-
-                  windmenuLayer.show().css({
-                        left: e.offset.x,
-                        top: e.offset.y
-                   }).html(coordHtml);
-            }
-        )
-        .catch(error=>{console.log(error);})
+//        axios.get("/OPTEST/"+e.coord._lat+"/"+e.coord._lng)
+//        .then(
+//            resp => {
+//
+//                console.log('openweatherAPI : ',resp);
+//                console.log(resp.data.wind);
+//                //지도에 표시
+//                 var coordHtml ='풍향정보 : '+ resp.data.wind.deg + '<br />'+
+//                    '돌풍정보 : ' + resp.data.wind.gust + '<br />'+
+//                    '풍속정보 : ' + resp.data.wind.speed;
+//
+//                  windmenuLayer.show().css({
+//                        left: e.offset.x,
+//                        top: e.offset.y
+//                   }).html(coordHtml);
+//            }
+//        )
+//        .catch(error=>{console.log(error);})
 
     });
 
@@ -928,32 +943,59 @@ function getForcastTime() {
   //return  `${hours}${minutes}`;
 
 
-//-----------------------------------------
-//처음로딩될때 이벤트
-//-----------------------------------------
-document.addEventListener('DOMContentLoaded', function() {
 
-                LChartBlock.style.visibility = 'hidden';
-                RChartBlock.style.visibility = 'hidden';
+    //-----------------------------------------
+    //윈도우 사이즈 이벤트
+    //-----------------------------------------
 
-                const n = document.querySelector('.buildingDangerFixedBlock .buildingwindGif');
-                let afterStyleEl = document.createElement("style");
-                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
-                    content: 'N';
-                    position:absolute;
-                    left:0px;
-                    top:0px !important;
-                    display:block;
-                    width : 40px;
-                    height :25px;
-                    z-index:11;
-                    color : white;
-                    text-align:center;
-                    border : 1px solid white;
-                    margin : 10px;
-                }`;
-                n.appendChild(afterStyleEl);
+    window.addEventListener('resize', function(){
+      // 현재 윈도우의 너비와 높이 가져오기
+      const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+      // 가져온 크기 출력
+      console.log(`윈도우 너비: ${windowWidth}px, 윈도우 높이: ${windowHeight}px`);
+
+    });
+    //-----------------------------------------
+    //처음로딩될때 이벤트
+    //-----------------------------------------
+    document.addEventListener('DOMContentLoaded', function() {
+
+                    LChartBlock.style.visibility = 'hidden';
+                    RChartBlock.style.visibility = 'hidden';
+
+                    const n = document.querySelector('.buildingDangerFixedBlock .buildingwindGif');
+                    let afterStyleEl = document.createElement("style");
+                    afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                        content: 'N';
+                        position:absolute;
+                        left:0px;
+                        top:0px !important;
+                        display:block;
+                        width : 40px;
+                        height :25px;
+                        z-index:11;
+                        color : white;
+                        text-align:center;
+                        border : 1px solid white;
+                        margin : 10px;
+                    }`;
+                    n.appendChild(afterStyleEl);
 
 
-});
+                    //모바일 사이즈 이벤트 처리
+                   // 현재 윈도우의 너비와 높이 가져오기
+                   const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                   const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+                   // 가져온 크기 출력
+                   console.log(`DOMContentLoaded 윈도우 너비: ${windowWidth}px, 윈도우 높이: ${windowHeight}px`);
+
+                   if(windowWidth<450){
+                        console.log('map : ' + map);
+                   }
+
+    });
+
 
