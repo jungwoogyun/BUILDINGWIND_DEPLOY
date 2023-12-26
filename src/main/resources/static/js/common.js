@@ -1,5 +1,21 @@
 
+//----------------------
+// 그래프 그리기
+//----------------------
+        let intervalId=null;        //setInterval id값
+        let menu02clickInit=true;
+        //실시간 풍향
+        realtimeVECIdx =["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
+        realtimeVECVal =[];
 
+        //실시간 풍속
+        realtimeWSDIdx = [];
+        realtimeWSDVal = [];
+
+//-----------------------
+// 지도
+//-----------------------
+var map;
 // --------------------------
 // OPENCANVAS
 // --------------------------
@@ -156,8 +172,10 @@ nav_menu_img_items.forEach(item => {
             const sectionEls = document.querySelectorAll('main section');
             sectionEls.forEach(sec => {
                 sec.style.display = 'none';
+
                 if (sec.classList.contains('section03'))
                 {
+
                     sec.style.display = "block";
                     document.querySelector('#map').remove();
                     const mapEl = document.createElement('div');
@@ -167,23 +185,24 @@ nav_menu_img_items.forEach(item => {
                     //-------------------------
                     // GreenPolygon 좌표 받아오기
                     //-------------------------
-                     axios('/polygon/green')
-                          .then(resp=>{
-                             console.log("GREENPOLYGON",resp);
-                              polygonDataGreen = [];
-                              polygonDataBlue = [];
-                              polygonDataRed = [];
-
-                             createMap(resp.data);      //폴리곤 받아 지도 만들기
-
-                            })
-                           .catch(err=>{console.log(err);});
-
-
+//                     axios('/polygon/green')
+//                          .then(resp=>{
+//                             console.log("GREENPOLYGON",resp);
+//                              polygonDataGreen = [];
+//                              polygonDataBlue = [];
+//                              polygonDataRed = [];
+//
+//                             createMap(resp.data);      //폴리곤 받아 지도 만들기
+//
+//                            })
+//                           .catch(err=>{console.log(err);});
+                        createMap(polygonGreen01);
 
                 }
             })
+
             //
+
             buildingDangerFixedBlock.style.zIndex="11";
             menu02ImageZIdxEls.forEach(item => {
                              item.style.display='none';
@@ -520,7 +539,7 @@ const createMap = (polygon) => {
 
     };
 
-    var map = new naver.maps.Map('map', mapOptions);
+    map = new naver.maps.Map('map', mapOptions);
 
 
     //-----------------------------------------
@@ -552,8 +571,7 @@ const createMap = (polygon) => {
     console.log("PB",polygonDataBlue);
     console.log("PR",polygonDataRed);
 
-
-    naver.maps.onJSContentLoaded = function() {
+    naver.maps.Event.once(map,'init',function(){
 
         //-----------------------------------------
         //점지도로 표현
@@ -582,30 +600,31 @@ const createMap = (polygon) => {
                    strokeColor : 'red',
         });
 
-    };
+    })
+
 
 
     //-----------------------------------------
      //도형 그리기
      //-----------------------------------------
-     var polygonGreen = new naver.maps.Polygon({
-         map: map,
-         paths: [[]],
-
-//         fillColor: '',
-//         fillOpacity: 0.6,
-         strokeColor: 'green',
-         strokeOpacity: 0.6,
-         strokeWeight: 3,
-         clickable: false,
-         zIndex:1,
-     });
-
-     // LCTPOLYGON XY
-     var path = polygonGreen.getPaths().getAt(0);
-     for(i=0;i<GREEN.length;i++){
-         path.push(GREEN[i]);
-     }
+//     var polygonGreen = new naver.maps.Polygon({
+//         map: map,
+//         paths: [[]],
+//
+////         fillColor: '',
+////         fillOpacity: 0.6,
+//         strokeColor: 'green',
+//         strokeOpacity: 0.6,
+//         strokeWeight: 3,
+//         clickable: false,
+//         zIndex:1,
+//     });
+//
+//     // LCTPOLYGON XY
+//     var path = polygonGreen.getPaths().getAt(0);
+//     for(i=0;i<GREEN.length;i++){
+//         path.push(GREEN[i]);
+//     }
 
 
     //-----------------------------------------
