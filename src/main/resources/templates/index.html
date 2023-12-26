@@ -280,9 +280,9 @@
                     </div>
                     <div  class="header">
                         <ul class="menu">
-                            <li><a href="javascript:void(0)">10분 후</a></li>
-                            <li><a href="javascript:void(0)">30분 후</a></li>
-                            <li><a href="javascript:void(0)">3시간 후</a></li>
+                            <li><a href="javascript:void(0)" class="forcast_btn">10분 후</a></li>
+                            <li><a href="javascript:void(0)" class="forcast_btn">30분 후</a></li>
+                            <li><a href="javascript:void(0)" class="forcast_btn">3시간 후</a></li>
                         </ul>
                     </div>
                     <!-- 빌딩풍 위험지도 -->
@@ -756,18 +756,7 @@
 
 
                     </div>
-                        <script>
-                        const opacityControlEl = document.querySelector('.opacityController');
-                            opacityControlEl.addEventListener('change', function () {
-                            console.log(opacityControlEl.value);
 
-                            const offcanvasEl = document.querySelector('.offcanvas');
-                            offcanvasEl.style.opacity = opacityControlEl.value;
-                            const offcanvas_btnEl = document.querySelector('.offcanvas_btn');
-                            offcanvas_btnEl.style.opacity = opacityControlEl.value;
-
-                        })
-                    </script>
                 </div>
 
 
@@ -1000,6 +989,26 @@
         }
 
 
+        // 투명도 EVENT
+        const opacityControlEl = document.querySelector('.opacityController');
+                            opacityControlEl.addEventListener('change', function () {
+                            console.log(opacityControlEl.value);
+
+                            const offcanvasEl = document.querySelector('.offcanvas');
+                            offcanvasEl.style.opacity = opacityControlEl.value;
+                            const offcanvas_btnEl = document.querySelector('.offcanvas_btn');
+                            offcanvas_btnEl.style.opacity = opacityControlEl.value;
+        })
+
+    //Forcast 버튼 클릭시(10분후 , 30분후 3시간후
+    const forcastEls = document.querySelectorAll('.forcast_btn');
+        forcastEls.forEach(el=>{
+
+        el.addEventListener('click',function(){
+            console.log('forcast btn');
+
+        });
+    })
 
 
     </script>
