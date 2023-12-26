@@ -327,12 +327,31 @@ body::-webkit-scrollbar{
 
 }
 .offcanvas .offcanvas-body>.wrapper .dangerzone>.body{
-    height : 450px;
+    height:200px;
     display:flex;
     justify-content: space-between;
     margin-bottom:5px;
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.body.forcast{
+    margin-top : 5px;
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.body.forcast div{
+    width : 200px;
+    height : 40px;
+    line-height : 40px;
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.body.forcast div:nth-child(2){
+    margin-left:5px;
+    margin-right:5px;
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.body.forcast div>a{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+
 
 }
+
 .offcanvas .offcanvas-body>.wrapper .dangerzone>.body>div{
     border : 1px solid ;
 

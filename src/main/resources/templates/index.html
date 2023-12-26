@@ -65,14 +65,6 @@
                             <div>
                                 <span>빌딩풍 위험도 분석 및 예방·대응 시스템</span>
                             </div>
-                            <div>
-                                <select class="form-select" style="width:150px;" name="centerxy" id="centerSelect" onchange="chageLangSelect()">
-                                    <option value="35.16073,129.1688" selected="selected">LCT</option>
-                                    <option value="35.15541,129.1460">마린시티</option>
-                                    <option value="35.17899,129.1227">센텀파크</option>
-                                </select>
-                            </div>
-
                         </div>
                         <div class="right">
                             <div>
@@ -425,7 +417,8 @@
 
 
 
-        <!-- -------------------------------------------- OFFCANVS
+        <!-- --------------------------------------------
+        OFFCANVS
         -------------------------------------------- -->
         <a
             class="offcanvas_btn"
@@ -735,21 +728,34 @@
                                     <div style="margin-top:10px;">투명도</div>
                                     <div style="margin-top:10px;">
 
-                                        <input
-                                            type="range"
-                                            value="0.7"
-                                            class="opacityController"
-                                            min="0.2"
-                                            max="1"
-                                            step="0.1">
-                                    </form>
+                                            <input
+                                                type="range"
+                                                value="0.7"
+                                                class="opacityController"
+                                                min="0.2"
+                                                max="1"
+                                                step="0.1">
+
+                                    </div>
+
                                 </div>
+
                             </div>
+
+                        <div class="header">
+                                <div>FORCAST</div>
+                                <div class="details">
+                                    <a href="javascript:void(0)">상세정보</a>
+                                </div>
+                        </div>
+                        <div class="body forcast">
+                            <div><a href="javascript:void(0)">10분 후</a></div>
+                            <div><a href="javascript:void(0)">30분 후</a></div>
+                            <div><a href="javascript:void(0)">3시간 후</a></div>
                         </div>
 
+
                     </div>
-
-
                         <script>
                         const opacityControlEl = document.querySelector('.opacityController');
                             opacityControlEl.addEventListener('change', function () {
@@ -763,6 +769,10 @@
                         })
                     </script>
                 </div>
+
+
+
+
 
             </div>
             <div class="dropdown mt-3"></div>
