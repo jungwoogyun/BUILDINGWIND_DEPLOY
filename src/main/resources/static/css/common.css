@@ -847,9 +847,9 @@ body::-webkit-scrollbar{
 }
 
 .section06>.left .weather-body>.weather-body-section>.weather-info span{
-    position:absolute;
-    top:2vw  !important;;
-    left:8vw;
+    position:absolute !important;
+    top:100px  !important;
+    left:45px !important;
     font-size:2.5rem  !important;
     font-weight:800;
 }

@@ -696,11 +696,11 @@ display:none !important;
 }
 
 .section06>.left .weather-body>.weather-body-section>.weather-info span{
-    position:absolute;
-    top:12vw !important;
-    left:8vw;
+    position:absolute !important;
+    top:250px !important;
+    left:45px !important;
     font-size:1.5rem !important;
-    font-weight:800;
+    font-weight:800 !important;
 }
 
 .section06>.left .weather-body>.weather-body-section>.weather-info .weather-info-body{

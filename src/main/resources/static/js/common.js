@@ -12,6 +12,13 @@
         realtimeWSDIdx = [];
         realtimeWSDVal = [];
 
+        //그래프 센터 값
+        let mapCenterXy;
+
+        const LCTlatlng = [35.16073, 129.1688];
+        const MARINElatlng = [35.15541, 129.1460];
+        const CENTUMPARKlatlan = [35.17899, 129.1227];
+
 //-----------------------
 // 지도
 //-----------------------
@@ -196,7 +203,8 @@ nav_menu_img_items.forEach(item => {
     //
     //                            })
     //                           .catch(err=>{console.log(err);});
-                            createMap(lctPolygon01,[35.16073, 129.1688]);
+                            createMap(lctPolygon00,[35.16073, 129.1688]);
+                            mapCenterXy = [35.16073, 129.1688];
 
                     }
                 })
@@ -260,6 +268,7 @@ nav_menu_img_items.forEach(item => {
                          resp => {
                              console.log('openweatherAPI : ',resp);
                              document.querySelector('.buildingDangerFixedBlock .weather-info-body span.T1H').innerHTML=(resp.data.main.feels_like-273.15).toFixed(); //캘빈단위로 제공
+                             document.querySelector('.buildingDangerFixedBlock .weather-footer span.SUNSET').innerHTML=datetime.datetime.utcfromtimestamp(resp.data.sys.sunset);
                          }
                      )
                 .catch(err=>{});
@@ -300,7 +309,7 @@ nav_menu_img_items.forEach(item => {
                     console.log('/windForcast',resp);
                     var data = resp.data;
                     data.forEach(item=>{
-                          console.log(item);
+                          console.log("item : ",item);
                         if(item.category==='T1H'){
                             //document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=item.fcstValue;
                             document.querySelector('.section06 .weather-info .temp').innerHTML=item.fcstValue+"℃";
@@ -329,16 +338,23 @@ nav_menu_img_items.forEach(item => {
              });
 
               //------------------------------
-              //체감온도 가져오기
+              //체감온도 가져오기 & 일몰
               //------------------------------
               axios.get("/OPTEST/35.170421/129.158254")
                      .then(
                          resp => {
                              console.log('openweatherAPI : ',resp);
                              document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=(resp.data.main.feels_like-273.15).toFixed(); //캘빈단위로 제공
+
+                             const sunsetTimestamp = resp.data.sys.sunset;
+                             const sunsetUtc = new Date(sunsetTimestamp * 1000);
+                             const offsetHours = 9; //시차고려
+                             const sunsetLocal = new Date(sunsetUtc.getTime() + offsetHours * 60 * 60 * 1000); // 밀리초 단위로 변환
+                             console.log('일몰 : ' + sunsetLocal);
+                             document.querySelector('.section06 .weather-footer span.SUNSET').innerHTML=sunsetLocal;
                          }
                      )
-                .catch(err=>{});
+              .catch(err=>{});
 
 
 
@@ -520,9 +536,7 @@ nav_menu_img_items.forEach(item => {
 
 const createMap = (polygon,centerCoord) => {
 
-    const LCTlatlng = [35.16073, 129.1688];
-    const MARINElatlng = [35.15541, 129.1460];
-    const CENTUMPARKlatlan = [35.17899, 129.1227];
+
 
 
     //-------------------------------------------------
@@ -948,7 +962,8 @@ function getForcastTime() {
                         if(selectValue=="35.16073, 129.1688")//LCT
                         {
                            console.log("LCT CLICKED...")
-                            createMap(lctPolygon01,arr)
+                            createMap(lctPolygon00,arr)
+
 
                         }
                         else if(selectValue=="35.15541, 129.1460") //MARIN
@@ -960,8 +975,9 @@ function getForcastTime() {
                         else if(selectValue=="35.17899, 129.1227")
                         {
                          console.log("CENTUM CLICKED...")
-                            createMap(centumPolygon01,arr)
+                            createMap(centumPolygon00,arr)
                         }
+                        mapCenterXy = arr;
 
             })
 
@@ -978,7 +994,7 @@ function getForcastTime() {
                         if(el.getAttribute('data-center')=="35.16073, 129.1688")//LCT
                         {
                            console.log("LCT CLICKED...")
-                            createMap(lctPolygon01,arr)
+                            createMap(lctPolygon00,arr)
 
                         }
                         else if(el.getAttribute('data-center')=="35.15541, 129.1460") //MARIN
@@ -990,9 +1006,9 @@ function getForcastTime() {
                         else if(el.getAttribute('data-center')=="35.17899, 129.1227")   //CENTEM
                         {
                             console.log("CENTUM CLICKED...")
-                            createMap(centumPolygon01,arr)
+                            createMap(centumPolygon00,arr)
                         }
-
+                        mapCenterXy = arr;
 
         })
 
