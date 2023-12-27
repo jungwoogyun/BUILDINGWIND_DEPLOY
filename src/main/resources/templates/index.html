@@ -1026,6 +1026,15 @@
                    el.addEventListener('click',function(){
 
 
+
+                    //기존맵지우기 + 새로 생성
+                    const section03El = document.querySelector(".section03")
+                    document.querySelector('#map').remove();
+                    const mapEl = document.createElement('div');
+                    mapEl.setAttribute('id', 'map');
+                    mapEl.setAttribute('style','position:relative ;z-index:10');
+                    section03El.appendChild(mapEl);
+
                        const when =  el.getAttribute('data-set');
                        console.log('when : ',when);
                        console.log('mapCenterXy = ',mapCenterXy);
