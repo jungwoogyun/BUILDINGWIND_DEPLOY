@@ -31,6 +31,7 @@ public class SecurityConfig  {
         //요청 URL별 접근 제한
         http.authorizeHttpRequests(
                 authorize->{
+                    authorize.requestMatchers("/RT_HISTORY","/RT_FORCAST_NOW").permitAll();
                     authorize.requestMatchers("js/**","css/**","images/**","font/**","video/**","gif/**").permitAll();
                     authorize.requestMatchers("/login").permitAll();
                     authorize.requestMatchers("/","/index").hasAnyRole("USER","ADMIN"); // ROLE_ADMIN

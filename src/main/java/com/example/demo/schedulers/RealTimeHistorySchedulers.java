@@ -4,9 +4,12 @@ import com.example.demo.domain.entity.RealTimeError;
 import com.example.demo.domain.repository.RealTimeErrorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
+
+@Component
 
 public class RealTimeHistorySchedulers {
 
@@ -25,6 +28,7 @@ public class RealTimeHistorySchedulers {
     // 50분마다 실행  : cron = "0 */50 * * * *
     // 06 50
     //@Scheduled(cron = "0 40 * * * *")
+//
     @Scheduled(cron = "0 22,42 6-23/1 * * *")     //6-23/1은 6부터 23까지의 모든 시간 값을 1씩 증가 + 50분마다
     public void PerDay() throws InterruptedException {
 
@@ -38,9 +42,9 @@ public class RealTimeHistorySchedulers {
         }catch(Exception e){
 
             System.out.println("RealTimeWindPowerAndDirectionSchedulers ERROR_"+(idx++)+" : " + e.getMessage());
-            System.out.println("80초 후다시 진행..");
+            System.out.println("30초 후다시 진행..");
             realTimeErrorRepository.save(new RealTimeError(LocalDateTime.now(), "RT_NOW_ERROR_"+(idx++), e.getMessage()));
-            Thread.sleep(1000*80);try {
+            Thread.sleep(1000*30);try {
                 String response = restTemplate.getForObject("http://localhost:8080/RT_HISTORY", String.class);
             }catch(Exception e1){
                 System.out.println("RealTimeWindPowerAndDirectionSchedulers ERROR_"+(idx++)+" : " + e.getMessage());
