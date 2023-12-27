@@ -388,7 +388,7 @@ body::-webkit-scrollbar{
     left:0px;
     top:0px;
     display:flex !important;
-    justify-content: space-evenly !important;
+    justify-content: space-between !important;
     align-items : center !important;
     text-align:center !important;
     flex-direction: row !important;
@@ -404,7 +404,7 @@ body::-webkit-scrollbar{
     margin : 5px !important;
     padding : 0px;
     background-color : beige;
-    width : 80px;
+    width : 100px;
     font-size : 0.9rem;
     height : 40px !important;
     line-height : 40px !important;

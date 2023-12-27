@@ -64,18 +64,21 @@ public class BuildingWindController {
         return realTimeWindNowRepostitory.findAll();
     }
 
+
+    /*
+    * WIND FORCAST REQ
+    * */
+
     @GetMapping(value = "/windForcast/{fcstDate}/{fcstTime}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<RealTimeForcastNow> getWindForcast(
             @PathVariable String fcstDate, @PathVariable String fcstTime
     )
     {
         return realTimeForcastNowRepository.findByBaseDateAndBaseTime(fcstDate, fcstTime);
-
     }
 
+
 }
-
-
 
 
 

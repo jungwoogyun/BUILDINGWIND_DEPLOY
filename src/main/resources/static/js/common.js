@@ -196,7 +196,7 @@ nav_menu_img_items.forEach(item => {
     //
     //                            })
     //                           .catch(err=>{console.log(err);});
-                            createMap(LctPolygon01,[35.16073, 129.1688]);
+                            createMap(lctPolygon01,[35.16073, 129.1688]);
 
                     }
                 })
@@ -814,88 +814,6 @@ const createMap = (polygon,centerCoord) => {
 
 
 
-//-------------------------------------------------
-// 위험지도 바람별로 바꾸기
-//-------------------------------------------------
-const dangerZoneLctEls = document.querySelectorAll('.dangerzone .body .left .dangerchk');
-
-
-dangerZoneLctEls.forEach(el=>{
-
-    el.addEventListener('change',function(){
-
-        console.log(el +" clicked..");
-        const fixedblockSection02ImgEl = document.querySelector('.buildingDangerFixedBlock .section02');
-        const n = document.querySelector('.buildingDangerFixedBlock .buildingwindGif');
-        let afterStyleEl = document.createElement("style");
-        const afterStyle = ``;
-        if (el.checked==true)
-        {
-           if(el.classList.contains('lct-n')){
-                fixedblockSection02ImgEl.src='gif/lct/n/1/n.gif';
-
-                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
-                    content: 'N';
-                    position:absolute;
-                    left:0px;
-                    top:0px !important;
-                    display:block;
-                    width : 40px;
-                    height :25px;
-                    z-index:11;
-                    color : white;
-                    text-align:center;
-                    border : 1px solid white;
-                    margin : 10px;
-                }`;
-                n.appendChild(afterStyleEl);
-
-            }
-            else if(el.classList.contains('lct-ne')){
-                fixedblockSection02ImgEl.src='gif/lct/ne/1/ne.gif';
-
-                  afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
-                                    content: 'NE';
-                                    position:absolute;
-                                    left:0px;
-                                    top:0px !important;
-                                    display:block;
-                                    width : 40px;
-                                    height :25px;
-                                    z-index:11;
-                                    color : white;
-                                    text-align:center;
-                                    border : 1px solid white;
-                                    margin : 10px;
-                                }`;
-                n.appendChild(afterStyleEl);
-            }
-            else if(el.classList.contains('lct-e')){
-                 fixedblockSection02ImgEl.src='gif/lct/e/1/e.gif';
-
-                   afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
-                                     content: 'E';
-                                     position:absolute;
-                                     left:0px;
-                                     top:0px !important;
-                                     display:block;
-                                     width : 40px;
-                                     height :25px;
-                                     z-index:11;
-                                     color : white;
-                                     text-align:center;
-                                     border : 1px solid white;
-                                     margin : 10px;
-                                 }`;
-                 n.appendChild(afterStyleEl);
-             }
-
-
-        }
-
-    })
-
-})
 
 const deSelectFunction = ()=>{
 
@@ -1030,7 +948,7 @@ function getForcastTime() {
                         if(selectValue=="35.16073, 129.1688")//LCT
                         {
                            console.log("LCT CLICKED...")
-                            createMap(LctPolygon01,arr)
+                            createMap(lctPolygon01,arr)
 
                         }
                         else if(selectValue=="35.15541, 129.1460") //MARIN
@@ -1039,7 +957,7 @@ function getForcastTime() {
                             createMap(marinPolygon01,arr)
 
                         }
-                        else if(selectValue=="35.15541, 129.1460")
+                        else if(selectValue=="35.17899, 129.1227")
                         {
                          console.log("CENTUM CLICKED...")
                             createMap(centumPolygon01,arr)
@@ -1060,7 +978,7 @@ function getForcastTime() {
                         if(el.getAttribute('data-center')=="35.16073, 129.1688")//LCT
                         {
                            console.log("LCT CLICKED...")
-                            createMap(LctPolygon01,arr)
+                            createMap(lctPolygon01,arr)
 
                         }
                         else if(el.getAttribute('data-center')=="35.15541, 129.1460") //MARIN
@@ -1069,7 +987,7 @@ function getForcastTime() {
                             createMap(marinPolygon01,arr)
 
                         }
-                        else if(el.getAttribute('data-center')=="35.15541, 129.1460")   //CENTEM
+                        else if(el.getAttribute('data-center')=="35.17899, 129.1227")   //CENTEM
                         {
                             console.log("CENTUM CLICKED...")
                             createMap(centumPolygon01,arr)
@@ -1082,3 +1000,167 @@ function getForcastTime() {
 
 
 
+//-------------------------------------------------
+// 위험지도 바람별로 바꾸기
+//-------------------------------------------------
+const dangerZoneLctEls = document.querySelectorAll('.dangerzone .body .left .dangerchk');
+dangerZoneLctEls.forEach(el=>{
+
+    el.addEventListener('change',function(){
+
+        console.log(el +" clicked..");
+        const fixedblockSection02ImgEl = document.querySelector('.buildingDangerFixedBlock .section02');
+        const n = document.querySelector('.buildingDangerFixedBlock .buildingwindGif');
+        let afterStyleEl = document.createElement("style");
+        const afterStyle = ``;
+        if (el.checked==true)
+        {
+           if(el.classList.contains('lct-n')){
+                fixedblockSection02ImgEl.src='gif/lct/n/1/n.gif';
+
+                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                    content: 'N';
+                    position:absolute;
+                    left:0px;
+                    top:0px !important;
+                    display:block;
+                    width : 40px;
+                    height :25px;
+                    z-index:11;
+                    color : white;
+                    text-align:center;
+                    border : 1px solid white;
+                    margin : 10px;
+                }`;
+                n.appendChild(afterStyleEl);
+
+            }
+            else if(el.classList.contains('lct-ne')){
+                fixedblockSection02ImgEl.src='gif/lct/ne/1/ne.gif';
+
+                  afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                    content: 'NE';
+                                    position:absolute;
+                                    left:0px;
+                                    top:0px !important;
+                                    display:block;
+                                    width : 40px;
+                                    height :25px;
+                                    z-index:11;
+                                    color : white;
+                                    text-align:center;
+                                    border : 1px solid white;
+                                    margin : 10px;
+                                }`;
+                n.appendChild(afterStyleEl);
+            }
+
+            else if(el.classList.contains('lct-e')){
+                 fixedblockSection02ImgEl.src='gif/lct/e/1/e.gif';
+
+                   afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                     content: 'E';
+                                     position:absolute;
+                                     left:0px;
+                                     top:0px !important;
+                                     display:block;
+                                     width : 40px;
+                                     height :25px;
+                                     z-index:11;
+                                     color : white;
+                                     text-align:center;
+                                     border : 1px solid white;
+                                     margin : 10px;
+                                 }`;
+                 n.appendChild(afterStyleEl);
+            }
+            else if(el.classList.contains('lct-s')){
+
+                             fixedblockSection02ImgEl.src='gif/lct/s/1/s.gif';
+
+                               afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                 content: 'S';
+                                                 position:absolute;
+                                                 left:0px;
+                                                 top:0px !important;
+                                                 display:block;
+                                                 width : 40px;
+                                                 height :25px;
+                                                 z-index:11;
+                                                 color : white;
+                                                 text-align:center;
+                                                 border : 1px solid white;
+                                                 margin : 10px;
+                                             }`;
+                             n.appendChild(afterStyleEl);
+
+
+            }
+            else if(el.classList.contains('lct-sw')){
+                              fixedblockSection02ImgEl.src='gif/lct/sw/1/sw.gif';
+
+                                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                  content: 'SW';
+                                                  position:absolute;
+                                                  left:0px;
+                                                  top:0px !important;
+                                                  display:block;
+                                                  width : 40px;
+                                                  height :25px;
+                                                  z-index:11;
+                                                  color : white;
+                                                  text-align:center;
+                                                  border : 1px solid white;
+                                                  margin : 10px;
+                                              }`;
+                              n.appendChild(afterStyleEl);
+
+
+            }
+            else if(el.classList.contains('lct-w')){
+                                fixedblockSection02ImgEl.src='gif/lct/w/1/w.gif';
+
+                                  afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                    content: 'W';
+                                                    position:absolute;
+                                                    left:0px;
+                                                    top:0px !important;
+                                                    display:block;
+                                                    width : 40px;
+                                                    height :25px;
+                                                    z-index:11;
+                                                    color : white;
+                                                    text-align:center;
+                                                    border : 1px solid white;
+                                                    margin : 10px;
+                                                }`;
+                                n.appendChild(afterStyleEl);
+
+
+            }
+            else if(el.classList.contains('lct-nw')){
+                             fixedblockSection02ImgEl.src='gif/lct/nw/1/nw.gif';
+
+                               afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                 content: 'NW';
+                                                 position:absolute;
+                                                 left:0px;
+                                                 top:0px !important;
+                                                 display:block;
+                                                 width : 40px;
+                                                 height :25px;
+                                                 z-index:11;
+                                                 color : white;
+                                                 text-align:center;
+                                                 border : 1px solid white;
+                                                 margin : 10px;
+                                             }`;
+                             n.appendChild(afterStyleEl);
+
+            }
+
+
+        }   //전체 if문 끝ㅌ남
+    })
+
+})
