@@ -15,9 +15,9 @@
         //그래프 센터 값
         let mapCenterXy;
 
-        const LCTlatlng = [35.16073, 129.1688];
-        const MARINElatlng = [35.15541, 129.1460];
-        const CENTUMPARKlatlan = [35.17899, 129.1227];
+        const LCTlatlng = ["35.16073", "129.1688"];
+        const MARINElatlng = ["35.15541", "129.1460"];
+        const CENTUMPARKlatlan = ["35.17899", "129.1227"];
 
 //-----------------------
 // 지도
@@ -939,6 +939,14 @@ function getForcastTime() {
          var langSelect = document.querySelector(".centerSelect");
         langSelect.addEventListener("change", function(e) {
 
+                    //기존맵지우기 + 새로 생성
+                    const section03El = document.querySelector(".section03")
+                    document.querySelector('#map').remove();
+                    const mapEl = document.createElement('div');
+                    mapEl.setAttribute('id', 'map');
+                    mapEl.setAttribute('style','position:relative ;z-index:10');
+                    section03El.appendChild(mapEl);
+
                      // select element에서 선택된 option의 value가 저장된다.
                        var selectValue = langSelect.options[langSelect.selectedIndex].value;
 
@@ -969,7 +977,7 @@ function getForcastTime() {
                         else if(selectValue=="35.15541, 129.1460") //MARIN
                         {
                             console.log("MARIN CLICKED...")
-                            createMap(marinPolygon01,arr)
+                            createMap(marinPolygon00,arr)
 
                         }
                         else if(selectValue=="35.17899, 129.1227")
@@ -984,6 +992,14 @@ function getForcastTime() {
     //center좌표변경시
     const centeredEls = document.querySelectorAll('.setCentered')
     centeredEls.forEach(el=>{
+                    //기존맵지우기 + 새로 생성
+    const section03El = document.querySelector(".section03")
+    document.querySelector('#map').remove();
+    const mapEl = document.createElement('div');
+    mapEl.setAttribute('id', 'map');
+    mapEl.setAttribute('style','position:relative ;z-index:10');
+    section03El.appendChild(mapEl);
+
 
         el.addEventListener('click',function(){
             const arr = el.getAttribute('data-center').split(',');
@@ -1000,7 +1016,7 @@ function getForcastTime() {
                         else if(el.getAttribute('data-center')=="35.15541, 129.1460") //MARIN
                         {
                             console.log("MARIN CLICKED...")
-                            createMap(marinPolygon01,arr)
+                            createMap(marinPolygon00,arr)
 
                         }
                         else if(el.getAttribute('data-center')=="35.17899, 129.1227")   //CENTEM

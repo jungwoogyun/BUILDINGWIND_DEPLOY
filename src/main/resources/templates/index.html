@@ -987,10 +987,13 @@
     <script src="js/dataSet/lct01.js"></script>
     <script src="js/dataSet/lct02.js"></script>
     <script src="js/dataSet/lct03.js"></script>
-        <script src="js/dataSet/centum01.js"></script>
-        <script src="js/dataSet/centum02.js"></script>
-        <script src="js/dataSet/centum03.js"></script>
-        <script src="js/dataSet/MarinPolygon01.js"></script>
+    <script src="js/dataSet/centum01.js"></script>
+    <script src="js/dataSet/centum02.js"></script>
+    <script src="js/dataSet/centum03.js"></script>
+    <script src="js/dataSet/MarinPolygon01.js"></script>
+        <script src="js/dataSet/marin01.js"></script>
+        <script src="js/dataSet/marin02.js"></script>
+        <script src="js/dataSet/marin03.js"></script>
     <script src="js/dataSet/CentumPolygon01.js"></script>
         <script>
 
@@ -1025,7 +1028,8 @@
 
                        const when =  el.getAttribute('data-set');
                        console.log('when : ',when);
-                       if(mapCenterXy[0] === LCTlatlng[0]&&mapCenterXy[1] === LCTlatlng[1]){
+                       console.log('mapCenterXy = ',mapCenterXy);
+                       if(Number(mapCenterXy[0]) == LCTlatlng [0] &&Number(mapCenterXy[1]) == LCTlatlng[1]){
                            if(when.includes('10m')){
                                 createMap(lctPolygon01,mapCenterXy);
                            }else if(when.includes('30m')){
@@ -1033,15 +1037,15 @@
                            }else if(when.includes('3h')){
                                 createMap(lctPolygon03,mapCenterXy);
                            }
-                       }if(mapCenterXy[0] === MARINElatlng[0]&&mapCenterXy[1] === MARINElatlng[1]){
+                       }if(Number(mapCenterXy[0]) == MARINElatlng[0]&&Number(mapCenterXy[1]) == MARINElatlng[1]){
                            if(when.includes('10m')){
-                                createMap(lctPolygon01,mapCenterXy);
+                                createMap(marinPolygon01,mapCenterXy);
                            }else if(when.includes('30m')){
-                                createMap(lctPolygon02,mapCenterXy);
+                                createMap(marinPolygon02,mapCenterXy);
                            }else if(when.includes('3h')){
-                                createMap(lctPolygon03,mapCenterXy);
+                                createMap(marinPolygon03,mapCenterXy);
                            }
-                       }if(mapCenterXy[0] === CENTUMPARKlatlan[0]&&mapCenterXy[1] === CENTUMPARKlatlan[1]){
+                       }if(Number(mapCenterXy[0]) == CENTUMPARKlatlan[0]&&Number(mapCenterXy[1]) == CENTUMPARKlatlan[1]){
                            if(when.includes('10m')){
                                 createMap(centumPolygon01,mapCenterXy);
                            }else if(when.includes('30m')){
