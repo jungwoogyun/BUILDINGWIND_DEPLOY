@@ -228,47 +228,90 @@ nav_menu_img_items.forEach(item => {
             RTForcastTime = getForcastTime();
             console.log("RTNowDate : " + RTForcastDate);
             console.log("RTNowTime : " + RTForcastTime);
-            axios.get('/windForcast/'+RTForcastDate+"/"+RTForcastTime)
-                .then(resp=>{
-                    console.log('/windForcast',resp);
-                    var data = resp.data;
-                    data.forEach(item=>{
-                          console.log(item);
-                        if(item.category==='T1H'){
-                            //document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=item.fcstValue;
-                            document.querySelector('.buildingDangerFixedBlock .weather-info .temp').innerHTML=item.fcstValue+"℃";
-                        }
-                        else if(item.category==='RN1'){
-
-                                document.querySelector('.buildingDangerFixedBlock .weather-info-body span.RN1').innerHTML=item.fcstValue;
-                        }
-                        else if(item.category==='REH'){
-                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.REH').innerHTML=item.fcstValue;
-                        }
-                        else if(item.category==='VEC'){
-                            directionIdx =  parseInt( (parseInt(item.fcstValue) + 22.5 * 0.5)/22.5); //풍향문자 구하기
-                            console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
-                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
-                        }
-                        else if(item.category==='WSD'){
-                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.WSD').innerHTML=item.fcstValue;
-                        }
-                    })
-
-                    ;
-                })
-                .catch(err=>{
-                    console.log("windNodErr",err);
-             });
+//            axios.get('/windForcast/'+RTForcastDate+"/"+RTForcastTime)
+//                .then(resp=>{
+//                    console.log('/windForcast',resp);
+//                    var data = resp.data;
+//                    data.forEach(item=>{
+//                          console.log(item);
+//                        if(item.category==='T1H'){
+//                            //document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=item.fcstValue;
+//                            document.querySelector('.buildingDangerFixedBlock .weather-info .temp').innerHTML=item.fcstValue+"℃";
+//                        }
+//                        else if(item.category==='RN1'){
+//
+//                                document.querySelector('.buildingDangerFixedBlock .weather-info-body span.RN1').innerHTML=item.fcstValue;
+//                        }
+//                        else if(item.category==='REH'){
+//                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.REH').innerHTML=item.fcstValue;
+//                        }
+//                        else if(item.category==='VEC'){
+//                            directionIdx =  parseInt( (parseInt(item.fcstValue) + 22.5 * 0.5)/22.5); //풍향문자 구하기
+//                            console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
+//                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
+//                        }
+//                        else if(item.category==='WSD'){
+//                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.WSD').innerHTML=item.fcstValue;
+//                        }
+//                    })
+//
+//                    ;
+//                })
+//                .catch(err=>{
+//                    console.log("windNodErr",err);
+//             });
               //------------------------------
               //체감온도 가져오기
               //------------------------------
+
               axios.get("/OPTEST/35.170421/129.158254")     //LCT만
                      .then(
                          resp => {
                              console.log('openweatherAPI : ',resp);
-                             document.querySelector('.buildingDangerFixedBlock .weather-info-body span.T1H').innerHTML=(resp.data.main.feels_like-273.15).toFixed(); //캘빈단위로 제공
-                             document.querySelector('.buildingDangerFixedBlock .weather-footer span.SUNSET').innerHTML=datetime.datetime.utcfromtimestamp(resp.data.sys.sunset);
+                             document.querySelector('.buildingDangerFixedBlock .weather-info .temp').innerHTML=(resp.data.main.temp - 273.15).toFixed()+"℃";
+
+                             if(innerHTML=resp.data.rain==null)
+                                document.querySelector('.buildingDangerFixedBlock .weather-info-body span.RN1').innerHTML='맑음'; //강수량
+                             else
+                                document.querySelector('.buildingDangerFixedBlock .weather-info-body span.REH').innerHTML=resp.data.rain+"mm"; //강수량
+
+
+                             document.querySelector('.buildingDangerFixedBlock .weather-info-body span.REH').innerHTML=resp.data.main.humidity;
+                             document.querySelector('.buildingDangerFixedBlock .weather-info-body span.T1H').innerHTML=(resp.data.main.feels_like - 273.15).toFixed(); //캘빈단위로 제공
+
+                             var directionIdx =  parseInt( (resp.data.wind.deg + 22.5 * 0.5)/22.5); //풍향문자 구하기
+                             console.log("directionIdx : "  +directionIdx);
+                             console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
+                             document.querySelector('.buildingDangerFixedBlock .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
+
+                             //일출일몰 구하ㅣㄱ
+                             // 주어진 Unix 타임스탬프 값
+                             const sunriseTimestamp = resp.data.sys.sunrise;
+                             const sunsetTimestamp = resp.data.sys.sunset;
+
+                             // Unix 타임스탬프를 밀리초로 변환
+                             const sunriseMillis = sunriseTimestamp * 1000;
+                             const sunsetMillis = sunsetTimestamp * 1000;
+
+                             // Unix 타임스탬프를 Date 객체로 변환
+                             const sunriseDate = new Date(sunriseMillis);
+                             const sunsetDate = new Date(sunsetMillis);
+
+                             // Date 객체를 문자열로 변환 (한국표준시)
+                             //const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Seoul' };
+                             const options = { hour: '2-digit', minute: '2-digit'  };
+                             const sunriseString = sunriseDate.toLocaleString('en-US', options);
+                             const sunsetString = sunsetDate.toLocaleString('en-US', options);
+
+
+                            const currentTime = new Date();
+                            const currentMillis = currentTime.getTime();
+                             if(currentMillis > sunriseMillis && currentMillis < sunsetMillis){
+                                document.querySelector('.buildingDangerFixedBlock .weather-footer span.Sun').innerHTML='일몰 ' + sunsetString
+                             }else{
+                                document.querySelector('.buildingDangerFixedBlock .weather-footer span.Sun').innerHTML='일출 ' + sunriseString;
+                             }
+
                          }
                      )
                 .catch(err=>{});
@@ -304,58 +347,93 @@ nav_menu_img_items.forEach(item => {
                 RTForcastDate
             console.log("RTNowDate : " + RTForcastDate);
             console.log("RTNowTime : " + RTForcastTime);
-            axios.get('/windForcast/'+RTForcastDate+"/"+RTForcastTime)
-                .then(resp=>{
-                    console.log('/windForcast',resp);
-                    var data = resp.data;
-                    data.forEach(item=>{
-                          console.log("item : ",item);
-                        if(item.category==='T1H'){
-                            //document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=item.fcstValue;
-                            document.querySelector('.section06 .weather-info .temp').innerHTML=item.fcstValue+"℃";
-                        }
-                        else if(item.category==='RN1'){
-
-                                document.querySelector('.section06 .weather-info-body span.RN1').innerHTML=item.fcstValue;
-                        }
-                        else if(item.category==='REH'){
-                            document.querySelector('.section06 .weather-info-body span.REH').innerHTML=item.fcstValue;
-                        }
-                        else if(item.category==='VEC'){
-                            directionIdx =  parseInt( (parseInt(item.fcstValue) + 22.5 * 0.5)/22.5); //풍향문자 구하기
-                            console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
-                            document.querySelector('.section06 .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
-                        }
-                        else if(item.category==='WSD'){
-                            document.querySelector('.section06 .weather-info-body span.WSD').innerHTML=item.fcstValue;
-                        }
-                    })
-
-                    ;
-                })
-                .catch(err=>{
-                    console.log("windNodErr",err)
-             });
+//            axios.get('/windForcast/'+RTForcastDate+"/"+RTForcastTime)
+//                .then(resp=>{
+//                    console.log('/windForcast',resp);
+//                    var data = resp.data;
+//                    data.forEach(item=>{
+//                          console.log("item : ",item);
+//                        if(item.category==='T1H'){
+//                            //document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=item.fcstValue;
+//                            document.querySelector('.section06 .weather-info .temp').innerHTML=item.fcstValue+"℃";
+//                        }
+//                        else if(item.category==='RN1'){
+//
+//                                document.querySelector('.section06 .weather-info-body span.RN1').innerHTML=item.fcstValue;
+//                        }
+//                        else if(item.category==='REH'){
+//                            document.querySelector('.section06 .weather-info-body span.REH').innerHTML=item.fcstValue;
+//                        }
+//                        else if(item.category==='VEC'){
+//                            directionIdx =  parseInt( (parseInt(item.fcstValue) + 22.5 * 0.5)/22.5); //풍향문자 구하기
+//                            console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
+//                            document.querySelector('.section06 .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
+//                        }
+//                        else if(item.category==='WSD'){
+//                            document.querySelector('.section06 .weather-info-body span.WSD').innerHTML=item.fcstValue;
+//                        }
+//                    })
+//
+//                    ;
+//                })
+//                .catch(err=>{
+//                    console.log("windNodErr",err)
+//             });
 
               //------------------------------
               //체감온도 가져오기 & 일몰
               //------------------------------
-              axios.get("/OPTEST/35.170421/129.158254")
+              axios.get("/OPTEST/35.170421/129.158254")     //LCT만
                      .then(
                          resp => {
                              console.log('openweatherAPI : ',resp);
-                             document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=(resp.data.main.feels_like-273.15).toFixed(); //캘빈단위로 제공
+                             document.querySelector('.section06  .weather-info .temp').innerHTML=(resp.data.main.temp - 273.15).toFixed()+"℃";
 
+                             if(innerHTML=resp.data.rain==null)
+                                document.querySelector('.section06 .weather-info-body span.RN1').innerHTML='맑음'; //강수량
+                             else
+                                document.querySelector('.section06 .weather-info-body span.REH').innerHTML=resp.data.rain+"mm"; //강수량
+
+
+                             document.querySelector('.section06 .weather-info-body span.REH').innerHTML=resp.data.main.humidity;
+                             document.querySelector('.section06 .weather-info-body span.T1H').innerHTML=(resp.data.main.feels_like - 273.15).toFixed(); //캘빈단위로 제공
+
+                             var directionIdx =  parseInt( (resp.data.wind.deg + 22.5 * 0.5)/22.5); //풍향문자 구하기
+                             console.log("directionIdx : "  +directionIdx);
+                             console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
+                             document.querySelector('.section06 .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
+
+                             //일출일몰 구하ㅣㄱ
+                             // 주어진 Unix 타임스탬프 값
+                             const sunriseTimestamp = resp.data.sys.sunrise;
                              const sunsetTimestamp = resp.data.sys.sunset;
-                             const sunsetUtc = new Date(sunsetTimestamp * 1000);
-                             const offsetHours = 9; //시차고려
-                             const sunsetLocal = new Date(sunsetUtc.getTime() + offsetHours * 60 * 60 * 1000); // 밀리초 단위로 변환
-                             console.log('일몰 : ' + sunsetLocal);
-                             document.querySelector('.section06 .weather-footer span.SUNSET').innerHTML=sunsetLocal;
+
+                             // Unix 타임스탬프를 밀리초로 변환
+                             const sunriseMillis = sunriseTimestamp * 1000;
+                             const sunsetMillis = sunsetTimestamp * 1000;
+
+                             // Unix 타임스탬프를 Date 객체로 변환
+                             const sunriseDate = new Date(sunriseMillis);
+                             const sunsetDate = new Date(sunsetMillis);
+
+                             // Date 객체를 문자열로 변환 (한국표준시)
+                             //const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Seoul' };
+                             const options = { hour: '2-digit', minute: '2-digit'  };
+                             const sunriseString = sunriseDate.toLocaleString('en-US', options);
+                             const sunsetString = sunsetDate.toLocaleString('en-US', options);
+
+
+                            const currentTime = new Date();
+                            const currentMillis = currentTime.getTime();
+                             if(currentMillis > sunriseMillis && currentMillis < sunsetMillis){
+                                document.querySelector('.section06 .weather-footer span.Sun').innerHTML='일몰<br>' + sunsetString
+                             }else{
+                                document.querySelector('.section06 .weather-footer span.Sun').innerHTML='일출<br>' + sunriseString;
+                             }
+
                          }
                      )
-              .catch(err=>{});
-
+                .catch(err=>{});
 
 
 
@@ -894,6 +972,8 @@ function getForcastTime() {
     //-----------------------------------------
     document.addEventListener('DOMContentLoaded', function() {
 
+
+
                     LChartBlock.style.visibility = 'hidden';
                     RChartBlock.style.visibility = 'hidden';
 
@@ -1196,3 +1276,21 @@ dangerZoneLctEls.forEach(el=>{
     })
 
 })
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+          const spinerEl = document.createElement('.spinerBlock');
+          // 로딩 중인지 확인
+          if (document.readyState === "loading") {
+            // 로딩 중이라면 모달 표시
+            spinerEl.classList.add('show');
+          }
+});
+
+
+
+

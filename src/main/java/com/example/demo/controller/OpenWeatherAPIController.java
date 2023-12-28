@@ -1,12 +1,14 @@
 package com.example.demo.controller;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,7 +19,7 @@ public class OpenWeatherAPIController {
 
 
     @GetMapping("/OPTEST/{lat}/{lon}")
-    public OpenWeatherAPIResponse test(@PathVariable String lat ,@PathVariable String lon){
+    public @ResponseBody OpenWeatherAPIResponse test(@PathVariable String lat , @PathVariable String lon){
         RestTemplate restTemplate = new RestTemplate();
 
 
@@ -70,6 +72,7 @@ class Main{
     public int id;
     public String name;
     public int cod;
+    public Rain rain;
 }
 @Data
  class Sys{
@@ -89,6 +92,11 @@ class Main{
     public double speed;
     public int deg;
     public double gust;
+}
+@Data
+class Rain{
+    @JsonProperty("1h")
+    public String rn1;
 }
 
 

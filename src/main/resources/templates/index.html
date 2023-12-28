@@ -204,7 +204,9 @@
                                     <span>해운대구 우동</span>
 
                                     <div class="updatedInfo"  style="display:absolute;width:200px;height:30px;left:-10%;top:0px;text-align:right;font-size:0.6rem;color:lightgray;">
-                                        <span class="updateDateTime">현재 시간으로부터 1시간 예측</span>
+                                        <span class="updateDateTime" >
+                                            🎈
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="weather-nav">
@@ -237,7 +239,7 @@
                                     <button class="weather-item btn" >미세먼지<br>-</button>
                                     <button class="weather-item btn" >초미세먼지<br>-</button>
                                     <button class="weather-item btn" >자외선<br>-</button>
-                                    <button class="weather-item btn" >일몰<br>--:--</button>
+                                    <button class="weather-item btn" ><span class="Sun"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -299,8 +301,11 @@
                     <div class="hrtg">AI학습결과</div>
 
                     <div class="section03-footer">
-                            <img src="/gif/lct/e/1/e.gif" alt="bb" />
-                            <img src="/images/fixed_img03.png" alt="aa" />
+                            <img src="/gif/lct/e/1/e.gif" alt="bb" class="fixedGif" />
+                            <video width="100%" height="150px"  controls loop  muted autoplay>
+                                <source src="video/section03_TensorVideo.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                     </div>
 
                 </section>
@@ -825,7 +830,7 @@
                                         <button class="weather-item btn" >미세먼지 -</button>
                                         <button class="weather-item btn" >초미세먼지 -</button>
                                         <button class="weather-item btn" >자외선 -</button>
-                                        <button class="weather-item btn" >일몰 <span class="value SUNSET"></span></button>
+                                        <button class="weather-item btn" ><span class="value Sun"></span></button>
                                     </div>
                                 </div>
                             </div>
@@ -939,6 +944,13 @@
     </div>
 
 
+<!--        <div  class="spinerBlock" style="">-->
+<!--            <div class="spinner-border" role="status" >-->
+<!--                <span class="visually-hidden">Loading...</span>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
     <!-- BS5 JS -->
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -998,12 +1010,6 @@
         <script>
 
 
-
-
-
-
-
-
                    // 투명도 EVENT
                    const opacityControlEl = document.querySelector('.opacityController');
                                        opacityControlEl.addEventListener('change', function () {
@@ -1023,9 +1029,10 @@
 
                    forcastEls.forEach(el=>{
 
+
+
+
                    el.addEventListener('click',function(){
-
-
 
                     //기존맵지우기 + 새로 생성
                     const section03El = document.querySelector(".section03")
@@ -1038,14 +1045,32 @@
                        const when =  el.getAttribute('data-set');
                        console.log('when : ',when);
                        console.log('mapCenterXy = ',mapCenterXy);
+
+                       //10분후 30분후 3시간후 에 대한 gif 설정
+                       const fixedblockSection02ImgEl = document.querySelector('.buildingDangerFixedBlock .section02');
+                       const fixedblockEl = document.querySelector('.section03-footer .fixedGif');
+
+                        //lct
                        if(Number(mapCenterXy[0]) == LCTlatlng [0] &&Number(mapCenterXy[1]) == LCTlatlng[1]){
                            if(when.includes('10m')){
                                 createMap(lctPolygon01,mapCenterXy);
+                                //10,30,3시간 클릭했을떄 fixed gif 변화 (바람에 따라 달라질것..)
+                                fixedblockSection02ImgEl.src='gif/lct/e/4/e.gif';
+                                fixedblockEl.src='gif/lct/e/4/e.gif';
+
                            }else if(when.includes('30m')){
                                 createMap(lctPolygon02,mapCenterXy);
+                                fixedblockSection02ImgEl.src='gif/lct/e/6/e.gif';
+                                fixedblockEl.src='gif/lct/e/6/e.gif';
+
                            }else if(when.includes('3h')){
                                 createMap(lctPolygon03,mapCenterXy);
+                                fixedblockSection02ImgEl.src='gif/lct/e/11/e.gif';
+                                fixedblockEl.src='gif/lct/e/11/e.gif';
                            }
+
+
+
                        }if(Number(mapCenterXy[0]) == MARINElatlng[0]&&Number(mapCenterXy[1]) == MARINElatlng[1]){
                            if(when.includes('10m')){
                                 createMap(marinPolygon01,mapCenterXy);
@@ -1064,9 +1089,21 @@
                            }
                        }
                        console.log('forcast btn');
-
                    });
                })
+
+
+
+    </script>
+
+
+
+    <script>
+
+
+
+
+
 
 
     </script>

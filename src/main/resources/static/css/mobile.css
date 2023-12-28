@@ -467,7 +467,13 @@ body::-webkit-scrollbar{
     height : 47%;
 
 }
-
+.section03-footer video{
+    position : relative !important;
+    top:0px !important;
+    left: 0px !important;
+    width : 47%;
+    height : 47%;
+}
 
 
 .buildingDangerFixedBlock{
@@ -601,6 +607,9 @@ display:none !important;
     display:block !important;
     z-index:1 !important;
     top:0px !important;
+}
+.updateDateTime{
+    font-size: 1rem !important;
 }
 .section06>.left
 {
@@ -907,3 +916,4 @@ section.section02>div img{
     z-index:15;
     margin : 0 auto !important;
 }
+
