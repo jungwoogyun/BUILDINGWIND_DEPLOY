@@ -627,6 +627,7 @@ body::-webkit-scrollbar{
     width : 60px;
     height : 35px;
     border : 1px solid lightgray;
+        overflow : hidden;
 }
 
 .buildingDangerFixedBlock>div>.buildingDangerFixedBlock-weather  .weather-body>.weather-body-section>.weather-footer .weather-item:last-child{

@@ -283,7 +283,7 @@ nav_menu_img_items.forEach(item => {
                              console.log("directionIdx : "  +directionIdx);
                              console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
                              document.querySelector('.buildingDangerFixedBlock .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
-
+                            document.querySelector('.buildingDangerFixedBlock .weather-info-body span.WSD').innerHTML=resp.data.wind.speed;
                              //일출일몰 구하ㅣㄱ
                              // 주어진 Unix 타임스탬프 값
                              const sunriseTimestamp = resp.data.sys.sunrise;
@@ -402,6 +402,8 @@ nav_menu_img_items.forEach(item => {
                              console.log("directionIdx : "  +directionIdx);
                              console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
                              document.querySelector('.section06 .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
+                             document.querySelector('.section06 .weather-info-body span.WSD').innerHTML=resp.data.wind.speed;
+
 
                              //일출일몰 구하ㅣㄱ
                              // 주어진 Unix 타임스탬프 값
