@@ -827,7 +827,7 @@ body::-webkit-scrollbar{
 }
 .section06>.left .weather-body>.weather-body-section>.weather-info img{
 
-    width : 150px !important;
+    width : 100px !important;
     height : 100px !important;
     margin : 20px auto !important;
     position:relative !important;
