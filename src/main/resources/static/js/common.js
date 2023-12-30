@@ -545,64 +545,66 @@ nav_menu_img_items.forEach(item => {
                     const zaEl = document.querySelector('.section06 .weather-footer span.za');
                     const currentDate = new Date();
                     const hours = currentDate.getHours();
+                    console.log("parseInt(resp.data[0].h3",parseInt(resp.data[0].h3));
+                     console.log("GetHours",hours);
                     if(hours<3){
-                        if(resp.data[0].h0<3){zaEl.innerHTML='낮음';}
+                        if(parseInt(resp.data[0].h0) < 3){zaEl.innerHTML='낮음';}
                         else if(resp.data[0].h0<6){zaEl.innerHTML='보통';}
                         else if(resp.data[0].h0<8){zaEl.innerHTML='높음';}
                         else if(resp.data[0].h0<11){zaEl.innerHTML='매우높음';}
                         else{zaEl.innerHTML='위험';}
                      }
                     else if(hours<6)    {
-                        if(resp.data[0].h3<3){zaEl.innerHTML='낮음';}
+                        if(parseInt(resp.data[0].h3)<3){zaEl.innerHTML='낮음';}
                         else if(resp.data[0].h3<6){zaEl.innerHTML='보통';}
                         else if(resp.data[0].h3<8){zaEl.innerHTML='높음';}
                         else if(resp.data[0].h3<11){zaEl.innerHTML='매우높음';}
                         else{zaEl.innerHTML='위험';}
                     }
                     else if(hours<9){
-                        if(resp.data[0].h6<3){zaEl.innerHTML='낮음';}
+                        if(parseInt(resp.data[0].h6)<3){zaEl.innerHTML='낮음';}
                         else if(resp.data[0].h6<6){zaEl.innerHTML='보통';}
                         else if(resp.data[0].h6<8){zaEl.innerHTML='높음';}
                         else if(resp.data[0].h6<11){zaEl.innerHTML='매우높음';}
                         else{zaEl.innerHTML='위험';}
                     }
                     else if(hours<12){
-                        if(resp.data[0].h9<3){zaEl.innerHTML='낮음';}
+                        if(parseInt(resp.data[0].h9)<3){zaEl.innerHTML='낮음';}
                         else if(resp.data[0].h9<6){zaEl.innerHTML='보통';}
                         else if(resp.data[0].h9<8){zaEl.innerHTML='높음';}
                         else if(resp.data[0].h9<11){zaEl.innerHTML='매우높음';}
                         else{zaEl.innerHTML='위험';}
                     }
                     else if(hours<15){
-                        if(resp.data[0].h12<3){zaEl.innerHTML='낮음';}
+                        if(parseInt(resp.data[0].h12)<3){zaEl.innerHTML='낮음';}
                         else if(resp.data[0].h12<6){zaEl.innerHTML='보통';}
                         else if(resp.data[0].h12<8){zaEl.innerHTML='높음';}
                         else if(resp.data[0].h12<11){zaEl.innerHTML='매우높음';}
                         else{zaEl.innerHTML='위험';}
                     }
                     else if(hours<18){
-                        if(resp.data[0].h15<3){zaEl.innerHTML='낮음';}
-                        else if(resp.data[0].h15<6){zaEl.innerHTML='보통';}
-                        else if(resp.data[0].h15<8){zaEl.innerHTML='높음';}
-                        else if(resp.data[0].h15<11){zaEl.innerHTML='매우높음';}
+                        if(parseInt(resp.data[0].h15)<3){zaEl.innerHTML='낮음';}
+                        else if(parseInt(resp.data[0].h15)<6){zaEl.innerHTML='보통';}
+                        else if(parseInt(resp.data[0].h15)<8){zaEl.innerHTML='높음';}
+                        else if(parseInt(resp.data[0].h15)<11){zaEl.innerHTML='매우높음';}
                         else{zaEl.innerHTML='위험';}
                     }
                     else if(hours<21){
-                        if(resp.data[0].h18<3){zaEl.innerHTML='낮음';}
+                        if(parseInt(resp.data[0].h18)<3){zaEl.innerHTML='낮음';}
                         else if(resp.data[0].h18<6){zaEl.innerHTML='보통';}
                         else if(resp.data[0].h18<8){zaEl.innerHTML='높음';}
                         else if(resp.data[0].h18<11){zaEl.innerHTML='매우높음';}
                         else{zaEl.innerHTML='위험';}
                     }
                     else if(hours<24){
-                        if(resp.data[0].h21<3){zaEl.innerHTML='낮음';}
+                        if(parseInt(resp.data[0].h21)<3){zaEl.innerHTML='낮음';}
                         else if(resp.data[0].h21<6){zaEl.innerHTML='보통';}
                         else if(resp.data[0].h21<8){zaEl.innerHTML='높음';}
                         else if(resp.data[0].h21<11){zaEl.innerHTML='매우높음';}
                         else{zaEl.innerHTML='위험';}
                     }
                     else{
-                        if(resp.data[0].h24<3){zaEl.innerHTML='낮음';}
+                        if(parseInt(resp.data[0].h24)<3){zaEl.innerHTML='낮음';}
                         else if(resp.data[0].h24<6){zaEl.innerHTML='보통';}
                         else if(resp.data[0].h24<8){zaEl.innerHTML='높음';}
                         else if(resp.data[0].h24<11){zaEl.innerHTML='매우높음';}

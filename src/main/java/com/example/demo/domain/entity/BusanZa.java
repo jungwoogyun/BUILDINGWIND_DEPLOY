@@ -22,6 +22,7 @@ public class BusanZa {
     private String h6;
     private String h9;
     private String h12;
+    private String h15;
     private String h18;
     private String h21;
     private String h24;
