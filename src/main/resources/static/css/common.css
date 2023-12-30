@@ -629,6 +629,15 @@ body::-webkit-scrollbar{
     border : 1px solid lightgray;
         overflow : hidden;
 }
+.buildingDangerFixedBlock>div>.buildingDangerFixedBlock-weather  .weather-body>.weather-body-section>.weather-footer button:nth-child(2){
+    width : 70px;
+}
+.buildingDangerFixedBlock>div>.buildingDangerFixedBlock-weather  .weather-body>.weather-body-section>.weather-footer button:nth-child(3){
+    width : 55px;
+}
+.buildingDangerFixedBlock>div>.buildingDangerFixedBlock-weather  .weather-body>.weather-body-section>.weather-footer button:nth-child(4){
+    width : 55px;
+}
 
 .buildingDangerFixedBlock>div>.buildingDangerFixedBlock-weather  .weather-body>.weather-body-section>.weather-footer .weather-item:last-child{
     margin-right:0px;

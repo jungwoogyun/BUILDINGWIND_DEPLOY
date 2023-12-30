@@ -45,6 +45,8 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 
 
+
+
 }
 
 tasks.named('bootBuildImage') {
