@@ -11,6 +11,7 @@ public class DataSourceConfig {
     @Bean
     public HikariDataSource dataSource()
     {
+        //
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
