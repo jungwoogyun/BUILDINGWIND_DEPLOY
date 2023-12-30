@@ -218,7 +218,7 @@
                             <div class="weather-body-section">
                                 <div class="weather-info">
                                     <div class="imgblock" style="object-fix:contain">
-                                        <img src="images/weather/NB02.png" alt="" />
+                                        <img src="" alt="" />
                                         <span class="temp"></span>
                                     </div>
 
@@ -226,7 +226,8 @@
                                         <span>체감 <span class="value T1H"></span>℃ </span>
                                         <span><span class="value RN1"></span></span>
                                         <span>습도 <span class="value REH"></span>%</span>
-                                        <span><span class="value VEC"></span> <span class="value WSD"></span> m/s</span>
+                                        <span><span class="value VEC"></span> </span>
+                                        <span><span class="value WSD"></span> m/s</span>
                                     </div>
                                 </div>
                                 <div class="weather-footer">
@@ -458,10 +459,10 @@
                             <div class="header">
                                 <div>[엘시티]</div>
                                 <div class="details">
-                                    <a href="javascript:void(0)">상세정보</a>
+<!--                                    <a href="javascript:void(0)">상세정보</a>-->
                                 </div>
                             </div>
-                            <div class="body" style="height:360px;">
+                            <div class="body" style="height:400px;">
                                 <div class="left">
 
                                     <div
@@ -494,6 +495,16 @@
                                             class="form-check-input dangerchk lct lct-e"
                                             style="width:20px;"/>&nbsp;
                                         <label for="lct-location03" class="form-check-label">동풍 (E)</label>
+                                    </div>
+                                    <div
+                                            style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                                type="radio"
+                                                name="lct"
+                                                id="lct-location08"
+                                                class="form-check-input dangerchk lct lct-se"
+                                                style="width:20px;"/>&nbsp;
+                                        <label for="lct-location07" class="form-check-label">남동풍 (SE)</label>
                                     </div>
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
@@ -535,16 +546,17 @@
                                             style="width:20px;"/>&nbsp;
                                         <label for="lct-location07" class="form-check-label">북서풍 (NW)</label>
                                     </div>
+
                                 </div>
 
                             </div>
                             <div class="header">
                                 <div>[마린시티]</div>
                                 <div class="details">
-                                    <a href="javascript:void(0)">상세정보</a>
+                                    <!--<a href="javascript:void(0)">상세정보</a>-->
                                 </div>
                             </div>
-                            <div class="body" style="height:360px;">
+                            <div class="body" style="height:400px;">
                                 <div class="left">
 
                                     <div
@@ -553,7 +565,7 @@
                                                 type="radio"
                                                 name="marin"
                                             id="marin-location01"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk marin marin-n"
                                             style="width:20px;"/>&nbsp;
                                         <label for="marin-location01" class="form-check-label">북풍 (N)</label>
                                     </div>
@@ -563,7 +575,7 @@
                                                 type="radio"
                                                 name="marin"
                                             id="marin-location02"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk marin marin-ne"
                                             style="width:20px;"/>&nbsp;
                                         <label for="marin-location02" class="form-check-label">북동풍 (NE)</label>
                                     </div>
@@ -573,7 +585,7 @@
                                                 type="radio"
                                                 name="marin"
                                             id="marin-location03"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk marin marin-e"
                                             style="width:20px;"/>&nbsp;
                                         <label for="marin-location03" class="form-check-label">동풍 (E)</label>
                                     </div>
@@ -583,7 +595,7 @@
                                                 type="radio"
                                                 name="marin"
                                             id="marin-location04"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk marin marin-s"
                                             style="width:20px;"/>&nbsp;
                                         <label for="marin-location04" class="form-check-label">남풍 (S)</label>
                                     </div>
@@ -593,17 +605,28 @@
                                                 type="radio"
                                                 name="marin"
                                             id="marin-location05"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk marin marin-sw"
                                             style="width:20px;"/>&nbsp;
                                         <label for="marin-location05" class="form-check-label">남서풍 (SW)</label>
                                     </div>
+                                    <div
+                                            style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                                type="radio"
+                                                name="lct"
+                                                id="marin-location08"
+                                                class="form-check-input dangerchk marin marin-se"
+                                                style="width:20px;"/>&nbsp;
+                                        <label for="lct-location07" class="form-check-label">남동풍 (SE)</label>
+                                    </div>
+
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
                                                 type="radio"
                                                 name="marin"
                                             id="marin-location06"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk marin marin-w"
                                             style="width:20px;"/>&nbsp;
                                         <label for="marin-location06" class="form-check-label">서풍 (W)</label>
                                     </div>
@@ -613,7 +636,7 @@
                                                 type="radio"
                                                 name="marin"
                                             id="marin-location07"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk marin marin-sw"
                                             style="width:20px;"/>&nbsp;
                                         <label for="marin-location07" class="form-check-label">북서풍 (NW)</label>
                                     </div>
@@ -623,10 +646,10 @@
                             <div class="header">
                                 <div>[센텀파크]</div>
                                 <div class="details">
-                                    <a href="javascript:void(0)">상세정보</a>
+                                    <!--<a href="javascript:void(0)">상세정보</a>-->
                                 </div>
                             </div>
-                            <div class="body" style="height:360px;">
+                            <div class="body" style="height:400px;">
                                 <div class="left">
 
                                     <div
@@ -635,7 +658,7 @@
                                             type="radio"
                                             name="centum"
                                             id="centum-location01"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk centum centum-n"
                                             style="width:20px;"/>&nbsp;
                                         <label for="centum-location01" class="form-check-label">북풍 (N)</label>
                                     </div>
@@ -645,7 +668,7 @@
                                                 type="radio"
                                                 name="centum"
                                             id="centum-location02"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk centum centum-ne"
                                             style="width:20px;"/>&nbsp;
                                         <label for="centum-location02" class="form-check-label">북동풍 (NE)</label>
                                     </div>
@@ -655,7 +678,7 @@
                                                 type="radio"
                                                 name="centum"
                                             id="centum-location03"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk centum centum-e"
                                             style="width:20px;"/>&nbsp;
                                         <label for="centum-location03" class="form-check-label">동풍 (E)</label>
                                     </div>
@@ -665,7 +688,7 @@
                                                 type="radio"
                                                 name="centum"
                                             id="centum-location04"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk centum centum-s"
                                             style="width:20px;"/>&nbsp;
                                         <label for="centum-location04" class="form-check-label">남풍 (S)</label>
                                     </div>
@@ -675,7 +698,7 @@
                                                 type="radio"
                                                 name="centum"
                                             id="centum-location05"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk centum centum-sw"
                                             style="width:20px;"/>&nbsp;
                                         <label for="centum-location05" class="form-check-label">남서풍 (SW)</label>
                                     </div>
@@ -685,17 +708,28 @@
                                                 type="radio"
                                                 name="centum"
                                             id="centum-location06"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk centum centum-w"
                                             style="width:20px;"/>&nbsp;
                                         <label for="centum-location06" class="form-check-label">서풍 (W)</label>
                                     </div>
+                                    <div
+                                            style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                                type="radio"
+                                                name="centum"
+                                                id="centum-location08"
+                                                class="form-check-input  dangerchk centum centum-se"
+                                                style="width:20px;"/>&nbsp;
+                                        <label for="centum-location05" class="form-check-label">남동풍 (SE)</label>
+                                    </div>
+
                                     <div
                                         style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
                                         <input
                                                 type="radio"
                                                 name="centum"
                                             id="centum-location07"
-                                            class="form-check-input"
+                                            class="form-check-input  dangerchk centum centum-nw"
                                             style="width:20px;"/>&nbsp;
                                         <label for="centum-location07" class="form-check-label">북서풍 (NW)</label>
                                     </div>
@@ -760,9 +794,7 @@
 
                         <div class="header">
                                 <div>FORCAST</div>
-                                <div class="details">
-                                    <a href="javascript:void(0)">상세정보</a>
-                                </div>
+
                         </div>
                         <div class="body forcast">
                             <div><a href="javascript:void(0)" class="forcast_btn" data-set="after10m">10분 후</a></div>
@@ -809,7 +841,7 @@
                                 <div class="weather-body-section">
                                     <div class="weather-info">
                                         <div class="imgblock">
-                                            <img src="images/weather/NB02.png" alt="" />
+                                            <img src="" alt="" />
                                             <span class="temp"></span>
                                         </div>
 
@@ -817,7 +849,8 @@
                                             <span>체감 <span class="value T1H"></span>℃ </span>
                                             <span><span class="value RN1"></span></span>
                                             <span>습도 <span class="value REH"></span>%</span>
-                                            <span><span class="value VEC"></span> <span class="value WSD"></span> m/s</span>
+                                            <span><span class="value VEC"></span> </span>
+                                            <span><span class="value WSD"></span> m/s</span>
                                         </div>
                                     </div>
                                     <div class="weather-footer">
@@ -1023,9 +1056,6 @@
 
                    forcastEls.forEach(el=>{
 
-
-
-
                    el.addEventListener('click',function(){
 
                     //기존맵지우기 + 새로 생성
@@ -1045,7 +1075,7 @@
                        const fixedblockEl = document.querySelector('.section03-footer .fixedGif');
 
                         //lct
-                       if(Number(mapCenterXy[0]) == LCTlatlng [0] &&Number(mapCenterXy[1]) == LCTlatlng[1]){
+                       if(Number(mapCenterXy[0]) == LCTlatlng[0] &&Number(mapCenterXy[1]) == LCTlatlng[1]){
                            if(when.includes('10m')){
                                 createMap(lctPolygon01,mapCenterXy);
                                 //10,30,3시간 클릭했을떄 fixed gif 변화 (바람에 따라 달라질것..)
@@ -1064,22 +1094,35 @@
                            }
 
 
-
                        }if(Number(mapCenterXy[0]) == MARINElatlng[0]&&Number(mapCenterXy[1]) == MARINElatlng[1]){
                            if(when.includes('10m')){
                                 createMap(marinPolygon01,mapCenterXy);
+                                fixedblockSection02ImgEl.src='gif/marin/e/4/e.gif';
+                                fixedblockEl.src='gif/marin/e/4/e.gif';
+
                            }else if(when.includes('30m')){
                                 createMap(marinPolygon02,mapCenterXy);
+                                fixedblockSection02ImgEl.src='gif/marin/e/6/e.gif';
+                                fixedblockEl.src='gif/marin/e/6/e.gif';
+
                            }else if(when.includes('3h')){
                                 createMap(marinPolygon03,mapCenterXy);
+                                fixedblockSection02ImgEl.src='gif/marin/e/11/e.gif';
+                                fixedblockEl.src='gif/marin/e/11/e.gif';
                            }
                        }if(Number(mapCenterXy[0]) == CENTUMPARKlatlan[0]&&Number(mapCenterXy[1]) == CENTUMPARKlatlan[1]){
                            if(when.includes('10m')){
                                 createMap(centumPolygon01,mapCenterXy);
+                                fixedblockSection02ImgEl.src='gif/centum/e/4/e.gif';
+                                fixedblockEl.src='gif/centum/e/4/e.gif';
                            }else if(when.includes('30m')){
                                 createMap(centumPolygon02,mapCenterXy);
+                                fixedblockSection02ImgEl.src='gif/centum/e/6/e.gif';
+                                fixedblockEl.src='gif/centum/e/6/e.gif';
                            }else if(when.includes('3h')){
                                 createMap(centumPolygon03,mapCenterXy);
+                                fixedblockSection02ImgEl.src='gif/centum/e/11/e.gif';
+                                fixedblockEl.src='gif/centum/e/11/e.gif';
                            }
                        }
                        console.log('forcast btn');

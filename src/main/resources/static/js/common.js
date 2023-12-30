@@ -267,13 +267,19 @@ nav_menu_img_items.forEach(item => {
               axios.get("/OPTEST/35.170421/129.158254")     //LCT만
                      .then(
                          resp => {
+                             var iconurl = "http://openweathermap.org/img/w/"+resp.data.weather[0].icon+".png";
+                             var iconEl = document.querySelector('.buildingDangerFixedBlock .weather-info img');
+                             iconEl.src=iconurl;
+
+
                              console.log('openweatherAPI : ',resp);
+
                              document.querySelector('.buildingDangerFixedBlock .weather-info .temp').innerHTML=(resp.data.main.temp - 273.15).toFixed()+"℃";
 
                              if(innerHTML=resp.data.rain==null)
                                 document.querySelector('.buildingDangerFixedBlock .weather-info-body span.RN1').innerHTML='맑음'; //강수량
                              else
-                                document.querySelector('.buildingDangerFixedBlock .weather-info-body span.REH').innerHTML=resp.data.rain+"mm"; //강수량
+                                document.querySelector('.buildingDangerFixedBlock .weather-info-body span.RN1').innerHTML=  Math.floor(resp.data.rain['1h']*100)+"mm"; //강수량
 
 
                              document.querySelector('.buildingDangerFixedBlock .weather-info-body span.REH').innerHTML=resp.data.main.humidity;
@@ -466,20 +472,26 @@ nav_menu_img_items.forEach(item => {
 //                .catch(err=>{
 //                    console.log("windNodErr",err)
 //             });
+             //------------------------------
+              //체감온도 가져오기
+              //------------------------------
 
-              //------------------------------
-              //체감온도 가져오기 & 일몰
-              //------------------------------
               axios.get("/OPTEST/35.170421/129.158254")     //LCT만
                      .then(
                          resp => {
+
+                             var iconurl = "http://openweathermap.org/img/w/"+resp.data.weather[0].icon+".png";
+                             console.log('iconurl',iconurl);
+                             var iconEl = document.querySelector('.section06 .weather-info img');
+                             iconEl.src=iconurl;
                              console.log('openweatherAPI : ',resp);
-                             document.querySelector('.section06  .weather-info .temp').innerHTML=(resp.data.main.temp - 273.15).toFixed()+"℃";
+
+                             document.querySelector('.section06 .weather-info .temp').innerHTML=(resp.data.main.temp - 273.15).toFixed()+"℃";
 
                              if(innerHTML=resp.data.rain==null)
                                 document.querySelector('.section06 .weather-info-body span.RN1').innerHTML='맑음'; //강수량
                              else
-                                document.querySelector('.section06 .weather-info-body span.REH').innerHTML=resp.data.rain+"mm"; //강수량
+                                document.querySelector('.section06 .weather-info-body span.RN1').innerHTML=Math.floor(resp.data.rain['1h']*100)+" mm"; //강수량
 
 
                              document.querySelector('.section06 .weather-info-body span.REH').innerHTML=resp.data.main.humidity;
@@ -489,9 +501,7 @@ nav_menu_img_items.forEach(item => {
                              console.log("directionIdx : "  +directionIdx);
                              console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
                              document.querySelector('.section06 .weather-info-body span.VEC').innerHTML=realtimeVECIdx[directionIdx];
-                             document.querySelector('.section06 .weather-info-body span.WSD').innerHTML=resp.data.wind.speed;
-
-
+                            document.querySelector('.section06 .weather-info-body span.WSD').innerHTML=resp.data.wind.speed;
                              //일출일몰 구하ㅣㄱ
                              // 주어진 Unix 타임스탬프 값
                              const sunriseTimestamp = resp.data.sys.sunrise;
@@ -515,14 +525,15 @@ nav_menu_img_items.forEach(item => {
                             const currentTime = new Date();
                             const currentMillis = currentTime.getTime();
                              if(currentMillis > sunriseMillis && currentMillis < sunsetMillis){
-                                document.querySelector('.section06 .weather-footer span.Sun').innerHTML='일몰<br>' + sunsetString
+                                document.querySelector('.section06 .weather-footer span.Sun').innerHTML='일몰 ' + sunsetString
                              }else{
-                                document.querySelector('.section06 .weather-footer span.Sun').innerHTML='일출<br>' + sunriseString;
+                                document.querySelector('.section06 .weather-footer span.Sun').innerHTML='일출 ' + sunriseString;
                              }
 
                          }
                      )
                 .catch(err=>{});
+
               //------------------------------
               //미세먼지 가져오기
               //------------------------------
@@ -1449,12 +1460,365 @@ dangerZoneLctEls.forEach(el=>{
                              n.appendChild(afterStyleEl);
 
             }
+            else if(el.classList.contains('lct-se')){
+                             fixedblockSection02ImgEl.src='gif/lct/se/1/se.gif';
+
+                               afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                 content: 'SE';
+                                                 position:absolute;
+                                                 left:0px;
+                                                 top:0px !important;
+                                                 display:block;
+                                                 width : 40px;
+                                                 height :25px;
+                                                 z-index:11;
+                                                 color : white;
+                                                 text-align:center;
+                                                 border : 1px solid white;
+                                                 margin : 10px;
+                                             }`;
+                             n.appendChild(afterStyleEl);
+
+            }
+
+
+        //마린시티
+           if(el.classList.contains('marin-n')){
+                fixedblockSection02ImgEl.src='gif/marin/n/1/n.gif';
+
+                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                    content: 'N';
+                    position:absolute;
+                    left:0px;
+                    top:0px !important;
+                    display:block;
+                    width : 40px;
+                    height :25px;
+                    z-index:11;
+                    color : white;
+                    text-align:center;
+                    border : 1px solid white;
+                    margin : 10px;
+                }`;
+                n.appendChild(afterStyleEl);
+
+            }
+            else if(el.classList.contains('marin-ne')){
+                fixedblockSection02ImgEl.src='gif/marin/ne/1/ne.gif';
+
+                  afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                    content: 'NE';
+                                    position:absolute;
+                                    left:0px;
+                                    top:0px !important;
+                                    display:block;
+                                    width : 40px;
+                                    height :25px;
+                                    z-index:11;
+                                    color : white;
+                                    text-align:center;
+                                    border : 1px solid white;
+                                    margin : 10px;
+                                }`;
+                n.appendChild(afterStyleEl);
+            }
+
+            else if(el.classList.contains('marin-e')){
+                 fixedblockSection02ImgEl.src='gif/marin/e/1/e.gif';
+
+                   afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                     content: 'E';
+                                     position:absolute;
+                                     left:0px;
+                                     top:0px !important;
+                                     display:block;
+                                     width : 40px;
+                                     height :25px;
+                                     z-index:11;
+                                     color : white;
+                                     text-align:center;
+                                     border : 1px solid white;
+                                     margin : 10px;
+                                 }`;
+                 n.appendChild(afterStyleEl);
+            }
+            else if(el.classList.contains('marin-s')){
+
+                             fixedblockSection02ImgEl.src='gif/marin/s/1/s.gif';
+
+                               afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                 content: 'S';
+                                                 position:absolute;
+                                                 left:0px;
+                                                 top:0px !important;
+                                                 display:block;
+                                                 width : 40px;
+                                                 height :25px;
+                                                 z-index:11;
+                                                 color : white;
+                                                 text-align:center;
+                                                 border : 1px solid white;
+                                                 margin : 10px;
+                                             }`;
+                             n.appendChild(afterStyleEl);
+
+
+            }
+            else if(el.classList.contains('marin-sw')){
+                              fixedblockSection02ImgEl.src='gif/marin/sw/1/sw.gif';
+
+                                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                  content: 'SW';
+                                                  position:absolute;
+                                                  left:0px;
+                                                  top:0px !important;
+                                                  display:block;
+                                                  width : 40px;
+                                                  height :25px;
+                                                  z-index:11;
+                                                  color : white;
+                                                  text-align:center;
+                                                  border : 1px solid white;
+                                                  margin : 10px;
+                                              }`;
+                              n.appendChild(afterStyleEl);
+
+
+            }
+            else if(el.classList.contains('marin-w')){
+                                fixedblockSection02ImgEl.src='gif/marin/w/1/w.gif';
+
+                                  afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                    content: 'W';
+                                                    position:absolute;
+                                                    left:0px;
+                                                    top:0px !important;
+                                                    display:block;
+                                                    width : 40px;
+                                                    height :25px;
+                                                    z-index:11;
+                                                    color : white;
+                                                    text-align:center;
+                                                    border : 1px solid white;
+                                                    margin : 10px;
+                                                }`;
+                                n.appendChild(afterStyleEl);
+
+
+            }
+            else if(el.classList.contains('marin-nw')){
+                             fixedblockSection02ImgEl.src='gif/marin/nw/1/nw.gif';
+
+                               afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                 content: 'NW';
+                                                 position:absolute;
+                                                 left:0px;
+                                                 top:0px !important;
+                                                 display:block;
+                                                 width : 40px;
+                                                 height :25px;
+                                                 z-index:11;
+                                                 color : white;
+                                                 text-align:center;
+                                                 border : 1px solid white;
+                                                 margin : 10px;
+                                             }`;
+                             n.appendChild(afterStyleEl);
+
+            }
+            else if(el.classList.contains('marin-se')){
+                             fixedblockSection02ImgEl.src='gif/marin/se/1/se.gif';
+
+                               afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                 content: 'SE';
+                                                 position:absolute;
+                                                 left:0px;
+                                                 top:0px !important;
+                                                 display:block;
+                                                 width : 40px;
+                                                 height :25px;
+                                                 z-index:11;
+                                                 color : white;
+                                                 text-align:center;
+                                                 border : 1px solid white;
+                                                 margin : 10px;
+                                             }`;
+                             n.appendChild(afterStyleEl);
+
+            }
+
+            //CENTUM
+           if(el.classList.contains('centum-n')){
+                fixedblockSection02ImgEl.src='gif/centum/n/1/n.gif';
+
+                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                    content: 'N';
+                    position:absolute;
+                    left:0px;
+                    top:0px !important;
+                    display:block;
+                    width : 40px;
+                    height :25px;
+                    z-index:11;
+                    color : white;
+                    text-align:center;
+                    border : 1px solid white;
+                    margin : 10px;
+                }`;
+                n.appendChild(afterStyleEl);
+
+            }
+            else if(el.classList.contains('centum-ne')){
+                fixedblockSection02ImgEl.src='gif/centum/ne/1/ne.gif';
+
+                  afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                    content: 'NE';
+                                    position:absolute;
+                                    left:0px;
+                                    top:0px !important;
+                                    display:block;
+                                    width : 40px;
+                                    height :25px;
+                                    z-index:11;
+                                    color : white;
+                                    text-align:center;
+                                    border : 1px solid white;
+                                    margin : 10px;
+                                }`;
+                n.appendChild(afterStyleEl);
+            }
+
+            else if(el.classList.contains('centum-e')){
+                 fixedblockSection02ImgEl.src='gif/centum/e/1/e.gif';
+
+                   afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                     content: 'E';
+                                     position:absolute;
+                                     left:0px;
+                                     top:0px !important;
+                                     display:block;
+                                     width : 40px;
+                                     height :25px;
+                                     z-index:11;
+                                     color : white;
+                                     text-align:center;
+                                     border : 1px solid white;
+                                     margin : 10px;
+                                 }`;
+                 n.appendChild(afterStyleEl);
+            }
+            else if(el.classList.contains('centum-s')){
+
+                             fixedblockSection02ImgEl.src='gif/centum/s/1/s.gif';
+
+                               afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                 content: 'S';
+                                                 position:absolute;
+                                                 left:0px;
+                                                 top:0px !important;
+                                                 display:block;
+                                                 width : 40px;
+                                                 height :25px;
+                                                 z-index:11;
+                                                 color : white;
+                                                 text-align:center;
+                                                 border : 1px solid white;
+                                                 margin : 10px;
+                                             }`;
+                             n.appendChild(afterStyleEl);
+
+
+            }
+            else if(el.classList.contains('centum-sw')){
+                              fixedblockSection02ImgEl.src='gif/centum/sw/1/sw.gif';
+
+                                afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                  content: 'SW';
+                                                  position:absolute;
+                                                  left:0px;
+                                                  top:0px !important;
+                                                  display:block;
+                                                  width : 40px;
+                                                  height :25px;
+                                                  z-index:11;
+                                                  color : white;
+                                                  text-align:center;
+                                                  border : 1px solid white;
+                                                  margin : 10px;
+                                              }`;
+                              n.appendChild(afterStyleEl);
+
+
+            }
+            else if(el.classList.contains('centum-w')){
+                                fixedblockSection02ImgEl.src='gif/centum/w/1/w.gif';
+
+                                  afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                    content: 'W';
+                                                    position:absolute;
+                                                    left:0px;
+                                                    top:0px !important;
+                                                    display:block;
+                                                    width : 40px;
+                                                    height :25px;
+                                                    z-index:11;
+                                                    color : white;
+                                                    text-align:center;
+                                                    border : 1px solid white;
+                                                    margin : 10px;
+                                                }`;
+                                n.appendChild(afterStyleEl);
+
+
+            }
+            else if(el.classList.contains('centum-nw')){
+                             fixedblockSection02ImgEl.src='gif/centum/nw/1/nw.gif';
+
+                               afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                 content: 'NW';
+                                                 position:absolute;
+                                                 left:0px;
+                                                 top:0px !important;
+                                                 display:block;
+                                                 width : 40px;
+                                                 height :25px;
+                                                 z-index:11;
+                                                 color : white;
+                                                 text-align:center;
+                                                 border : 1px solid white;
+                                                 margin : 10px;
+                                             }`;
+                             n.appendChild(afterStyleEl);
+
+            }
+            else if(el.classList.contains('centum-se')){
+                             fixedblockSection02ImgEl.src='gif/centum/se/1/se.gif';
+
+                               afterStyleEl.innerHTML = `.buildingDangerFixedBlock .buildingwindGif::after{
+                                                 content: 'SE';
+                                                 position:absolute;
+                                                 left:0px;
+                                                 top:0px !important;
+                                                 display:block;
+                                                 width : 40px;
+                                                 height :25px;
+                                                 z-index:11;
+                                                 color : white;
+                                                 text-align:center;
+                                                 border : 1px solid white;
+                                                 margin : 10px;
+                                             }`;
+                             n.appendChild(afterStyleEl);
+
+            }
 
 
         }   //전체 if문 끝ㅌ남
     })
 
 })
+
+
 
 
 

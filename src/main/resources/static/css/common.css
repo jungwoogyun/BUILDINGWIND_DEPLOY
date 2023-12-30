@@ -280,7 +280,7 @@ body::-webkit-scrollbar{
 
 }
 .offcanvas .offcanvas-body>.wrapper .dangerzone>.body{
-    height : 200px;
+    height : 250px;
     display:flex;
     justify-content: space-between;
     margin-bottom:5px;
@@ -327,7 +327,7 @@ body::-webkit-scrollbar{
 
 }
 .offcanvas .offcanvas-body>.wrapper .dangerzone>.body{
-    height:200px;
+    height:250px;
     display:flex;
     justify-content: space-between;
     margin-bottom:5px;
@@ -571,8 +571,8 @@ body::-webkit-scrollbar{
 }
 .buildingDangerFixedBlock>div>.buildingDangerFixedBlock-weather  .weather-body>.weather-body-section>.weather-info img{
 
-    width : 50px !important;
-    height : 30px !important;
+    width : 40px !important;
+    height : 40px !important;
     margin : 10px auto !important;
     position:absolute !important;
     margin : 0 auto !important;
@@ -653,8 +653,6 @@ body::-webkit-scrollbar{
 
 .section01 .youtubeBlk .wrapper{
     width:100%;
-
-
 }
 .section01 video {
     position:relative;
@@ -665,22 +663,13 @@ body::-webkit-scrollbar{
     left:20vw;
     top:62vh;
     background-color : white;
-
-
-
 }
 .section01 .youtubeBlk .wrapper .videoblock{
   display:flex;
-
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-
-
-
-
 }
-
 .section01 .youtubeBlk .wrapper .videoblock div{
     width : 150px;
     height : 100px;
@@ -691,13 +680,11 @@ body::-webkit-scrollbar{
     color:white;
     text-align: center;
     z-index:888;
-
 }
 .section01 .youtubeBlk .wrapper div{
  margin:20px;
 
 }
-
 .section01 .youtubeBlk .wrapper .videoblock div{
     background-color: white;
     border-radius: 10px;
