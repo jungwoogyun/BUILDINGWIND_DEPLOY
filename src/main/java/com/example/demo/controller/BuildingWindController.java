@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -42,18 +43,33 @@ public class BuildingWindController {
     //-----------------------------------------------
     @GetMapping("/windPower")
     public @ResponseBody List<RealTimeWindPower> getWindPower() {
-        return realTimeWindPowerRepostitory.findAll();
+        LocalDateTime now =  LocalDateTime.now();
+        String time =  now.getHour()+"00";
+
+        if(now.getHour()<10)
+            time = "0" + time;
+        return realTimeWindPowerRepostitory.selectAllByBaseTime(time);
     }
 
     @GetMapping("/windDirection")
     public @ResponseBody List<RealTimeWindDirection> getWindDirection() {
 
-        return realTimeWindDirectionRepostitory.findAll();
+        LocalDateTime now =  LocalDateTime.now();
+        String time =  now.getHour()+"00";
+
+        if(now.getHour()<10)
+            time = "0" + time;
+
+
+        return realTimeWindDirectionRepostitory.selectAllByBaseTime(time);
     }
 
     @GetMapping("/windNow")
     public @ResponseBody List<RealTimeWindNow> getWindNow() {
+
+
         return realTimeWindNowRepostitory.findAll();
+
     }
 
 
